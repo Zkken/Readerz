@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Reader.Application.Cards.Commands.DeleteCard;
-using Reader.Application.Cards.Querries.GetCardsByCardSet;
+using Reader.Application.Cards.Queries.GetCardsByCardSet;
 
 namespace Readerz.Controllers
 {

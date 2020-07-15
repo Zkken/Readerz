@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Reader.Application.Cards.Querries.GetCardsByCardSet
+namespace Reader.Application.Cards.Queries.GetCardsByCardSet
 {
     public class GetCardsByCardSetQuery : IRequest<CardListVm>
     {

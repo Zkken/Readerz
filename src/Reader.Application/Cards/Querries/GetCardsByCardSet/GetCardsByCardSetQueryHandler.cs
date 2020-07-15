@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Reader.Application.Cards.Querries.GetCardsByCardSet
+namespace Reader.Application.Cards.Queries.GetCardsByCardSet
 {
     public class GetCardsByCardSetQueryHandler : IRequestHandler<GetCardsByCardSetQuery, CardListVm>
     {
