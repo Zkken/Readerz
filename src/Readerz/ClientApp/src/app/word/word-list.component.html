@@ -1,0 +1,22 @@
+<div>
+    <a routerLink="/word/create" class="nav-link">Add new word</a>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let w of words">
+            <td>{{w?.textTranslated}}</td>
+            <td>{{w?.textUntranslated}}</td>
+            <td>
+                <a [routerLink]="['update', w.id]" class="btn btn-sm btn-primary">Edit</a>
+                <button (click)="delete(w.id)" class="btn btn-sm btn-danger">X</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
