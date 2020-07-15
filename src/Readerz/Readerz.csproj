@@ -22,12 +22,10 @@
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0-preview1.19506.2" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.5" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0-preview1.19506.1" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0-preview1-19509-03" />
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.1" />
     </ItemGroup>
     <ItemGroup>
         <!-- Don't publish the SPA source files, but do show them in the project files list -->
@@ -36,12 +34,14 @@
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\Reader.Application\Reader.Application.csproj" />
+        <ProjectReference Include="..\Reader.Application\Reader.Application.csproj" />
+        <ProjectReference Include="..\Readerz.Infrastructure\Readerz.Infrastructure.csproj" />
+        <ProjectReference Include="..\Readerz.Persistence\Readerz.Persistence.csproj" />
     </ItemGroup>
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="Pages\Error.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Shared\_LoginPartial.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Error.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\Shared\_LoginPartial.cshtml" />
+        <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -1,6 +1,6 @@
 ﻿using Readerz.Domain.Enums;
 
-namespace Reader.Application.CardSets.Queries.GetCardSet
+namespace Reader.Application.CardSets.Queries.GetCardSets
 {
     public class CardSetDto
     {

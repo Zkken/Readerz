@@ -4,32 +4,37 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Reader.Application;
+using Readerz.Infrastructure;
+using Readerz.Persistence;
 
 namespace Readerz
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            //     options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-            //
-            // services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //     .AddEntityFrameworkStores<ApplicationDbContext>();
-            //
-            // services.AddIdentityServer()
-            //     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
-            services.AddAuthentication()
-                .AddIdentityServerJwt();
+            services.AddInfrastructure(Configuration, Environment);
+            services.AddPersistence(Configuration);
+            services.AddApplication();
+            
+            services.AddHttpContextAccessor();
+
+
             services.AddControllersWithViews();
+                // .AddNewtonsoftJson();
+                
             services.AddRazorPages();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => 
@@ -52,6 +57,7 @@ namespace Readerz
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

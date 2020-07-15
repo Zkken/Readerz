@@ -2,7 +2,7 @@
 
 namespace Reader.Application.CardSets.Queries.GetCardSets
 {
-    public class GetCardSetQuery : IRequest<CardSetVm>
+    public class GetCardSetsQuery : IRequest<CardSetVm>
     {
         public string UserId { get; set; }
     }

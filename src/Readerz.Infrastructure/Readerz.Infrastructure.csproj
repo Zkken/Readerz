@@ -5,12 +5,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
-      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
+      <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="3.1.1" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.1" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Readerz.Domain\Readerz.Domain.csproj" />
       <ProjectReference Include="..\Reader.Application\Reader.Application.csproj" />
     </ItemGroup>
 
