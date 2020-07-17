@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Reader.Application.Common.Exceptions;
 using Reader.Application.Common.Interfaces;
 using Reader.Application.Common.Models;
 
@@ -14,7 +15,7 @@ namespace Readerz.Infrastructure.Identity
         {
             _userManager = userManager;
         }
-        
+
         public async Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password)
         {
             var user = new ApplicationUser
@@ -34,16 +35,15 @@ namespace Readerz.Infrastructure.Identity
 
             if (user == null)
             {
-                return Result.Success();
+                throw new NotFoundException(nameof(ApplicationUser), userId);
             }
 
             var res = await _userManager.DeleteAsync(user);
 
             return res.ToApplicationResult();
-
         }
     }
-    
+
     public static class IdentityResultExtensions
     {
         public static Result ToApplicationResult(this IdentityResult result)

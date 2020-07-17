@@ -13,22 +13,25 @@ namespace Readerz.Persistence
     {
         private readonly ICurrentUserService _currentUserService;
 
-        public ReaderzDbContext(DbContextOptions options, ICurrentUserService currentUserService) : base(options)
-        {
-            _currentUserService = currentUserService;
-        }
-
         public ReaderzDbContext(DbContextOptions options) : base(options)
         {
+        }
+    
+        public ReaderzDbContext(DbContextOptions options,
+            ICurrentUserService currentUserService) 
+            : base(options)
+        {
+            _currentUserService = currentUserService;
         }
 
         public DbSet<Card> Cards { get; set; }
         public DbSet<CardSet> CardSets { get; set; }
         public DbSet<Text> Texts { get; set; }
+        public DbSet<CardCreator> CardCreators { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            
+
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
             {
                 switch (entry.State)
