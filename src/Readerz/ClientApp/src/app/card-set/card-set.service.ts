@@ -1,36 +1,59 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { WordCollectionApiUrl } from "../app.constants";
-import { WordCollection } from "./word-collection";
+import { CardSet } from "./card-set";
 import { Observable } from "rxjs";
 
 @Injectable()
-export class WordCollectionService {
+export class CardSetService {
 
     constructor(private client: HttpClient) {
 
     }
 
-    getWordCollectionAll() {
+    /**
+     * getting all card sets from server
+     */
+    getAll() {
         return this.client.get(WordCollectionApiUrl);
     }
 
-    getWordCollectionByUser(userName: string) {
+    /**
+     * getting all card sets by current user 
+     * @param userName userName of user
+     */
+    getCardSetByUser(userName: string) {
         return this.client.get(WordCollectionApiUrl + '?userName=' + userName);
     }
 
-    updateWordCollection(wordCollection: WordCollection) {
-        return this.client.put(WordCollectionApiUrl, wordCollection);
+    /**
+     * updating existing card set
+     * @param cardSet card set object that will be updated
+     */
+    update(cardSet: CardSet) {
+        return this.client.put(WordCollectionApiUrl, cardSet);
     }
 
-    createWordCollection(wordCollection: WordCollection) {
-        return this.client.post(WordCollectionApiUrl, wordCollection);
+    /**
+     * creating new card set
+     * @param cardSet card set object that will be created
+     */
+    create(cardSet: CardSet) {
+        return this.client.post(WordCollectionApiUrl, cardSet);
     }
 
-    deleteWodCollection(id: number) {
+    /**
+     * deleting existing card set by id property
+     * @param id id of card set that will be deleted
+     */
+    delete(id: number) {
         return this.client.delete(WordCollectionApiUrl + '/' + id);
     }
 
+    /**
+     * getting card set by id
+     * @param id id of card set
+     */
     getWordCollectionById(id: number) {
         return this.client.get(WordCollectionApiUrl + '/' + id);
     }

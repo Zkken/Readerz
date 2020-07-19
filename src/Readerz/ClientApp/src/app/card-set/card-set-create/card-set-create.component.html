@@ -1,34 +1,34 @@
 <div class="border p-2">
-    <h4 class="text-center">Define word collection's name: </h4>
-    <input type="text" placeholder="Word collection's name" class="form-control" [(ngModel)]="wordCollection.name" />
+    <h4 class="text-center">Define card set's name: </h4>
+    <input type="text" placeholder="Card set's name" class="form-control" [(ngModel)]="cardSet.name" />
 
-    <h3 class="text-center">({{wordCollection.words.length}}) Words: </h3>
-    <div *ngFor="let w of wordCollection.words; let i = index">
+    <h3 class="text-center">({{cardSet.words.length}}) Words: </h3>
+    <div *ngFor="let c of cardSet.cards; let i = index">
         <div class="row m-2">
             <div class="offset-1 col-4 border rounded" style="height: 50px;">
-                {{w?.textUntranslated}}
+                {{c?.front}}
             </div>
             <div class="offset-2 col-4 border rounded" style="height: 50px;">
-                {{w?.textTranslated}}
+                {{c?.back}}
             </div>
             <div class="col-1">
-                <input type="button" class="btn btn-danger" value="del" (click)=" deleteWord(i)"/>
+                <input type="button" class="btn btn-danger" value="del" (click)=" deleteCard(i)"/>
             </div>
         </div>
     </div>
 
     <div class="p-2 border rounded m-3">
-        <word-form [(word)]="word"></word-form>
-        <input type="button" value="Add" class="btn btn-primary btn-block mt-2" (click)="addWord()" />
+        <card-form [(card)]="card"></card-form>
+        <input type="button" value="Add" class="btn btn-primary btn-block mt-2" (click)="addCard()" />
     </div>
 
 
     <div class="d-flex flex-row justify-content-between">
         <div class="p-2">
-            <a routerLink="/wordCollection" class="btn btn-danger btn-lg">Go back</a>
+            <a routerLink="/cardSets" class="btn btn-danger btn-lg">Go back</a>
         </div>
         <div class="p-2">
-            <input type="button" value="Save collection" class="btn btn-success btn-lg" (click)="save()"/>
+            <input type="button" value="Save set" class="btn btn-success btn-lg" (click)="save()"/>
         </div>
     </div>
 </div>

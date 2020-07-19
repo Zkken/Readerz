@@ -8,27 +8,27 @@ export class CardService {
     constructor(private client: HttpClient) {
     }
 
-    getWords() {
+    getCards() {
         return this.client.get(WordApiUrl);
     }
 
-    getWord(id: number) {
+    getCard(id: number) {
         return this.client.get(WordApiUrl + '/' + id);
     }
 
-    createWord(card: Card) {
+    createCard(card: Card) {
         return this.client.post(WordApiUrl, card);
     }
 
-    updateWord(card: Card) {
+    updateCard(card: Card) {
         return this.client.put(WordApiUrl, card);
     }
 
-    deleteWord(id: number) {
+    deleteCard(id: number) {
         return this.client.delete(WordApiUrl + '/' + id);
     }
 
-    getWordsByWordCollectionId(id: number) {
+    getCardsBySetId(id: number) {
         return this.client.get(WordApiUrl + '/byWordCollection/' + id);
     }
 }

@@ -1,28 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { WordService } from './word.service';
-import { Word } from './word';
+import { CardService } from './card.service';
+import { Card } from './card';
 
 @Component({
-    selector: 'words',
-    templateUrl: './word-list.component.html',
-    providers: [WordService]
+    selector: 'cards',
+    templateUrl: './card-list.component.html',
+    providers: [CardService]
 })
-export class WordListComponent implements OnInit {
-    words: Word[];
+export class CardListComponent implements OnInit {
+    cards: Card[];
 
-    constructor(private wordService: WordService) {
+    constructor(private cardService: CardService) {
 
     }
 
     ngOnInit(): void {
-        this.loadWords();
+        this.loadCards();
     }
 
-    loadWords() {
-        this.wordService.getWords().subscribe((data: Word[]) => this.words = data);
+    loadCards() {
+        this.cardService.getCards().subscribe((data: Card[]) => this.cards = data);
     }
 
     delete(id: number) {
-        this.wordService.deleteWord(id).subscribe(_ => this.loadWords());
+        this.cardService.deleteCard(id).subscribe(_ => this.loadCards());
     }
 }

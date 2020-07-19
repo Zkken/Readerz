@@ -1,12 +1,8 @@
-import { Word } from "../word/word";
-
-export class WordCollection {
+export class CardSet {
     constructor (
         public id?: number,
         public name?: string,
-        public words?: Word[],
-        public userName?: string
+        public cardSetStatus?: CardSetStatus
     ) {
-        this.words = [];
     }
 }

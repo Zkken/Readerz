@@ -1,10 +1,10 @@
 import { Component, Input } from "@angular/core";
-import { Word } from "../word";
+import { Card } from "../card";
 
 @Component({
-    selector: 'word-form',
-    templateUrl: './word-form.component.html'
+    selector: 'card-form',
+    templateUrl: './card-form.component.html'
 })
-export class WordFormComponent {
-    @Input() word: Word;
+export class CardFormComponent {
+    @Input() card: Card;
 }

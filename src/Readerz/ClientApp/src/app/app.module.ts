@@ -10,27 +10,27 @@ import { HomeComponent } from './home/home.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
-import { WordListComponent } from './word/word-list.component';
-import { WordFormComponent } from './word/word-form/word-form.component';
-import { WordUpdateComponent } from './word/word-update/word-update.component';
-import { WordCollectionComponent } from './word-collection/word-collection.component';
-import { WordCollectionCreateComponent } from './word-collection/word-collection-create/word-collection-create.component';
+import { CardListComponent } from './card/card-list.component';
+import { CardFormComponent } from './card/card-form/card-form.component';
+import { CardUpdateComponent } from './card/card-update/card-update.component';
+import { CardSetComponent } from './card-set/card-set.component';
+import { CardSetCreateComponent } from './card-set/card-set-create/card-set-create.component';
 
-import { WordService } from './word/word.service';
-import { WordCollectionService } from './word-collection/word-collection.service';
-import { WordCollectionGameComponent } from './word-collection/word-collection-game/word-collection-game.component';
+import { CardService } from './card/card.service';
+import { CardSetService } from './card-set/card-set.service';
+import { CardSetGameComponent } from './card-set/card-set-game/card-set-game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    WordListComponent,
-    WordFormComponent,
-    WordUpdateComponent,
-    WordCollectionCreateComponent,
-    WordCollectionComponent,
-    WordCollectionGameComponent
+    CardListComponent,
+    CardFormComponent,
+    CardUpdateComponent,
+    CardSetCreateComponent,
+    CardSetComponent,
+    CardSetGameComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -39,16 +39,16 @@ import { WordCollectionGameComponent } from './word-collection/word-collection-g
     ApiAuthorizationModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'word', component: WordListComponent, canActivate: [AuthorizeGuard] },
-      { path: 'wordCollection', component: WordCollectionComponent, canActivate: [AuthorizeGuard]},
-      { path: 'wordCollection/create', component: WordCollectionCreateComponent, canActivate: [AuthorizeGuard]},
-      { path: 'wordCollection/:id/game', component: WordCollectionGameComponent } 
+      { path: 'cards/:id', component: CardListComponent, canActivate: [AuthorizeGuard] },
+      { path: 'cards', component: CardSetComponent, canActivate: [AuthorizeGuard]},
+      { path: 'cards/create', component: CardSetCreateComponent, canActivate: [AuthorizeGuard]},
+      { path: 'cards/:id/game', component: CardSetGameComponent } 
     ])
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
-    WordService,
-    WordCollectionService
+    CardService,
+    CardSetService
   ],
   bootstrap: [AppComponent]
 })

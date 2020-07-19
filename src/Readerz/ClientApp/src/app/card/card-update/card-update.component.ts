@@ -1,28 +1,28 @@
 import { Component, OnInit } from "@angular/core";
-import { WordService } from "../word.service";
-import { Word } from "../word";
+import { CardService } from "../card.service";
+import { Card } from "../card";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
-    templateUrl: './word-update.component.html'
+    templateUrl: './card-update.component.html'
 })
-export class WordUpdateComponent implements OnInit {
-    word: Word;
+export class CardUpdateComponent implements OnInit {
+    card: Card;
     id: number;
     loaded: boolean = false;
 
     constructor (
-        private wordService: WordService, 
+        private cardService: CardService, 
         private router: Router, 
         public activeRoute: ActivatedRoute) {
             this.id = Number.parseInt(activeRoute.snapshot.params["id"]);
     }
     ngOnInit(): void {
         if(this.id) {
-            this.wordService.getWord(this.id)
-                .subscribe((data: Word) => {
-                    this.word = data;
-                    if (this.word != null) {
+            this.cardService.getCard(this.id)
+                .subscribe((data: Card) => {
+                    this.card = data;
+                    if (this.card != null) {
                         this.loaded = true;
                     }
                 })
@@ -30,7 +30,7 @@ export class WordUpdateComponent implements OnInit {
     }
 
     save() {
-        this.wordService.updateWord(this.word)
+        this.cardService.updateCard(this.card)
             .subscribe(data => this.router.navigateByUrl("/word"));
     }
 }

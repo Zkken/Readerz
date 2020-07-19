@@ -1,14 +1,14 @@
 export class Card {
     constructor(
         public id?: number, 
-        public textTranslated?: string, 
-        public textUntranslated?: string) {
+        public front?: string, 
+        public back?: string) {
 
     }
 
     copy(card: Card) {
         this.id = card.id;
-        this.textTranslated = card.textTranslated;
-        this.textUntranslated = card.textUntranslated;
+        this.front = card.front;
+        this.back = card.back;
     }
 }

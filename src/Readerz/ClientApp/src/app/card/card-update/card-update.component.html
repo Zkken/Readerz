@@ -1,8 +1,8 @@
 <div *ngIf="loaded">
-    <h2>Editing word</h2>
+    <h2>Editing card</h2>
     <word-form [(word)]="word"></word-form>
     <div class="form-group">
         <input type="button" (click)="save()" value="Save" class="btn btn-success"/>
     </div>
 </div>
-<a class="nav-link" routerLink="/word">Back to words</a>
+<a class="nav-link" routerLink="/word">Back to cards</a>
