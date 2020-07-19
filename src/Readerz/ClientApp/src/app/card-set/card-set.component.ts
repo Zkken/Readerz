@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { WordCollectionService } from "./word-collection.service";
+import { WordCollectionService } from "./card-set.service";
 import { AuthorizeService } from "src/api-authorization/authorize.service";
 import { map, take } from "rxjs/operators";
 import { Observable } from "rxjs";
-import { WordCollection } from "./word-collection";
-import { Word } from "../word/word";
+import { WordCollection } from "./card-set";
+import { Card } from "../card/card";
 
 @Component({
     templateUrl: './word-collection.component.html'

@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
-import { WordCollection } from "../word-collection";
-import { Word } from "src/app/word/word";
-import { WordCollectionService } from "../word-collection.service";
+import { WordCollection } from "../card-set";
+import { Card } from "src/app/card/card";
+import { WordCollectionService } from "../card-set.service";
 import { Router } from "@angular/router";
 import { AuthorizeService } from "src/api-authorization/authorize.service";
 import { User } from "oidc-client";
@@ -12,19 +12,19 @@ import { take } from "rxjs/operators";
 })
 export class WordCollectionCreateComponent{
     wordCollection: WordCollection = new WordCollection();
-    word: Word = new Word()
+    word: Card = new Card()
 
     constructor(
         private wordCollectionService: WordCollectionService,
         private router: Router,
         private authorizeService: AuthorizeService
         ) {
-        this.wordCollection.words.push(new Word(undefined, "Учитель", "Teacher")); //delete
+        this.wordCollection.words.push(new Card(undefined, "Учитель", "Teacher")); //delete
     }
 
     addWord() {
         this.wordCollection.words.push(this.word);
-        this.word = new Word();
+        this.word = new Card();
     }
 
     save() {

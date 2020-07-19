@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Word } from "./word";
+import { Card } from "./card";
 import { WordApiUrl } from "../app.constants";
 
 @Injectable()
-export class WordService {
+export class CardService {
     constructor(private client: HttpClient) {
     }
 
@@ -16,12 +16,12 @@ export class WordService {
         return this.client.get(WordApiUrl + '/' + id);
     }
 
-    createWord(word: Word) {
-        return this.client.post(WordApiUrl, word);
+    createWord(card: Card) {
+        return this.client.post(WordApiUrl, card);
     }
 
-    updateWord(word: Word) {
-        return this.client.put(WordApiUrl, word);
+    updateWord(card: Card) {
+        return this.client.put(WordApiUrl, card);
     }
 
     deleteWord(id: number) {
