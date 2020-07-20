@@ -1,7 +1,30 @@
-export const CardSetApiUrl = "api/cardSet";
+interface apiUrl {
+    CardSet: {
+        GetAll: string,
+        Update: string,
+        Delete: string,
+        ByCreatorId: string
+    },
+    Card: {
 
-export const CardApiUrl = "api/card";
+    },
+    CardCreator: {
+        GetId: string
+    }
+}
 
-export const UserApiUrl = "api/user";
+export const ApiUrl: apiUrl = {
+    CardSet: {
+        GetAll: "api/cardSet/all",
+        Update: "api/cardSet/update",
+        Delete: "api/cardSet/delete",
+        ByCreatorId: "api/cardSet/ByCardCreator"
+    },
+    Card: {
 
-export const CardCreatorApiUrl = "api/cardCreator";
+    },
+    CardCreator: {
+        GetId: "api/cardCreator/current"
+    }
+}
+
