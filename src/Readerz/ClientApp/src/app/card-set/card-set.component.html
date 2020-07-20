@@ -1,16 +1,16 @@
 <div *ngIf="!empty;else e">
     <h2 class="text-center">Your word collections: </h2>
     <a class="text-muted" routerLink="create">Create a new one</a>
-    <div *ngFor="let wc of wordCollections">
+    <div *ngFor="let c of cardSets">
         <div class="card m-1">
             <div class="card-body">
-                <h5 class="card-title text-center">{{wc?.name}}</h5>
+                <h5 class="card-title text-center">{{c?.name}}</h5>
             </div>
-            <a class="btn btn-secondary" routerLink="{{wc?.id}}/game">Click to play</a>
+            <a class="btn btn-secondary" routerLink="{{c?.id}}/game">Click to play</a>
         </div>
    </div>
 </div>
 <ng-template #e>
     <h2 class="text-center">Yours word collections have not created yet.</h2>
-    <a routerLink="/wordCollection/create">Go to create new collection</a>
+    <a routerLink="/card/create">Go to create new collection</a>
 </ng-template>

@@ -7,9 +7,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
-import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
-import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
+import { ApiAuthorizationModule } from '../api-authorization/api-authorization.module';
+import { AuthorizeGuard } from '../api-authorization/authorize.guard';
+import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor';
 import { CardListComponent } from './card/card-list.component';
 import { CardFormComponent } from './card/card-form/card-form.component';
 import { CardUpdateComponent } from './card/card-update/card-update.component';
@@ -19,6 +19,7 @@ import { CardSetCreateComponent } from './card-set/card-set-create/card-set-crea
 import { CardService } from './card/card.service';
 import { CardSetService } from './card-set/card-set.service';
 import { CardSetGameComponent } from './card-set/card-set-game/card-set-game.component';
+import { CardCreatorService } from './card-set/card-creator.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { CardSetGameComponent } from './card-set/card-set-game/card-set-game.com
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
     CardService,
-    CardSetService
+    CardSetService,
+    CardCreatorService
   ],
   bootstrap: [AppComponent]
 })

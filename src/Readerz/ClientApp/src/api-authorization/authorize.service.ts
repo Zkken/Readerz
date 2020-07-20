@@ -21,6 +21,7 @@ export interface FailureAuthenticationResult {
 
 export interface RedirectAuthenticationResult {
   status: AuthenticationResultStatus.Redirect;
+  redirectUrl: string;
 }
 
 export enum AuthenticationResultStatus {
@@ -31,6 +32,18 @@ export enum AuthenticationResultStatus {
 
 export interface IUser {
   name: string;
+}
+
+// Private interfaces
+enum LoginMode {
+  Silent,
+  PopUp,
+  Redirect
+}
+
+interface IAuthenticationState {
+  mode: LoginMode;
+  userState?: any;
 }
 
 @Injectable({
@@ -73,7 +86,7 @@ export class AuthorizeService {
     await this.ensureUserManagerInitialized();
     let user: User = null;
     try {
-      user = await this.userManager.signinSilent(this.createArguments());
+      user = await this.userManager.signinSilent(this.createArguments(LoginMode.Silent));
       this.userSubject.next(user.profile);
       return this.success(state);
     } catch (silentError) {
@@ -84,7 +97,7 @@ export class AuthorizeService {
         if (this.popUpDisabled) {
           throw new Error('Popup disabled. Change \'authorize.service.ts:AuthorizeService.popupDisabled\' to false to enable it.');
         }
-        user = await this.userManager.signinPopup(this.createArguments());
+        user = await this.userManager.signinPopup(this.createArguments(LoginMode.PopUp));
         this.userSubject.next(user.profile);
         return this.success(state);
       } catch (popupError) {
@@ -97,8 +110,9 @@ export class AuthorizeService {
 
         // PopUps might be blocked by the user, fallback to redirect
         try {
-          await this.userManager.signinRedirect(this.createArguments(state));
-          return this.redirect();
+          const signInRequest = await this.userManager.createSigninRequest(
+            this.createArguments(LoginMode.Redirect, state));
+          return this.redirect(signInRequest.url);
         } catch (redirectError) {
           console.log('Redirect authentication error: ', redirectError);
           return this.error(redirectError);
@@ -107,33 +121,56 @@ export class AuthorizeService {
     }
   }
 
+  // We are receiving a callback from the IdP. This code can be running in 3 situations:
+  // 1) As a hidden iframe started by a silent login on signIn (above). The code in the main
+  //    browser window will close the iframe after returning from signInSilent.
+  // 2) As a PopUp window started by a pop-up login on signIn (above). The code in the main
+  //    browser window will close the pop-up window after returning from signInPopUp
+  // 3) On the main browser window when the IdP redirects back to the app. We will process
+  //    the response and redirect to the return url or display an error message.
   public async completeSignIn(url: string): Promise<IAuthenticationResult> {
+    await this.ensureUserManagerInitialized();
     try {
-      await this.ensureUserManagerInitialized();
-      const user = await this.userManager.signinCallback(url);
-      this.userSubject.next(user && user.profile);
-      return this.success(user && user.state);
-    } catch (error) {
-      console.log('There was an error signing in: ', error);
-      return this.error('There was an error signing in.');
+      const { state } = await (this.userManager as any).readSigninResponseState(url, this.userManager.settings.stateStore);
+      if (state.request_type === 'si:r' || !state.request_type) {
+        const user = await this.userManager.signinRedirectCallback(url);
+        this.userSubject.next(user.profile);
+        return this.success(state.data.userState);
+
+      }
+      if (state.request_type === 'si:p') {
+        await this.userManager.signinPopupCallback(url);
+        return this.success(undefined);
+      }
+      if (state.request_type === 'si:s') {
+        await this.userManager.signinSilentCallback(url);
+        return this.success(undefined);
+      }
+
+      throw new Error(`Invalid login mode '${state.request_type}'.`);
+    } catch (signInResponseError) {
+      console.log('There was an error signing in', signInResponseError);
+      return this.error('Sing in callback authentication error.');
     }
   }
 
+  // We try to sign out the user in two different ways:
+  // 1) We try to do a sign-out using a PopUp Window. This might fail if there is a
+  //    Pop-Up blocker or the user has disabled PopUps.
+  // 2) If the method above fails, we redirect the browser to the IdP to perform a traditional
+  //    post logout redirect flow.
   public async signOut(state: any): Promise<IAuthenticationResult> {
+    await this.ensureUserManagerInitialized();
     try {
-      if (this.popUpDisabled) {
-        throw new Error('Popup disabled. Change \'authorize.service.ts:AuthorizeService.popupDisabled\' to false to enable it.');
-      }
-
-      await this.ensureUserManagerInitialized();
-      await this.userManager.signoutPopup(this.createArguments());
+      await this.userManager.signoutPopup(this.createArguments(LoginMode.PopUp));
       this.userSubject.next(null);
       return this.success(state);
     } catch (popupSignOutError) {
       console.log('Popup signout error: ', popupSignOutError);
       try {
-        await this.userManager.signoutRedirect(this.createArguments(state));
-        return this.redirect();
+        const signInRequest = await this.userManager.createSignoutRequest(
+          this.createArguments(LoginMode.Redirect, state));
+        return this.redirect(signInRequest.url);
       } catch (redirectSignOutError) {
         console.log('Redirect signout error: ', popupSignOutError);
         return this.error(redirectSignOutError);
@@ -141,20 +178,39 @@ export class AuthorizeService {
     }
   }
 
+  // We are receiving a callback from the IdP. This code can be running in 2 situations:
+  // 1) As a PopUp window started by a pop-up login on signOut (above). The code in the main
+  //    browser window will close the pop-up window after returning from signOutPopUp
+  // 2) On the main browser window when the IdP redirects back to the app. We will process
+  //    the response and redirect to the logged-out url or display an error message.
   public async completeSignOut(url: string): Promise<IAuthenticationResult> {
     await this.ensureUserManagerInitialized();
     try {
-      const state = await this.userManager.signoutCallback(url);
-      this.userSubject.next(null);
-      return this.success(state && state.data);
-    } catch (error) {
-      console.log(`There was an error trying to log out '${error}'.`);
-      return this.error(error);
+      const { state } = await (this.userManager as any).readSignoutResponseState(url, this.userManager.settings.stateStore);
+      if (state) {
+        if (state.request_type === 'so:r') {
+          await this.userManager.signoutRedirectCallback(url);
+          this.userSubject.next(null);
+          return this.success(state.data.userState);
+        }
+        if (state.request_type === 'so:p') {
+          await this.userManager.signoutPopupCallback(url);
+          return this.success(state.data && state.data.userState);
+        }
+        throw new Error(`Invalid login mode '${state.request_type}'.`);
+      }
+    } catch (signInResponseError) {
+      console.log('There was an error signing out', signInResponseError);
+      return this.error('Sign out callback authentication error.');
     }
   }
 
-  private createArguments(state?: any): any {
-    return { useReplaceToNavigate: true, data: state };
+  private createArguments(mode: LoginMode, state?: any): any {
+    if (mode !== LoginMode.Silent) {
+      return { data: { mode, userState: state } };
+    } else {
+      return { data: { mode, userState: state }, redirect_uri: this.userManager.settings.redirect_uri };
+    }
   }
 
   private error(message: string): IAuthenticationResult {
@@ -165,8 +221,8 @@ export class AuthorizeService {
     return { status: AuthenticationResultStatus.Success, state };
   }
 
-  private redirect(): IAuthenticationResult {
-    return { status: AuthenticationResultStatus.Redirect };
+  private redirect(redirectUrl: string): IAuthenticationResult {
+    return { status: AuthenticationResultStatus.Redirect, redirectUrl };
   }
 
   private async ensureUserManagerInitialized(): Promise<void> {

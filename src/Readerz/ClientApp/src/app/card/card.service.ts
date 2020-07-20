@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Card } from "./card";
-import { WordApiUrl } from "../app.constants";
+import { CardApiUrl } from "../app.constants";
 
 @Injectable()
 export class CardService {
@@ -9,26 +9,26 @@ export class CardService {
     }
 
     getCards() {
-        return this.client.get(WordApiUrl);
+        return this.client.get(CardApiUrl);
     }
 
     getCard(id: number) {
-        return this.client.get(WordApiUrl + '/' + id);
+        return this.client.get(CardApiUrl + '/' + id);
     }
 
     createCard(card: Card) {
-        return this.client.post(WordApiUrl, card);
+        return this.client.post(CardApiUrl, card);
     }
 
     updateCard(card: Card) {
-        return this.client.put(WordApiUrl, card);
+        return this.client.put(CardApiUrl, card);
     }
 
     deleteCard(id: number) {
-        return this.client.delete(WordApiUrl + '/' + id);
+        return this.client.delete(CardApiUrl + '/' + id);
     }
 
     getCardsBySetId(id: number) {
-        return this.client.get(WordApiUrl + '/byWordCollection/' + id);
+        return this.client.get(CardApiUrl + '/byWordCollection/' + id);
     }
 }

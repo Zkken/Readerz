@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { WordCollectionApiUrl } from "../app.constants";
+import { CardSetApiUrl } from "../app.constants";
 import { CardSet } from "./card-set";
 import { Observable } from "rxjs";
 
@@ -15,7 +15,7 @@ export class CardSetService {
      * getting all card sets from server
      */
     getAll() {
-        return this.client.get(WordCollectionApiUrl);
+        return this.client.get(CardSetApiUrl + "/All");
     }
 
     /**
@@ -23,7 +23,7 @@ export class CardSetService {
      * @param userName userName of user
      */
     getCardSetByUser(userName: string) {
-        return this.client.get(WordCollectionApiUrl + '?userName=' + userName);
+        return this.client.get(CardSetApiUrl + '?userName=' + userName);
     }
 
     /**
@@ -31,7 +31,7 @@ export class CardSetService {
      * @param cardSet card set object that will be updated
      */
     update(cardSet: CardSet) {
-        return this.client.put(WordCollectionApiUrl, cardSet);
+        return this.client.put(CardSetApiUrl, cardSet);
     }
 
     /**
@@ -39,7 +39,7 @@ export class CardSetService {
      * @param cardSet card set object that will be created
      */
     create(cardSet: CardSet) {
-        return this.client.post(WordCollectionApiUrl, cardSet);
+        return this.client.post(CardSetApiUrl, cardSet);
     }
 
     /**
@@ -47,14 +47,18 @@ export class CardSetService {
      * @param id id of card set that will be deleted
      */
     delete(id: number) {
-        return this.client.delete(WordCollectionApiUrl + '/' + id);
+        return this.client.delete(CardSetApiUrl + '/' + id);
     }
 
     /**
      * getting card set by id
      * @param id id of card set
      */
-    getWordCollectionById(id: number) {
-        return this.client.get(WordCollectionApiUrl + '/' + id);
+    getCardSetById(id: number) {
+        return this.client.get(CardSetApiUrl + '/' + id);
+    }
+
+    getCardSetByCreatorId(id: Observable<number>) {
+        return this.client.get(CardSetApiUrl + '/byCreator/' + id)
     }
 }

@@ -1,5 +1,7 @@
-export const WordCollectionApiUrl = "api/wordCollections";
+export const CardSetApiUrl = "api/cardSet";
 
-export const WordApiUrl = "api/words";
+export const CardApiUrl = "api/card";
 
 export const UserApiUrl = "api/user";
+
+export const CardCreatorApiUrl = "api/cardCreator";

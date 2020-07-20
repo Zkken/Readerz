@@ -3,7 +3,6 @@ import { CardSet } from "../card-set";
 import { Card } from "src/app/card/card";
 import { CardSetService } from "../card-set.service";
 import { Router } from "@angular/router";
-import { AuthorizeService } from "src/api-authorization/authorize.service";
 import { User } from "oidc-client";
 import { take } from "rxjs/operators";
 
@@ -16,10 +15,8 @@ export class CardSetCreateComponent{
 
     constructor(
         private wordCollectionService: CardSetService,
-        private router: Router,
-        private authorizeService: AuthorizeService
+        private router: Router
         ) {
-        // this.cardSet.words.push(new Card(undefined, "Учитель", "Teacher")); //delete
     }
 
     // addCard() {

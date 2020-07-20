@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { CardSetService } from "../card-set.service";
-import { Card } from "src/app/card/card";
+import { Card } from "../../card/card";
 import { CardService } from "src/app/card/card.service";
 import { CardSet } from "../card-set";
 import { Router, ActivatedRoute } from "@angular/router";
