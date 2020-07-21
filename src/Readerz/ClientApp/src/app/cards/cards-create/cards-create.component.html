@@ -1,0 +1,53 @@
+<div class="border p-2">
+    <h4 class="text-center">Define card set's name: </h4>
+
+
+    <div class="row">
+        <div class="col">
+            <input type="text" placeholder="Card set's name" class="form-control" [(ngModel)]="cardSet.name" />
+        </div>
+        <div class="col">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Accessibility</label>
+                </div>
+                <select type="number" [(ngModel)]="cardSet.status" class="custom-select" id="inputGroupSelect01">
+                    <option selected value="0">Private</option>
+                    <option value="1">Public</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+
+    <h3 class="text-center">({{cards.length}}) Cards: </h3>
+    <div *ngFor="let c of cards; let i = index">
+        <div class="row m-2">
+            <div class="offset-1 col-4 border rounded" style="height: 50px;">
+                {{c?.front}}
+            </div>
+            <div class="offset-2 col-4 border rounded" style="height: 50px;">
+                {{c?.back}}
+            </div>
+            <div class="col-1">
+                <input type="button" class="btn btn-danger" value="del" (click)=" delete(i)" />
+            </div>
+        </div>
+    </div>
+
+    <div class="p-2 border rounded m-3">
+        <app-card-form [(card)]="card"></app-card-form>
+        <input type="button" value="Add" class="btn btn-primary btn-block mt-2" (click)="add()" />
+    </div>
+
+
+    <div class="d-flex flex-row justify-content-between">
+        <div class="p-2">
+            <a routerLink="/cards" class="btn btn-danger btn-lg">Go back</a>
+        </div>
+        <div class="p-2">
+            <input type="button" value="Save set" class="btn btn-success btn-lg" (click)="save()" />
+        </div>
+    </div>
+</div>

@@ -6,6 +6,7 @@ using Readerz.Domain.Entities;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Reader.Application.Cards.Queries.GetCardsByCardSet
 {
@@ -22,21 +23,16 @@ namespace Reader.Application.Cards.Queries.GetCardsByCardSet
 
         public async Task<CardListVm> Handle(GetCardsByCardSetQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _context.CardSets.FindAsync(request.Id);
-
-            if (entity == null)
+            var cardSet = await _context.CardSets.Include(c => c.Cards)
+                .FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
+            
+            if (cardSet == null)
             {
                 throw new NotFoundException(nameof(CardSet), request.Id);
             }
 
-            var cards = _mapper.Map<IList<CardDto>>(entity.Cards);
-
-            var vm = new CardListVm
-            {
-                Cards = cards
-            };
-
-            return vm;
+            var cards = _mapper.Map<ICollection<CardDto>>(cardSet.Cards);
+            return new CardListVm {Cards = cards};
         }
     }
 }

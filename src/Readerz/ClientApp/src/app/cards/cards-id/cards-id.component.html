@@ -1,0 +1,19 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let c of cards">
+            <td>{{c?.front}}</td>
+            <td>{{c?.back}}</td>
+            <td>
+                <a [routerLink]="['card/update', c.id]" class="btn btn-sm btn-primary">Edit</a>
+                <button (click)="delete(c.id)" class="btn btn-sm btn-danger">X</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
