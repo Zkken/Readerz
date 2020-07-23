@@ -26,7 +26,7 @@ export class CardsIdComponent implements OnInit {
   }
 
   game() {
-    
+    //Todo game
   }
 
   delete(id: number) {

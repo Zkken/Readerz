@@ -11,7 +11,9 @@
             <td>{{c?.front}}</td>
             <td>{{c?.back}}</td>
             <td>
-                <a [routerLink]="['card/update', c.id]" class="btn btn-sm btn-primary">Edit</a>
+                <a [routerLink]="['card/update', c.id]" class="btn btn-sm btn-primary">
+                    <i class="fa fa-edit" title="Edit"></i>
+                </a>
                 <button (click)="delete(c.id)" class="btn btn-sm btn-danger">X</button>
             </td>
         </tr>

@@ -1,14 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { CardSetService } from '../services/cards.service';
+import { CardSetService } from '../services/card-set.service';
 import { CardSet } from '../models/card-set';
 import { CurrentUserService } from '../services/current-user-service';
 import { switchMap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.component.html',
-  styleUrls: ['./cards.component.css']
+  styleUrls: ['./card.component.css']
 })
 export class CardsComponent implements OnInit {
   cardSets: CardSet[];
@@ -29,7 +28,8 @@ export class CardsComponent implements OnInit {
         return this.cardSetService.getAllByCardCreatorId(val);
       })
     ).subscribe(val => {
-      this.cardSets = val;
+      console.log(val.cardSetDtos);
+      this.cardSets = val.cardSetDtos;
     }, err => console.log(err));
   }
 }
