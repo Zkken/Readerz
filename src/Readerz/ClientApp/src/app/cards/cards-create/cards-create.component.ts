@@ -14,12 +14,10 @@ export class CardsCreateComponent implements OnInit {
   cards: Card[]
   card: Card
   cardSet: CardSet
-  private cardCreatorId: number
 
   constructor(
     private cardSetService: CardSetService,
-    private router: Router,
-    private userService: CurrentUserService
+    private router: Router
   ) {
     this.cards = [];
     this.cardSet = new CardSet();
@@ -27,9 +25,6 @@ export class CardsCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getCardCreatorId().subscribe(val => {
-      this.cardCreatorId = val;
-    });
   }
 
   add() {
@@ -45,8 +40,7 @@ export class CardsCreateComponent implements OnInit {
     const command = {
       name: this.cardSet.name,
       status: this.cardSet.status,
-      cards: this.cards,
-      cardCreatorId: this.cardCreatorId
+      cards: this.cards
     }
     this.cardSetService.create(command)
       .subscribe(val => {

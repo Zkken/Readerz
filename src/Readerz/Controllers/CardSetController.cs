@@ -1,28 +1,37 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Reader.Application.Cards.Commands.DeleteCard;
 using Reader.Application.CardSets.Commands.CreateCommand;
+using Reader.Application.CardSets.Commands.DeleteCommand;
 using Reader.Application.CardSets.Commands.UpdateCommand;
+using Reader.Application.CardSets.Queries.GetCardSets;
+using Reader.Application.CardSets.Queries.GetCardSetsAll;
 
 namespace Readerz.Controllers
 {
     [Authorize]
     public class CardSetController : BaseController
     {
-        [HttpPost]
-        public async Task<ActionResult<int>> CreateCardSet([FromBody] CreateCardSetCommand command)
+        [HttpGet]
+        public async Task<ActionResult<CardSetVm>> All()
         {
-            var cardSetId = await Mediator.Send(command);
-
-            return Ok(cardSetId);
+            return Ok(await Mediator.Send(new GetCardSetsAllQuery()));
+        }
+        
+        [HttpPost]
+        public async Task<ActionResult<int>> Create([FromBody] CreateCardSetCommand command)
+        {
+            return Ok(await Mediator.Send(command));
         }
 
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> UpdateCardSet([FromBody] UpdateCardSetCommand command)
+        public async Task<ActionResult> Update([FromBody] UpdateCardSetCommand command)
         {
             await Mediator.Send(command);
 
@@ -31,11 +40,15 @@ namespace Readerz.Controllers
 
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<ActionResult> DeleteCardSet(int id)
+        public async Task<ActionResult<DeleteCardCommand>> Delete(int id)
         {
-            await Mediator.Send(new DeleteCardCommand { Id = id });
+            return Ok(await Mediator.Send(new DeleteCardSetCommand { CardSetId = id}));
+        }
 
-            return NoContent();
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<CardSetDto>>> ByCardCreator(int id)
+        {
+            return Ok(await Mediator.Send(new GetCardSetsQuery { UserId = id }));
         }
     }
 }

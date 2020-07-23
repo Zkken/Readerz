@@ -16,13 +16,16 @@ export class CardSetService {
     create(command: CreateCardSetCommand) {
         return this.client.post(this.baseUrl + ApiUrl.CardSet.Create, command);
     }
+
+    delete(id: number) {
+        return this.client.delete(this.baseUrl + ApiUrl.CardSet.Delete + "/" + id);
+    }
 }
-interface GetCardSetCommand {
+export interface GetCardSetCommand {
     cardSetDtos: CardSet[]
 }
 
 interface CreateCardSetCommand {
-    cardCreatorId: number,
     name: string,
     status: CardSetStatus,
     textId?: number,

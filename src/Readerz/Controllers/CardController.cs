@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Reader.Application.Cards.Commands.CreateRangeCommand;
 using Reader.Application.Cards.Commands.DeleteCard;
+using Reader.Application.Cards.Commands.UpdateCard;
 using Reader.Application.Cards.Queries.GetCardsByCardSet;
 
 namespace Readerz.Controllers
@@ -37,6 +35,14 @@ namespace Readerz.Controllers
         public async Task<ActionResult> CreateRange(CreateCardRangeCommand command)
         {
             await Mediator.Send(command);
+
+            return NoContent();
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> Update(CardDto card)
+        {
+            await Mediator.Send(new UpdateCardCommand { });
 
             return NoContent();
         }

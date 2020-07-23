@@ -31,7 +31,9 @@
                 {{c?.back}}
             </div>
             <div class="col-1">
-                <input type="button" class="btn btn-danger" value="del" (click)=" delete(i)" />
+                <button class="btn btn-danger" (click)=" delete(i)">
+                    <fa name="trash"></fa>
+                </button>
             </div>
         </div>
     </div>

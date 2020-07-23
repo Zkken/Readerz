@@ -1,7 +1,17 @@
-﻿namespace Readerz.Controllers
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Reader.Application.CardCreator.Queries.GetCardCreatorId;
+
+namespace Readerz.Controllers
 {
-    public class CardCreatorController
+    [Authorize]
+    public class CardCreatorController : BaseController
     {
-        
+        [HttpGet]
+        public async Task<ActionResult<int?>> Current()
+        {
+            return Ok(await Mediator.Send(new GetCardCreatorIdQuery()));//create query
+        }
     }
 }

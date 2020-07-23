@@ -1,40 +1,41 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Reader.Application;
+using Reader.Application.Common.Interfaces;
 using Readerz.Infrastructure;
 using Readerz.Persistence;
+using Readerz.Services;
 
 namespace Readerz
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _environment;
+        
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
-            Configuration = configuration;
-            Environment = environment;
+            _configuration = configuration;
+            _environment = environment;
         }
-
-        public IConfiguration Configuration { get; }
-        public IWebHostEnvironment Environment { get; }
-
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddInfrastructure(Configuration, Environment);
-            services.AddPersistence(Configuration);
+            services.AddInfrastructure(_configuration, _environment);
+            services.AddPersistence(_configuration);
             services.AddApplication();
-            
+
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddHttpContextAccessor();
 
+            services.AddControllersWithViews()
+                            .AddNewtonsoftJson();
 
-            services.AddControllersWithViews();
-                // .AddNewtonsoftJson();
-                
             services.AddRazorPages();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => 
@@ -57,11 +58,13 @@ namespace Readerz
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
-
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+            if (!env.IsDevelopment())
+            {
+                app.UseSpaStaticFiles();
+            }
 
             app.UseRouting();
 
@@ -82,7 +85,7 @@ namespace Readerz
                 spa.Options.SourcePath = "ClientApp";
                 if (env.IsDevelopment())
                 {
-                    //spa.UseAngularCliServer(npmScript: "start");
+                    // spa.UseAngularCliServer(npmScript: "start");
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
