@@ -1,1 +1,27 @@
-<p>cards-game works!</p>
+<p *ngIf="!game"><em>Loading...</em></p>
+
+<div class="row" *ngIf="game">
+    <div class="border rounded" style="width: 100%;">
+        <h2 class="text-center">
+            Memorize
+            <span *ngIf="!game.end">
+                [{{game.currentCardIndex+1}}/{{game.currentLength}}]
+            </span>
+        </h2>
+        <hr>
+        <div class="d-flex flex-column align-items-center justify-content-between noselect card-block"
+            [ngClass]="{pointer: !game.end}" (mouseup)="myMouseClicked($event)" *ngIf="!game.end">
+            <div></div>
+            <h1 class="mt-3">{{game.text}}</h1>
+            <p class="text-muted">{{game.currentCardSide}}</p>
+        </div>
+        <div *ngIf="game.end" class="card-block d-flex justify-content-center flex-column align-items-center">
+            <h2>Thanks for playing</h2>
+            <a routerLink="/cards">Go back to cards</a>
+        </div>
+    </div>
+    <p class="text-muted m-3">
+        Press <b>enter button</b> to go to the next card if you memorize it translation.
+        Else press <b>space button</b> to leave it in stack.
+    </p>
+</div>

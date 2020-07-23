@@ -44,7 +44,8 @@ import { CardsGameComponent } from './cards/cards-game/cards-game.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'cards', component: CardsComponent, canActivate: [AuthorizeGuard] },
       { path: 'cards/create', component: CardsCreateComponent, canActivate: [AuthorizeGuard] },
-      { path: 'cards/:id', component: CardsIdComponent, canActivate: [AuthorizeGuard] }
+      { path: 'cards/:id', component: CardsIdComponent, canActivate: [AuthorizeGuard] },
+      { path: 'cards/:id/game', component: CardsGameComponent, canActivate: [AuthorizeGuard]}
     ])
   ],
   providers: [
