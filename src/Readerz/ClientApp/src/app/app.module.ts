@@ -20,6 +20,7 @@ import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor
 import { CardSetService } from './services/card-set.service';
 import { CurrentUserService } from './services/current-user-service';
 import { CardService } from './services/card.service';
+import { CardsGameComponent } from './cards/cards-game/cards-game.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { CardService } from './services/card.service';
     CardsCreateComponent,
     CardsIdComponent,
     CardFormComponent,
+    CardsGameComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

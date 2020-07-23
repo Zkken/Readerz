@@ -8,7 +8,7 @@ import { CardService, Card } from 'src/app/services/card.service';
   styleUrls: ['./cards-id.component.css']
 })
 export class CardsIdComponent implements OnInit {
-  private id: number
+  id: number
   cards: Card[]
   
   constructor(

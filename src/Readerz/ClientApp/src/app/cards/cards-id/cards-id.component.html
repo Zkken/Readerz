@@ -1,21 +1,31 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td scope="col">#</td>
+            <td scope="col">Front</td>
+            <td scope="col">Back</td>
+            <td scope="col"></td>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let c of cards">
+        <tr *ngFor="let c of cards; let i = index">
+            <td scope="row">{{i+1}}</td>
             <td>{{c?.front}}</td>
             <td>{{c?.back}}</td>
             <td>
-                <a [routerLink]="['card/update', c.id]" class="btn btn-sm btn-primary">
-                    <i class="fa fa-edit" title="Edit"></i>
-                </a>
-                <button (click)="delete(c.id)" class="btn btn-sm btn-danger">X</button>
+                <div class="btn-group">
+                    <a [routerLink]="['card/update', c.id]" class="btn btn-sm btn-light">
+                        <fa name="edit"></fa>
+                    </a>
+                    <button (click)="delete(c.id)" class="btn btn-sm btn-light">
+                        <fa name="trash"></fa>
+                    </button>
+                </div>
             </td>
         </tr>
     </tbody>
 </table>
+
+<div>
+    <a class="btn btn-bg btn-dark" routerLink="cards/4/game">Play</a>
+</div >
