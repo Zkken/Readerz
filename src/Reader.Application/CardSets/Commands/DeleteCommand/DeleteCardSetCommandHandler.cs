@@ -8,7 +8,7 @@ using Readerz.Domain.Enums;
 
 namespace Reader.Application.CardSets.Commands.DeleteCommand
 {
-    public class DeleteCardSetCommandHandler : IRequestHandler<DeleteCardSetCommand>
+    public class DeleteCardSetCommandHandler : IRequestHandler<DeleteCardSetCommand, DeleteCardSetCommand>
     {
         private readonly IReaderzDbContext _context;
 
@@ -17,20 +17,20 @@ namespace Reader.Application.CardSets.Commands.DeleteCommand
             _context = context;
         }
 
-        public async Task<Unit> Handle(DeleteCardSetCommand request, CancellationToken cancellationToken)
+        public async Task<DeleteCardSetCommand> Handle(DeleteCardSetCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.CardSets.FindAsync(request.CardSetId);
+            var cardSet = await _context.CardSets.FindAsync(request.CardSetId);
 
-            if (entity == null)
+            if (cardSet == null)
             {
                 throw new NotFoundException(nameof(CardSet), request.CardSetId);
             }
 
-            _context.CardSets.Remove(entity);
+            _context.CardSets.Remove(cardSet);
 
             await _context.SaveChangesAsync(cancellationToken);
             
-            return Unit.Value;
+            return request;
         }
     }
 }

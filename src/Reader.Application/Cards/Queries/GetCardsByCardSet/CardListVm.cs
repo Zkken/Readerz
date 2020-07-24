@@ -4,6 +4,6 @@ namespace Reader.Application.Cards.Queries.GetCardsByCardSet
 {
     public class CardListVm
     {
-        public IList<CardDto> Cards { get; set; }
+        public ICollection<CardDto> Cards { get; set; }
     }
 }
