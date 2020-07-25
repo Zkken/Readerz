@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ApiAuthorizationModule } from '../api-authorization/api-authorization.module';
+import { ReactiveFormsModule }   from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -18,9 +19,13 @@ import { AuthorizeGuard } from '../api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor';
 
 import { CardSetService } from './services/card-set.service';
-import { CurrentUserService } from './services/current-user-service';
+import { CurrentUserService } from './services/current-user.service';
 import { CardService } from './services/card.service';
 import { CardsGameComponent } from './cards/cards-game/cards-game.component';
+import { CardGameService } from './services/card-game.service';
+import { TextComponent } from './text/text.component';
+import { TextService } from './services/text.service';
+import { TextCreateComponent } from './text/text-create/text-create.component';
 
 
 @NgModule({
@@ -33,6 +38,8 @@ import { CardsGameComponent } from './cards/cards-game/cards-game.component';
     CardsIdComponent,
     CardFormComponent,
     CardsGameComponent,
+    TextComponent,
+    TextCreateComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -40,19 +47,23 @@ import { CardsGameComponent } from './cards/cards-game/cards-game.component';
     FormsModule,
     ApiAuthorizationModule,
     AngularFontAwesomeModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'cards', component: CardsComponent, canActivate: [AuthorizeGuard] },
       { path: 'cards/create', component: CardsCreateComponent, canActivate: [AuthorizeGuard] },
       { path: 'cards/:id', component: CardsIdComponent, canActivate: [AuthorizeGuard] },
-      { path: 'cards/:id/game', component: CardsGameComponent, canActivate: [AuthorizeGuard]}
+      { path: 'cards/:id/game', component: CardsGameComponent, canActivate: [AuthorizeGuard]},
+      { path: 'text', component: TextCreateComponent, canActivate: [AuthorizeGuard] }
     ])
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
     CardSetService,
     CurrentUserService,
-    CardService
+    CardService,
+    CardGameService,
+    TextService
   ],
   bootstrap: [AppComponent]
 })

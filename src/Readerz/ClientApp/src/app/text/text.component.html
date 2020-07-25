@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-10">
+        <h3 class="text-center">{{text.name}}</h3>
+        <div class="border rounded mb-4">
+            <div class="p-container p-3">
+                <ng-container #container></ng-container>
+            </div>
+        </div>
+        <div class="col-2">
+            <!--Add adding new card feature by a word-->
+        </div>
+    </div>
+</div>
+
+<ng-template #paragraphTemplate let-words="words">
+    <p class="p">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <ng-template ngFor let-w [ngForOf]="words">
+            <span (click)="selectWord($event)">{{w}} </span>
+        </ng-template>
+    </p>
+    <br>
+</ng-template>

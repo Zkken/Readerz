@@ -1,0 +1,8 @@
+.p {
+    text-align: justify;
+    font-size: 18px;
+    cursor: pointer;
+}
+.p-container {
+    margin-bottom: -30px;
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { CardSetService, GetCardSetCommand } from '../services/card-set.service';
 import { CardSet } from '../models/card-set';
-import { CurrentUserService } from '../services/current-user-service';
+import { CurrentUserService } from '../services/current-user.service';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Card } from '../services/card.service';

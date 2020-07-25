@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,12 +19,11 @@ namespace Readerz.Controllers
             return Ok(await Mediator.Send(new GetCardsByCardSetQuery { Id = id }));
         }
 
-        [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> Delete(int id)
-        {
-            await Mediator.Send(new DeleteCardCommand { Id = id });
+        [HttpDelete ("{id}")]
+        [ProducesResponseType (StatusCodes.Status204NoContent)]
+        [ProducesResponseType (StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> Delete (int id) {
+            await Mediator.Send (new DeleteCardCommand { Id = id });
 
             return NoContent();
         }

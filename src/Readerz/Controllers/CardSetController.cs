@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -10,6 +10,7 @@ using Reader.Application.CardSets.Commands.DeleteCommand;
 using Reader.Application.CardSets.Commands.UpdateCommand;
 using Reader.Application.CardSets.Queries.GetCardSets;
 using Reader.Application.CardSets.Queries.GetCardSetsAll;
+using Reader.Application.CardSets.Queries.GetCardSetsByText;
 
 namespace Readerz.Controllers
 {
@@ -46,9 +47,15 @@ namespace Readerz.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<CardSetDto>>> ByCardCreator(int id)
+        public async Task<ActionResult<CardSetVm>> ByCardCreator(int id)
         {
             return Ok(await Mediator.Send(new GetCardSetsQuery { UserId = id }));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CardSetVm>> ByText(int id)
+        {
+            return Ok(await Mediator.Send(new GetCardSetByTextQuery {TextId = id}));
         }
     }
 }

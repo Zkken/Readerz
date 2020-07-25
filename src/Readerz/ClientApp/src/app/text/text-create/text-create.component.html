@@ -1,0 +1,34 @@
+<div *ngIf="editMode">
+    <div class="form-group">
+        <h3 class="text-center">Name of the text: </h3>
+        <div class="alert alert-danger" [hidden]="name.valid || name.untouched">
+            The text name field is empty.
+        </div>
+        <div class="d-flex justify-content-center">
+            <input class="form-control" placeholder="Type a text name here..." [(ngModel)]="text.name" #name="ngModel"
+                required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <h3 class="text-muted">Text:</h3>
+        <div class="alert alert-danger" [hidden]="innerText.valid || innerText.untouched">
+            The text field is empty.
+        </div>
+        <textarea rows="10" class="form-control" placeholder="Insert your test here.." [(ngModel)]="text.innerText"
+            #innerText="ngModel" required></textarea>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="d-flex justify-content-center offset-5 col-2">
+                <input class="form-control btn btn-success" type="button" value="Save your text" (click)="setText()"
+                    [disabled]="innerText.invalid || name.invalid">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!editMode">
+    <app-text [(text)]="text"></app-text>
+</div>
