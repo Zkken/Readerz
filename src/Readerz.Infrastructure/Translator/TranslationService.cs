@@ -17,7 +17,8 @@ namespace Readerz.Infrastructure.Translator
             Translate(string text, string to, string from = "Auto")
         {
             var langFrom = Language.Auto;
-            var langTo = GoogleTranslator.GetLanguageByName(to);
+            //var langTo = GoogleTranslator.GetLanguageByName(to);
+            var langTo = Language.Russian; // todo fix
             var result = await _translator.TranslateAsync(text, langFrom, langTo);
             var translation = result.TranslatedTextTranscription;
 

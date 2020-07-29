@@ -10,7 +10,7 @@ namespace Reader.Application.Common.Interfaces
         DbSet<Readerz.Domain.Entities.CardCreator> CardCreators { get; set; }
         DbSet<Card> Cards { get; set; }
         DbSet<CardSet> CardSets { get; set; }
-        DbSet<Text> Texts { get; set; }
+        DbSet<Readerz.Domain.Entities.Text> Texts { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

@@ -4,6 +4,7 @@ import { UnknownText } from '../models/text';
 import { Util } from '../services/util.service';
 import { delay, filter, map, mergeMap, switchMap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
+import { TextService } from '../services/text.service';
 
 @Component({
   selector: 'app-text',
@@ -16,7 +17,7 @@ export class TextComponent implements OnInit, AfterViewInit {
   @ViewChild('paragraphTemplate', { static: false }) paragraphTemp: TemplateRef<any>;
   @ViewChild('container', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(private cdr: ChangeDetectorRef, private textService: TextService) {
   }
 
   ngOnInit() {
@@ -42,6 +43,15 @@ export class TextComponent implements OnInit, AfterViewInit {
   selectWord(event: any) {
     let span = event.target as HTMLSpanElement
     console.log(span.innerText);
+
+    this.textService.translateWord({
+      text: span.innerText,
+      from: "en",
+      to: "ru"
+    }).subscribe(val => {
+      console.log(val.translation);
+    });
+
     span.className = "border rounded bg-info";
   }
 

@@ -15,6 +15,9 @@ interface IApiUrl {
     },
     CardCreator: {
         GetId: string
+    },
+    Text: {
+        Translate: string
     }
 }
 
@@ -35,6 +38,9 @@ export const ApiUrl: IApiUrl = {
     },
     CardCreator: {
         GetId: "api/cardCreator/current"
+    },
+    Text: {
+        Translate: "api/text/translateWord"
     }
 }
 
