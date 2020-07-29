@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Reader.Application.Common.Interfaces;
 using Readerz.Infrastructure.Identity;
+using Readerz.Infrastructure.Translator;
 
 namespace Readerz.Infrastructure
 {
@@ -15,6 +16,8 @@ namespace Readerz.Infrastructure
             IConfiguration configuration, IWebHostEnvironment environment)
         {
             services.AddScoped<IUserManager, UserManagerService>();
+
+            services.AddSingleton<ITranslatiovService, TranslationService>();
             
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
