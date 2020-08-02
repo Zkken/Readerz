@@ -1,33 +1,72 @@
 using GoogleTranslateFreeApi;
 using Reader.Application.Common.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Language = Reader.Application.Common.Models.Language;
+using Lang = GoogleTranslateFreeApi.Language;
+using TranslationResult = Reader.Application.Common.Models.TranslationResult;
+using TranslationRes = GoogleTranslateFreeApi.TranslationResult;
+using System;
+using Reader.Application.Common.Exceptions;
 
 namespace Readerz.Infrastructure.Translator
 {
     public class TranslationService : ITranslatiovService
     {
         private readonly ITranslator _translator;
+        private IEnumerable<Language> _supportedLanguages;
 
         public TranslationService()
         {
             _translator = new GoogleTranslator();
         }
 
-        public async Task<Reader.Application.Common.Interfaces.TranslationResult>
-            Translate(string text, string to, string from = "Auto")
+        public IEnumerable<Language> SupportedLanguages
         {
-            var langFrom = Language.Auto;
-            //var langTo = GoogleTranslator.GetLanguageByName(to);
-            var langTo = Language.Russian; // todo fix
-            var result = await _translator.TranslateAsync(text, langFrom, langTo);
-            var translation = result.TranslatedTextTranscription;
-
-            return new Reader.Application.Common.Interfaces.TranslationResult
+            get
             {
-                Translation = translation
-            };
+                if (_supportedLanguages == null)
+                {
+                    _supportedLanguages = GoogleTranslator.LanguagesSupported.ToList()
+                        .Select(language => new Language
+                        {
+                            Name = language.FullName,
+                            ISO = language.ISO639
+                        }
+                    );
+                }
+
+                return _supportedLanguages;
+            }
         }
 
-        //todo get all possible languages values with reflection or mb similar func already exists
+
+        public async Task<TranslationResult> Translate(string text, string to, string from = "auto")
+        {
+            if (text == null)
+            {
+                throw new ArgumentNullException(nameof(text));
+            }
+
+            if (!SupportedLanguages.Any(l => l.ISO == to))
+            {
+                throw new NotSupportedLanguageException(to);
+            }
+
+            if (from != "auto" && !SupportedLanguages.Any(l => l.ISO == from))
+            {
+                throw new NotSupportedLanguageException(to);
+            }
+
+            var langFrom = from == "auto" ? Lang.Auto : GoogleTranslator.GetLanguageByISO(from);
+            var langTo = GoogleTranslator.GetLanguageByISO(to);
+            var result = await _translator.TranslateAsync(text, langFrom, langTo);
+
+            return new TranslationResult
+            {
+                Translations = result.FragmentedTranslation.AsEnumerable()
+            };
+        }
     }
 }

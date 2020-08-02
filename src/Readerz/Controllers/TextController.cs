@@ -1,32 +1,46 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Reader.Application.Common.Interfaces;
+using Reader.Application.Common.Models;
+using Reader.Application.Text.Queries;
+using Reader.Application.Text.Queries.GetSupportedLanguages;
 using Reader.Application.Text.Queries.GetWordTranlsation;
 
 namespace Readerz.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class TextController : BaseController
     {
-        public async Task<ActionResult<object>> Get()
+        private readonly ILogger<TextController> _logger;
+
+        public TextController(ILogger<TextController> logger)
         {
-            return new ActionResult<object>(new object());
+            _logger = logger;
         }
 
         [HttpGet]
         public async Task<ActionResult<TranslationResult>> TranslateWord(
             [FromQuery] string text, 
             [FromQuery] string to, 
-            [FromQuery] string from="Auto"
+            [FromQuery] string from
             )
         {
+            _logger.LogInformation("text:{0}, to:{1}, from:{2}", text, to, from);
+
             return Ok(await Mediator.Send(new GetWordTranslationQuery
             {
                 Text = text,
                 To = to,
                 From = from
             }));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<LanguageVm>> GetSupportedLanguages()
+        {
+            return Ok(await Mediator.Send(new GetSupportedLanguagesQuery()));
         }
     }
 }

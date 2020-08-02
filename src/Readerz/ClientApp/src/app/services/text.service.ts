@@ -15,8 +15,22 @@ export class TextService {
 
     translateWord(translable: ITranslable) {
         let params = `?text=${translable.text}&to=${translable.to}&from=${translable.from}`;
+        console.log(params);
         return this.http.get<ITranslationResult>(this.baseUrl + ApiUrl.Text.Translate + params);
     }
+
+    getSupportedLanguages() {
+        return this.http.get<Languages>(this.baseUrl + ApiUrl.Text.SupportedLanguages);
+    }
+}
+
+export interface Languages {
+    languages: Language[]
+}
+
+export interface Language {
+    iso: string,
+    name: string
 }
 
 export interface ITranslable {
@@ -26,5 +40,5 @@ export interface ITranslable {
 }
 
 export interface ITranslationResult {
-    translation: string
+    translations: string[]
 }

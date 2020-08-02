@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Reader.Application.Common.Interfaces;
+using Reader.Application.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,12 +26,10 @@ namespace Reader.Application.Text.Queries.GetWordTranlsation
             {
                 if(string.IsNullOrEmpty(request.From))
                 {
-                    request.From = "Auto";
+                    request.From = "auto";
                 }
 
-                var result = await _translatiovService.Translate(request.Text, request.To, request.From);
-
-                return result;
+                return await _translatiovService.Translate(request.Text, request.To, request.From);
             }
         }
     }

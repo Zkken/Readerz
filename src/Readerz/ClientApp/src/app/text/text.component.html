@@ -6,8 +6,23 @@
                 <ng-container #container></ng-container>
             </div>
         </div>
-        <div class="col-2">
-            <!--Add adding new card feature by a word-->
+    </div>
+    <div class="col-2">
+        <h4>Choose language</h4>
+        <div class="d-flex flex-column">
+            <div class="form-group">
+                <label for="langFromSelect">From:</label>
+                <select [(ngModel)]="languageFrom" class="custom-select" id="langFromSelect">
+                    <option value="auto" selected>Auto</option>
+                    <option *ngFor="let lang of languages" value="{{lang.iso}}">{{lang.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="langToSelect">To:</label>
+                <select [(ngModel)]="languageTo" class="custom-select" id="langToSelect">
+                    <option *ngFor="let lang of languages" value="{{lang.iso}}">{{lang.name}}</option>
+                </select>
+            </div>
         </div>
     </div>
 </div>

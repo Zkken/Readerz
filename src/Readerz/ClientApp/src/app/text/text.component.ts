@@ -1,10 +1,9 @@
-import { Component, OnInit, ElementRef, ViewChild, TemplateRef, ViewContainerRef, AfterViewInit, ChangeDetectorRef, Injectable, Input } from '@angular/core';
-import { Card } from '../services/card.service';
+import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, AfterViewInit, ChangeDetectorRef,  Input } from '@angular/core';
 import { UnknownText } from '../models/text';
 import { Util } from '../services/util.service';
-import { delay, filter, map, mergeMap, switchMap } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
-import { TextService } from '../services/text.service';
+import { TextService, Language } from '../services/text.service';
 
 @Component({
   selector: 'app-text',
@@ -17,7 +16,14 @@ export class TextComponent implements OnInit, AfterViewInit {
   @ViewChild('paragraphTemplate', { static: false }) paragraphTemp: TemplateRef<any>;
   @ViewChild('container', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
 
+  languages: Language[]
+  languageFrom: string
+  languageTo: string
+
   constructor(private cdr: ChangeDetectorRef, private textService: TextService) {
+    this.textService.getSupportedLanguages().subscribe(val => {
+      this.languages = val.languages;
+    })
   }
 
   ngOnInit() {
@@ -38,18 +44,19 @@ export class TextComponent implements OnInit, AfterViewInit {
   }
 
   //TODO bug: sentence: I love sushi., there are 3 words ["I", "love", "sushi."], 
-  //but sushi with the end of dot, need to fix this cases.
+  //but sushi has the end with dot, need to fix this case and similar with other punctuations.
+
+
 
   selectWord(event: any) {
     let span = event.target as HTMLSpanElement
-    console.log(span.innerText);
 
     this.textService.translateWord({
       text: span.innerText,
-      from: "en",
-      to: "ru"
+      from: this.languageFrom,
+      to: this.languageTo
     }).subscribe(val => {
-      console.log(val.translation);
+      console.log(val.translations);
     });
 
     span.className = "border rounded bg-info";

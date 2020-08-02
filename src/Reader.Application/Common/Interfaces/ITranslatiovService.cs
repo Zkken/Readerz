@@ -1,11 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using Reader.Application.Common.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Reader.Application.Common.Interfaces
 {
-    public class TranslationResult
-    {
-        public string Translation { get; set; }
-    }
     public interface ITranslatiovService
     {
 
@@ -18,5 +16,6 @@ namespace Reader.Application.Common.Interfaces
         /// parameter as value means that translator automatically define the text</param>
         /// <returns></returns>
         Task<TranslationResult> Translate(string text, string to, string from = "Auto");
+        IEnumerable<Language> SupportedLanguages { get; } 
     }
 }
