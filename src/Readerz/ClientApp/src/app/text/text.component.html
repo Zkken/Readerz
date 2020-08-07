@@ -8,22 +8,38 @@
         </div>
     </div>
     <div class="col-2">
-        <h4>Choose language</h4>
-        <div class="d-flex flex-column">
-            <div class="form-group">
-                <label for="langFromSelect">From:</label>
-                <select [(ngModel)]="languageFrom" class="custom-select" id="langFromSelect">
-                    <option value="auto" selected>Auto</option>
-                    <option *ngFor="let lang of languages" value="{{lang.iso}}">{{lang.name}}</option>
-                </select>
+        <h5>Choose language and then click on the word you like</h5>
+        <form [formGroup]="selectForm">
+            <div *ngIf="langFromSelect.errors?.required || langToSelect.errors?.required">
+                <div class="alert alert-danger">
+                    Choose source and destination languages
+                </div>
             </div>
-            <div class="form-group">
-                <label for="langToSelect">To:</label>
-                <select [(ngModel)]="languageTo" class="custom-select" id="langToSelect">
-                    <option *ngFor="let lang of languages" value="{{lang.iso}}">{{lang.name}}</option>
-                </select>
+            <div class="d-flex flex-column">
+                <div class="form-group">
+                    <label for="langFromSelect">From:</label>
+                    <select [(ngModel)]="languageFrom" class="custom-select" id="langFromSelect"
+                    formControlName="langFromSelect">
+                        <option value="auto" selected>Auto</option>
+                        <option *ngFor="let lang of languages" value="{{lang.iso}}">{{lang.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="langToSelect">To:</label>
+                    <select [(ngModel)]="languageTo" class="custom-select" id="langToSelect"
+                    formControlName="langToSelect">
+                        <option *ngFor="let lang of languages" value="{{lang.iso}}">{{lang.name}}</option>
+                    </select>
+                </div>
+                <div>
+                    <h6 class="text-muted">Translation</h6>
+                    <p>{{lastTranslation}} <b>-</b> {{translation}}</p>
+                    <div class="form-group">
+                        <input type="button" value="Add new card to list" class="btn btn-success">
+                    </div>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
