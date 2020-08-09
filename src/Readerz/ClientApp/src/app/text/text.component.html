@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <label for="langFromSelect">From:</label>
                     <select [(ngModel)]="languageFrom" class="custom-select" id="langFromSelect"
-                    formControlName="langFromSelect">
+                        formControlName="langFromSelect">
                         <option value="auto" selected>Auto</option>
                         <option *ngFor="let lang of languages" value="{{lang.iso}}">{{lang.name}}</option>
                     </select>
@@ -27,7 +27,7 @@
                 <div class="form-group">
                     <label for="langToSelect">To:</label>
                     <select [(ngModel)]="languageTo" class="custom-select" id="langToSelect"
-                    formControlName="langToSelect">
+                        formControlName="langToSelect">
                         <option *ngFor="let lang of languages" value="{{lang.iso}}">{{lang.name}}</option>
                     </select>
                 </div>
@@ -47,8 +47,8 @@
     <p class="p">
         &nbsp;&nbsp;&nbsp;&nbsp;
         <ng-template ngFor let-w [ngForOf]="words">
-            <span (click)="selectWord($event)">{{w}} </span>
+            <!-- <span *ngIf="!isDelimeter(w); else withoutSpan" (click)="selectWord($event)">{{w}} </span>
+            <ng-template #withoutSpan>{{w}}</ng-template> -->
         </ng-template>
-    </p>
-    <br>
+        <br>
 </ng-template>

@@ -1,11 +1,11 @@
-﻿using IdentityServer4.Models;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Reader.Application.Common.Interfaces;
 using Readerz.Infrastructure.Identity;
+using Readerz.Infrastructure.TextProcessing;
 using Readerz.Infrastructure.Translator;
 
 namespace Readerz.Infrastructure
@@ -16,8 +16,11 @@ namespace Readerz.Infrastructure
             IConfiguration configuration, IWebHostEnvironment environment)
         {
             services.AddScoped<IUserManager, UserManagerService>();
-
+            
+            services.AddSingleton<ITextProcessingService, TextProcessingService>();
+            
             services.AddSingleton<ITranslatiovService, TranslationService>();
+            
             
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));

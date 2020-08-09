@@ -22,6 +22,11 @@ export class TextService {
     getSupportedLanguages() {
         return this.http.get<Languages>(this.baseUrl + ApiUrl.Text.SupportedLanguages);
     }
+
+    process(text: string) {
+        let params: string = `?text=${text}`;
+        return this.http.get<ITextProcessingResult>(this.baseUrl + ApiUrl.Text.Process + params);
+    }
 }
 
 export interface Languages {
@@ -41,4 +46,9 @@ export interface ITranslable {
 
 export interface ITranslationResult {
     translations: string[]
+}
+
+export interface ITextProcessingResult {
+    uniqueIdentifier: string,
+    text: string
 }

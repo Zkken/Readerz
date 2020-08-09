@@ -28,6 +28,7 @@ export class TextComponent implements OnInit, AfterViewInit {
     langToSelect: ['', [Validators.required]],
     langFromSelect: ['', [Validators.required]]
   })
+  dels: string[] = Util.possibleDelimeters.split('')
 
   constructor(private cdr: ChangeDetectorRef, private textService: TextService,
     public fb: FormBuilder) {
@@ -50,14 +51,17 @@ export class TextComponent implements OnInit, AfterViewInit {
   //dom generating with view
   //TODO: need to comment this section
   ngAfterViewInit() {
+    //first of all text will be splitted by '\n' characters
     from((this.text.innerText.split('\n'))).pipe(
+      //check if text string is not blank
       filter(val => !Util.isBlank(val)),
+      //switch map that returns a paragraph that will be insert on the page with all words in text string
       switchMap(val => {
-        let words = val.split(' '); // mb async
+        let words = Util.getWords(val); // get words
         return of(this.paragraphTemp.createEmbeddedView({ words: words }));
       })
     ).subscribe(val => {
-      this.container.insert(val);
+      this.container.insert(val); // add to container of paragrapsh new paragraph
       this.cdr.detectChanges(); // detect changes by a reason of manual dom manipulating
     }, err => console.log(err))
   }

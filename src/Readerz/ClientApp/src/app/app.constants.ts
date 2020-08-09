@@ -18,7 +18,8 @@ interface IApiUrl {
     },
     Text: {
         Translate: string,
-        SupportedLanguages: string
+        SupportedLanguages: string,
+        Process: string
     }
 }
 
@@ -42,7 +43,8 @@ export const ApiUrl: IApiUrl = {
     },
     Text: {
         Translate: "api/text/translateWord",
-        SupportedLanguages: "api/text/getSupportedLanguages"
+        SupportedLanguages: "api/text/getSupportedLanguages",
+        Process: "api/text/process"
     }
 }
 
