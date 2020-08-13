@@ -13,9 +13,8 @@ export class TextService {
     
     }
 
-    translateWord(translable: ITranslable) {
+    getTranslatedWord(translable: ITranslable) {
         let params = `?text=${translable.text}&to=${translable.to}&from=${translable.from}`;
-        console.log(params);
         return this.http.get<ITranslationResult>(this.baseUrl + ApiUrl.Text.Translate + params);
     }
 
@@ -23,7 +22,7 @@ export class TextService {
         return this.http.get<Languages>(this.baseUrl + ApiUrl.Text.SupportedLanguages);
     }
 
-    process(text: string) {
+    getProcessed(text: string) {
         let params: string = `?text=${text}`;
         return this.http.get<ITextProcessingResult>(this.baseUrl + ApiUrl.Text.Process + params);
     }

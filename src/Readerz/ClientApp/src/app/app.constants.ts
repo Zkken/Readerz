@@ -1,29 +1,4 @@
-interface IApiUrl {
-    CardSet: {
-        GetAll: string,
-        Update: string,
-        Delete: string,
-        ByCreatorId: string,
-        Create: string
-    },
-    Card: {
-        ByCardSetId: string,
-        Create: string,
-        Delete: string,
-        Update: string,
-        CreateRange: string
-    },
-    CardCreator: {
-        GetId: string
-    },
-    Text: {
-        Translate: string,
-        SupportedLanguages: string,
-        Process: string
-    }
-}
-
-export const ApiUrl: IApiUrl = {
+export const ApiUrl = {
     CardSet: {
         Create: "api/cardSet/create",
         GetAll: "api/cardSet/all",
