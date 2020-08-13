@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Reader.Application.Cards.Commands.DeleteCard;
 using Reader.Application.CardSets.Commands.CreateCommand;
@@ -30,8 +27,6 @@ namespace Readerz.Controllers
         }
 
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesDefaultResponseType]
         public async Task<ActionResult> Update([FromBody] UpdateCardSetCommand command)
         {
             await Mediator.Send(command);
@@ -40,7 +35,6 @@ namespace Readerz.Controllers
         }
 
         [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult<DeleteCardCommand>> Delete(int id)
         {
             return Ok(await Mediator.Send(new DeleteCardSetCommand { CardSetId = id}));

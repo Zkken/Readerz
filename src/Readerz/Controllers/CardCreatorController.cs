@@ -11,7 +11,7 @@ namespace Readerz.Controllers
         [HttpGet]
         public async Task<ActionResult<int?>> Current()
         {
-            return Ok(await Mediator.Send(new GetCardCreatorIdQuery()));//create query
+            return Ok(await Mediator.Send(new GetCardCreatorIdQuery()));
         }
     }
 }

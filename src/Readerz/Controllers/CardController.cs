@@ -13,15 +13,12 @@ namespace Readerz.Controllers
     public class CardController : BaseController
     {
         [HttpGet("{id}")]
-        [AllowAnonymous]
         public async Task<ActionResult<CardListVm>> GetBySet(int id)
         {
             return Ok(await Mediator.Send(new GetCardsByCardSetQuery { Id = id }));
         }
 
         [HttpDelete ("{id}")]
-        [ProducesResponseType (StatusCodes.Status204NoContent)]
-        [ProducesResponseType (StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Delete (int id) {
             await Mediator.Send (new DeleteCardCommand { Id = id });
 
@@ -29,8 +26,6 @@ namespace Readerz.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> CreateRange(CreateCardRangeCommand command)
         {
             await Mediator.Send(command);
