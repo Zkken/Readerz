@@ -28,8 +28,6 @@ namespace Readerz.Controllers
             [FromQuery] string from
             )
         {
-            _logger.LogInformation("text:{0}, to:{1}, from:{2}", text, to, from);
-
             return Ok(await Mediator.Send(new GetWordTranslationQuery
             {
                 Text = text,

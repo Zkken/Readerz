@@ -43,12 +43,12 @@
     </div>
 </div>
 
-<ng-template #paragraphTemplate let-text="text" let-identifier="identifier">
+<ng-template #paragraphTemplate let-text="text">
     <p class="p">
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <ng-template ngFor let-w [ngForOf]="words">
-            <span *ngIf="!isDelimeter(w); else withoutSpan" (click)="selectWord($event)">{{w}} </span>
-            <ng-template #withoutSpan>{{w}}</ng-template>
+        <ng-template ngFor let-t [ngForOf]="text">
+            <span (click)="selectWord($event)" *ngIf="t.isWord;else emptyTemplate">{{t.value}}</span>
+            <ng-template #emptyTemplate>{{t.value}}</ng-template>
         </ng-template>
         <br>
     </p>

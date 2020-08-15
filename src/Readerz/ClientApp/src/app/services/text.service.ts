@@ -13,9 +13,9 @@ export class TextService {
     
     }
 
-    getTranslatedWord(translable: ITranslable) {
+    getTranslatedWord(translable: Translable) {
         let params = `?text=${translable.text}&to=${translable.to}&from=${translable.from}`;
-        return this.http.get<ITranslationResult>(this.baseUrl + ApiUrl.Text.Translate + params);
+        return this.http.get<TranslationResult>(this.baseUrl + ApiUrl.Text.Translate + params);
     }
 
     getSupportedLanguages() {
@@ -24,7 +24,7 @@ export class TextService {
 
     getProcessed(text: string) {
         let params: string = `?text=${text}`;
-        return this.http.get<ITextProcessingResult>(this.baseUrl + ApiUrl.Text.Process + params);
+        return this.http.get<TextProcessingResult>(this.baseUrl + ApiUrl.Text.Process + params);
     }
 }
 
@@ -37,17 +37,21 @@ export interface Language {
     name: string
 }
 
-export interface ITranslable {
+export interface Translable {
     text: string,
     from?: string,
     to: string
 }
 
-export interface ITranslationResult {
+export interface TranslationResult {
     translations: string[]
 }
 
-export interface ITextProcessingResult {
-    uniqueIdentifier: string,
-    text: string
+export interface TextProcessingResult {
+    text: TextItem[]
+}
+
+export interface TextItem {
+    isWord: boolean,
+    value: string
 }

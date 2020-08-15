@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Reader.Application.Common.Models
 {
@@ -7,14 +8,76 @@ namespace Reader.Application.Common.Models
     {
         public TextProcessingResult()
         {
-            UniqueIdentifier = Guid.NewGuid().ToString().Split('-')[0][..4];
-            OpenTagIdetifier = Guid.NewGuid().ToString().Split('-')[0][..4];
-            CloseTagIdentifier = Guid.NewGuid().ToString().Split('-')[0][..4];
+            Text = new List<TextItem>();
+        }
+
+        public TextProcessingResult(IList<TextItem> items)
+        {
+            Text = items;
         }
         
-        public string OpenTagIdetifier { get; }
-        public string CloseTagIdentifier { get;  }
-        public string UniqueIdentifier { get; }
-        public string Text { get; set; }
+        public IList<TextItem> Text { get; }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is TextProcessingResult result))
+            {
+                return false;
+            }
+
+            if (Text.Count != result.Text.Count)
+            {
+                return false;
+            }
+
+            return !Text.Where((t, i) => !t.Equals(result.Text[i])).Any();
+        }
+
+        public override int GetHashCode()
+        {
+            return Text != null ? Text.GetHashCode() : 0;
+        }
+
+        public override string ToString()
+        {
+            return string.Join(",", Text);
+        }
+    }
+
+    public readonly struct TextItem
+    {
+        public TextItem(bool isWord, string value)
+        {
+            IsWord = isWord;
+            Value = value;
+        }
+
+        public bool IsWord { get; }
+        public string Value { get; }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is TextItem item))
+            {
+                return false;
+            }
+
+            if (item.IsWord != IsWord)
+            {
+                return false;
+            }
+
+            return item.Value == Value;
+        }
+        
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(IsWord, Value);
+        }
+
+        public override string ToString()
+        {
+            return $"[val:\"{Value}\", word:\"{IsWord}\"]";
+        }
     }
 }

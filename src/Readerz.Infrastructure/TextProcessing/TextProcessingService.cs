@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Reader.Application.Common.Interfaces;
 using Reader.Application.Common.Models;
@@ -7,12 +9,7 @@ namespace Readerz.Infrastructure.TextProcessing
 {
     public class TextProcessingService : ITextProcessingService
     {
-        private const string PossibleDelimiters = "/\\,. \"{}[]();?!><";
-
-        private enum Tag
-        {
-            Closed, Opened
-        }
+        private const string PossibleDelimiters = "/\\,. \"{}[]();?!><”";
         
         public TextProcessingResult Process(string text)
         {
@@ -22,43 +19,47 @@ namespace Readerz.Infrastructure.TextProcessing
             }
             
             var result = new TextProcessingResult();
-            var chunk = new StringBuilder();
-
-            var lastSymbolIsDelimiter = false;
-            var firstNoDelimiterSymbol = false;
+            var chunkForLetters = new StringBuilder();
+            var chunkForDelimiters = new StringBuilder();
             
-            foreach (var symbol in text)
+            var lastSymbolIsDelimiter = false;
+            var firstNoDelimiterSymbolHasAppeared = false;
+            
+            for(var i = 0; i < text.Length; i++)
             {
-                if (PossibleDelimiters.Contains(symbol))
+                if (PossibleDelimiters.Contains(text[i]))
                 {
-                    if (lastSymbolIsDelimiter)
+                    chunkForDelimiters.Append(text[i]);
+                    
+                    if (firstNoDelimiterSymbolHasAppeared)
                     {
-                        chunk.Append(symbol);
-                        continue;
+                        result.Text.Add(new TextItem(true, chunkForLetters.ToString()));
+                        chunkForLetters.Clear();
                     }
 
-                    if (firstNoDelimiterSymbol)
-                    {
-                        chunk.Append(result.CloseTagIdentifier);
-                    }
-                    
                     lastSymbolIsDelimiter = true;
                 }
                 else
                 {
-                    if (lastSymbolIsDelimiter || !firstNoDelimiterSymbol)
-                    {
-                        chunk.Append(result.OpenTagIdetifier);
-                    }
+                    chunkForLetters.Append(text[i]);
                     
-                    firstNoDelimiterSymbol = true;
+                    if (lastSymbolIsDelimiter)
+                    {
+                        result.Text.Add(new TextItem(false, chunkForDelimiters.ToString()));
+                        chunkForDelimiters.Clear();
+                    }
+
+                    firstNoDelimiterSymbolHasAppeared = true;
                     lastSymbolIsDelimiter = false;
                 }
                 
-                chunk.Append(symbol);
+                if (i == text.Length - 1)
+                {
+                    result.Text.Add(chunkForLetters.Length != 0
+                        ? new TextItem(true, chunkForLetters.ToString())
+                        : new TextItem(false, chunkForDelimiters.ToString()));
+                }
             }
-
-            result.Text = chunk.ToString();
             
             return result;
         }
