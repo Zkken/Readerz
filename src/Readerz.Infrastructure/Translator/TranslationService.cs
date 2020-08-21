@@ -26,18 +26,13 @@ namespace Readerz.Infrastructure.Translator
         {
             get
             {
-                if (_supportedLanguages == null)
-                {
-                    _supportedLanguages = GoogleTranslator.LanguagesSupported.ToList()
-                        .Select(language => new Language
+                return _supportedLanguages ??= GoogleTranslator.LanguagesSupported.ToList()
+                    .Select(language => new Language
                         {
                             Name = language.FullName,
                             ISO = language.ISO639
                         }
                     );
-                }
-
-                return _supportedLanguages;
             }
         }
 
@@ -49,12 +44,12 @@ namespace Readerz.Infrastructure.Translator
                 throw new ArgumentNullException(nameof(text));
             }
 
-            if (!SupportedLanguages.Any(l => l.ISO == to))
+            if (SupportedLanguages.All(l => l.ISO != to))
             {
                 throw new NotSupportedLanguageException(to);
             }
 
-            if (from != "auto" && !SupportedLanguages.Any(l => l.ISO == from))
+            if (from != "auto" && SupportedLanguages.All(l => l.ISO != from))
             {
                 throw new NotSupportedLanguageException(to);
             }
@@ -65,7 +60,7 @@ namespace Readerz.Infrastructure.Translator
 
             return new TranslationResult
             {
-                Translations = result.FragmentedTranslation.AsEnumerable()
+                Translations = result.FragmentedTranslation.Concat(result.SeeAlso)
             };
         }
     }

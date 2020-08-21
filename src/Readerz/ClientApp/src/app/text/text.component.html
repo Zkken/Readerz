@@ -3,6 +3,7 @@
         <h3 class="text-center">{{text.name}}</h3>
         <div class="border rounded mb-4">
             <div class="p-container p-3">
+                <div *ngIf="!languages">Loading...</div>
                 <ng-container #container></ng-container>
             </div>
         </div>
@@ -47,7 +48,7 @@
     <p class="p">
         &nbsp;&nbsp;&nbsp;&nbsp;
         <ng-template ngFor let-t [ngForOf]="text">
-            <span (click)="selectWord($event)" *ngIf="t.isWord;else emptyTemplate">{{t.value}}</span>
+            <span (click)="selectWord(t.value)" *ngIf="t.isWord;else emptyTemplate">{{t.value}}</span>
             <ng-template #emptyTemplate>{{t.value}}</ng-template>
         </ng-template>
         <br>

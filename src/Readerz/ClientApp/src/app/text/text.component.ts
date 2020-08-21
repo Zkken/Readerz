@@ -1,8 +1,5 @@
 import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, AfterViewInit, ChangeDetectorRef, Input } from '@angular/core';
 import { UnknownText } from '../models/text';
-import { Util } from '../services/util.service';
-import { filter, switchMap } from 'rxjs/operators';
-import { from, of } from 'rxjs';
 import { TextService, Language } from '../services/text.service';
 import { Card } from '../services/card.service';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -18,23 +15,22 @@ export class TextComponent implements OnInit, AfterViewInit {
   @ViewChild('paragraphTemplate', { static: false }) paragraphTemp: TemplateRef<any>;
   @ViewChild('container', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
 
-  languages: Language[]
-  languageFrom: string
-  languageTo: string
-  lastTranslation: string = "Word that will be traslated will be here"
-  translation: string = "Translation will be here"
-  cards: Card[]
+  languages: Language[];
+  languageFrom: string;
+  languageTo: string;
+  lastTranslation: string = "Word that will be traslated will be here";
+  translation: string = "Translation will be here";
+  paragraph: string;
+  cards: Card[];
+  wordCash: Map<string, string[]> = new Map<string, string[]>();
+
   selectForm = this.fb.group({
     langToSelect: ['', [Validators.required]],
     langFromSelect: ['', [Validators.required]]
-  })
-  paragraph: string
+  });
 
   constructor(private cdr: ChangeDetectorRef, private textService: TextService,
     public fb: FormBuilder) {
-    this.textService.getSupportedLanguages().subscribe(val => {
-      this.languages = val.languages;
-    })
   }
 
   get langToSelect() {
@@ -46,35 +42,41 @@ export class TextComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.textService.getSupportedLanguages().subscribe(val => {
+      this.languages = val.languages;
+    })
   }
 
   ngAfterViewInit() {
     this.textService.getProcessed(this.text.innerText)
-    .subscribe(val => {
-      console.log(val.text);
-      let paragraph = this.paragraphTemp.createEmbeddedView({text: val.text});
-      this.container.insert(paragraph);
-      this.cdr.detectChanges();
-    }, err => console.log(err));
+      .subscribe(val => {
+        console.log(val.text);
+        let paragraph = this.paragraphTemp.createEmbeddedView({ text: val.text });
+        this.container.insert(paragraph);
+        this.cdr.detectChanges();
+      }, err => console.log(err));
   }
 
-  selectWord(event: any) {
+  selectWord(text: string) {
     //check for validate errors
     if (this.langToSelect.errors || this.langFromSelect.errors) {
       return;
     }
-    //traslate the span inner text
-    let span = event.target as HTMLSpanElement
-    this.textService.getTranslatedWord({
-      text: span.innerText,
-      from: this.languageFrom,
-      to: this.languageTo
-    }).subscribe(val => {
-      this.lastTranslation = span.innerText;
-      this.translation = val.translations.join(', ');
-    });
+    this.lastTranslation = text;
 
-    span.className = "border rounded bg-info";
+    //traslate the span inner text
+    if (this.wordCash.has(text)) {
+      this.translation = this.wordCash.get(text).join(', ');
+    } else {
+      this.textService.getTranslatedWord({
+        text: text,
+        from: this.languageFrom,
+        to: this.languageTo
+      }).subscribe(val => {
+        this.translation = val.translations.join(', ');
+        this.wordCash.set(text, val.translations);
+      });
+    }
   }
 
   addWordToCards() {
@@ -83,7 +85,7 @@ export class TextComponent implements OnInit, AfterViewInit {
       return;
     }
     //check for existings last translation 
-    if(!this.lastTranslation || !this.translation) {
+    if (!this.lastTranslation || !this.translation) {
       return;
     }
     //push new card to card array
