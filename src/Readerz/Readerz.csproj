@@ -31,7 +31,6 @@
     <ItemGroup>
         <ProjectReference Include="..\Reader.Application\Reader.Application.csproj" />
         <ProjectReference Include="..\Readerz.Infrastructure\Readerz.Infrastructure.csproj" />
-        <ProjectReference Include="..\Readerz.Persistence\Readerz.Persistence.csproj" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

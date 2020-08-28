@@ -7,12 +7,18 @@
     <ItemGroup>
       <PackageReference Include="GoogleTranslateFreeApi" Version="1.1.1" />
       <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="3.1.6" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.6" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.7" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Reader.Application\Reader.Application.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Services" />
     </ItemGroup>
 
 </Project>

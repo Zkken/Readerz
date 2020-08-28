@@ -10,9 +10,9 @@ namespace Reader.Application.CardSets.Commands.DeleteCommand
 {
     public class DeleteCardSetCommandHandler : IRequestHandler<DeleteCardSetCommand, DeleteCardSetCommand>
     {
-        private readonly IReaderzDbContext _context;
+        private readonly IApplicationDbContext _context;
 
-        public DeleteCardSetCommandHandler(IReaderzDbContext context)
+        public DeleteCardSetCommandHandler(IApplicationDbContext context)
         {
             _context = context;
         }

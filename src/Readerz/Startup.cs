@@ -1,13 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Reader.Application;
 using Reader.Application.Common.Interfaces;
 using Readerz.Infrastructure;
-using Readerz.Persistence;
 using Readerz.Services;
 
 namespace Readerz
@@ -27,7 +25,6 @@ namespace Readerz
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInfrastructure(_configuration, _environment);
-            services.AddPersistence(_configuration);
             services.AddApplication();
 
             services.AddScoped<ICurrentUserService, CurrentUserService>();

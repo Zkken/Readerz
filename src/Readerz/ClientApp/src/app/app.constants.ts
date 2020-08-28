@@ -4,7 +4,7 @@ export const ApiUrl = {
         GetAll: "api/cardSet/all",
         Update: "api/cardSet/update",
         Delete: "api/cardSet/delete",
-        ByCreatorId: "api/cardSet/ByCardCreator"
+        Get: "api/cardSet/get"
     },
     Card: {
         ByCardSetId: "api/card/GetBySet",

@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using Reader.Application.Common.Mappings;
 using Readerz.Domain.Entities;
-using Readerz.Domain.Enums;
 
 namespace Reader.Application.CardSets.Queries.GetCardSets
 {
@@ -11,11 +8,15 @@ namespace Reader.Application.CardSets.Queries.GetCardSets
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public CardSetStatus Status { get; set; }
+        public string Status { get; set; }
+        public int Like { get; set; }
+        public int Dislike { get; set; }
+        public int TimesPlayed { get; set; }
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<CardSet, CardSetDto>();
+            profile.CreateMap<CardSet, CardSetDto>()
+                .ForMember(dto => dto.Status, options => options.MapFrom(entity => entity.Status.ToString()));
         }
     }
 }

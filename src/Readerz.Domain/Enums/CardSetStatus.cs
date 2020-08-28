@@ -2,7 +2,6 @@
 {
     public enum CardSetStatus
     {
-        Public,
-        Private
+        Private, Public
     }
 }

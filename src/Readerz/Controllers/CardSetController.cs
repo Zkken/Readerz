@@ -6,20 +6,13 @@ using Reader.Application.CardSets.Commands.CreateCommand;
 using Reader.Application.CardSets.Commands.DeleteCommand;
 using Reader.Application.CardSets.Commands.UpdateCommand;
 using Reader.Application.CardSets.Queries.GetCardSets;
-using Reader.Application.CardSets.Queries.GetCardSetsAll;
-using Reader.Application.CardSets.Queries.GetCardSetsByText;
+using Reader.Application.Common.Models;
 
 namespace Readerz.Controllers
 {
     [Authorize]
     public class CardSetController : BaseController
     {
-        [HttpGet]
-        public async Task<ActionResult<CardSetVm>> All()
-        {
-            return Ok(await Mediator.Send(new GetCardSetsAllQuery()));
-        }
-        
         [HttpPost]
         public async Task<ActionResult<int>> Create([FromBody] CreateCardSetCommand command)
         {
@@ -40,16 +33,15 @@ namespace Readerz.Controllers
             return Ok(await Mediator.Send(new DeleteCardSetCommand { CardSetId = id}));
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<CardSetVm>> ByCardCreator(int id)
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult<PaginatorResult<CardSetDto>>> Get(int pageIndex = 0, int pageSize = 10,
+            bool byCurrentUser = false)
         {
-            return Ok(await Mediator.Send(new GetCardSetsQuery { UserId = id }));
-        }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<CardSetVm>> ByText(int id)
-        {
-            return Ok(await Mediator.Send(new GetCardSetByTextQuery {TextId = id}));
+            return Ok(await Mediator.Send(new GetCardSetsQuery
+            {
+                PageIndex = pageIndex, PageSize = pageSize, ByCurrentUser = byCurrentUser
+            }));
         }
     }
 }

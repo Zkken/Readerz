@@ -1,7 +1,5 @@
 ﻿using Readerz.Domain.Common;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Readerz.Domain.Entities
 {

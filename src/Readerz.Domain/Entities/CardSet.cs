@@ -12,11 +12,12 @@ namespace Readerz.Domain.Entities
         }
         public int Id { get; set; }
         public string Name { get; set; }
+        public int Like { get; set; }
+        public int Dislike { get; set; }
+        public int TimesPlayed { get; set; }
         public CardSetStatus Status { get; set; }
         public int? TextId { get; set; }
-        public int CardCreatorId { get; set; }
         public ICollection<Card> Cards { get; set; }
         public Text Text { get; set; }
-        public CardCreator CardCreator { get; set; }
     }
 }

@@ -12,10 +12,10 @@ namespace Reader.Application.Cards.Commands.CreateRangeCommand
 {
     public class CreateCardRangeCommandHandler : IRequestHandler<CreateCardRangeCommand>
     {
-        private readonly IReaderzDbContext _context;
+        private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public CreateCardRangeCommandHandler(IReaderzDbContext context, IMapper mapper)
+        public CreateCardRangeCommandHandler(IApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

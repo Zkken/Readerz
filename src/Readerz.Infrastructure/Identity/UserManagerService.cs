@@ -42,6 +42,30 @@ namespace Readerz.Infrastructure.Identity
 
             return res.ToApplicationResult();
         }
+
+        public async Task<string> GetUserNameAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                throw new NotFoundException(nameof(ApplicationUser), userId);
+            }
+
+            return user.UserName;
+        }
+
+        public async Task<string> GetUserIdByUserNameAsync(string userName)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+
+            if (user == null)
+            {
+                throw new NotFoundException(nameof(ApplicationUser), userName);
+            }
+
+            return user.Id;
+        }
     }
 
     public static class IdentityResultExtensions

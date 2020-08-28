@@ -3,38 +3,45 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Reader.Application.Common.Exceptions;
 using Reader.Application.Common.Interfaces;
+using Reader.Application.Common.Models;
 using Readerz.Domain.Entities;
+using Readerz.Domain.Enums;
 
 namespace Reader.Application.CardSets.Queries.GetCardSets
 {
-    public class GetCardSetsQueryHandler : IRequestHandler<GetCardSetsQuery, CardSetVm>
+    public class GetCardSetsQueryHandler : IRequestHandler<GetCardSetsQuery, PaginatorResult<CardSetDto>>
     {   
-        private readonly IReaderzDbContext _context;
+        private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
-
-        public GetCardSetsQueryHandler(IReaderzDbContext context, IMapper mapper)
+        private readonly ICurrentUserService _currentUserService;
+        
+        public GetCardSetsQueryHandler(IApplicationDbContext context, IMapper mapper, ICurrentUserService currentUserService)
         {
+            _currentUserService = currentUserService;
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<CardSetVm> Handle(GetCardSetsQuery request, CancellationToken cancellationToken)
+        public async Task<PaginatorResult<CardSetDto>> Handle(GetCardSetsQuery request, CancellationToken cancellationToken)
         {
-            var cardCreator = await _context.CardCreators.Include(c => c.CardSets)
-                .FirstOrDefaultAsync(c => c.CardCreatorId == request.UserId, cancellationToken);
-            
-            if(cardCreator == null)
+            if (request.PageIndex < 0)
             {
-                throw new NotFoundException(nameof(CardCreator), request.UserId);
+                throw new PaginatorException("Page index cannot be less than 0.");
             }
 
-            var res = _mapper.Map<ICollection<CardSetDto>>(cardCreator.CardSets);
-            return new CardSetVm {CardSetDtos = res};
+            var cardSets = request.ByCurrentUser ? 
+                _context.CardSets.Where(cardSet => cardSet.CreatedBy == _currentUserService.UserId) : 
+                _context.CardSets.Where(cardSet => cardSet.Status == CardSetStatus.Public);
+
+            return await PaginatorResult<CardSetDto>.CreateAsyncWithMapping(
+                cardSets,
+                request.PageIndex,
+                request.PageSize,
+                _mapper.Map<List<CardSet>, List<CardSetDto>>
+            );
         }
     }
 }

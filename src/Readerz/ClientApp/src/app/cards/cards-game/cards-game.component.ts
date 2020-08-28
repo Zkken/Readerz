@@ -59,6 +59,6 @@ export class CardsGameComponent implements OnInit {
     }
   }
 
-  //todo take and move a card with word to left or right
+  //todo take and move a card to left or right
 }
 

@@ -16,9 +16,9 @@ namespace Reader.Application.Cards.Commands.UpdateCard
         
         public class UpdateCardCommandHandler : IRequestHandler<UpdateCardCommand>
         {
-            private readonly IReaderzDbContext _context;
+            private readonly IApplicationDbContext _context;
 
-            public UpdateCardCommandHandler(IReaderzDbContext context)
+            public UpdateCardCommandHandler(IApplicationDbContext context)
             {
                 _context = context;
             }

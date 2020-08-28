@@ -2,6 +2,7 @@
 using MediatR;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using Reader.Application.CardSets.Queries.GetCardSets;
 
 namespace Reader.Application
 {
@@ -11,7 +12,8 @@ namespace Reader.Application
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
-
+            services.AddScoped<CardSetDto>();
+            
             return services;
         }
     }

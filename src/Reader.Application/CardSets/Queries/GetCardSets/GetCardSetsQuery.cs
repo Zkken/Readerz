@@ -1,12 +1,12 @@
 ﻿using MediatR;
-using Readerz.Domain.Entities;
-using System.Collections;
-using System.Collections.Generic;
+using Reader.Application.Common.Models;
 
 namespace Reader.Application.CardSets.Queries.GetCardSets
 {
-    public class GetCardSetsQuery : IRequest<CardSetVm>
+    public class GetCardSetsQuery : IRequest<PaginatorResult<CardSetDto>>
     {
-        public int UserId { get; set; }
+        public int PageIndex { get; set; }
+        public int PageSize { get; set; }
+        public bool ByCurrentUser { get; set; }
     }
 }

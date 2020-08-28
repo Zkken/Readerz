@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Reader.Application.Common.Interfaces;
 using Readerz.Infrastructure.Identity;
+using Readerz.Infrastructure.Persistence;
 using Readerz.Infrastructure.TextProcessing;
 using Readerz.Infrastructure.Translator;
 
@@ -15,22 +16,31 @@ namespace Readerz.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services,
             IConfiguration configuration, IWebHostEnvironment environment)
         {
-            services.AddScoped<IUserManager, UserManagerService>();
+            if (configuration.GetValue<bool>("UseInMemoryDatabase"))
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseInMemoryDatabase("ReaderzDb"));
+            }
+            else
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseNpgsql(
+                        configuration.GetConnectionString("DefaultConnection"),
+                        b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+            }
             
-            services.AddSingleton<ITextProcessingService, TextProcessingService>();
+            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
             
-            services.AddSingleton<ITranslatiovService, TranslationService>();
+            services.AddTransient<IUserManager, UserManagerService>();
+            services.AddTransient<ITextProcessingService, TextProcessingService>();
+            services.AddTransient<ITranslatiovService, TranslationService>();
             
-            
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
-
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
+            
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
-
+            
             services.AddAuthentication()
                 .AddIdentityServerJwt();
 

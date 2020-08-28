@@ -12,10 +12,10 @@ namespace Reader.Application.Cards.Queries.GetCardsByCardSet
 {
     public class GetCardsByCardSetQueryHandler : IRequestHandler<GetCardsByCardSetQuery, CardListVm>
     {
-        private readonly IReaderzDbContext _context;
+        private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetCardsByCardSetQueryHandler(IReaderzDbContext context, IMapper mapper)
+        public GetCardsByCardSetQueryHandler(IApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

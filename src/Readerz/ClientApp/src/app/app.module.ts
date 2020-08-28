@@ -26,7 +26,8 @@ import { CardGameService } from './services/card-game.service';
 import { TextComponent } from './text/text.component';
 import { TextService } from './services/text.service';
 import { TextCreateComponent } from './text/text-create/text-create.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMaterialModule } from '../angular-material-model/angular-material.model'
 
 @NgModule({
   declarations: [
@@ -55,7 +56,9 @@ import { TextCreateComponent } from './text/text-create/text-create.component';
       { path: 'cards/:id', component: CardsIdComponent, canActivate: [AuthorizeGuard] },
       { path: 'cards/:id/game', component: CardsGameComponent, canActivate: [AuthorizeGuard]},
       { path: 'text', component: TextCreateComponent, canActivate: [AuthorizeGuard] }
-    ])
+    ]),
+    BrowserAnimationsModule,
+    AngularMaterialModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
