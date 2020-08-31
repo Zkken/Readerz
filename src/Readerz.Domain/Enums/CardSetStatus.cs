@@ -1,4 +1,4 @@
-﻿namespace Readerz.Domain.Enums
+﻿namespace Readerz.Web.Domain.Enums
 {
     /// <summary>
     /// Card set accessibility status.

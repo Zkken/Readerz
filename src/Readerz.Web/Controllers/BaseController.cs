@@ -2,7 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Readerz.Controllers
+namespace Readerz.Web.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]

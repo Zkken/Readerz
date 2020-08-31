@@ -1,8 +1,8 @@
-﻿using Readerz.Domain.Common;
-using Readerz.Domain.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Readerz.Web.Domain.Common;
+using Readerz.Web.Domain.Enums;
 
-namespace Readerz.Domain.Entities
+namespace Readerz.Web.Domain.Entities
 {
     public class CardSet : AuditableEntity
     {

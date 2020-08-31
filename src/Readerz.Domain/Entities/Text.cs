@@ -1,7 +1,7 @@
-﻿using Readerz.Domain.Common;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Readerz.Web.Domain.Common;
 
-namespace Readerz.Domain.Entities
+namespace Readerz.Web.Domain.Entities
 {
     public class Text : AuditableEntity
     {

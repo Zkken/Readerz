@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Readerz.Domain.Common
+namespace Readerz.Web.Domain.Common
 {
     public class AuditableEntity
     {

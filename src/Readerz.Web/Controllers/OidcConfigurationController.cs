@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Readerz.Controllers
+namespace Readerz.Web.Controllers
 {
     public class OidcConfigurationController : Controller
     {

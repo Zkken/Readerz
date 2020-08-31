@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reader.Application", "src\Reader.Application\Reader.Application.csproj", "{F7912399-5B54-41E1-8F1F-7E75E9549EC0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Readerz", "src\Readerz\Readerz.csproj", "{C66722DA-27A0-4DEB-8C5C-E84CEC5BCC89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Readerz", "src\Readerz.Web\Readerz.Web.csproj", "{C66722DA-27A0-4DEB-8C5C-E84CEC5BCC89}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Readerz.Domain", "src\Readerz.Domain\Readerz.Domain.csproj", "{5BE5644A-C204-4157-A072-BC2AFD695531}"
 EndProject

@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Reader.Application.Common.Exceptions;
 using Reader.Application.Common.Interfaces;
-using Readerz.Domain.Entities;
+using Readerz.Web.Domain.Entities;
 
 namespace Reader.Application.Cards.Commands.UpdateCard
 {

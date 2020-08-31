@@ -10,7 +10,7 @@ using TranslationRes = GoogleTranslateFreeApi.TranslationResult;
 using System;
 using Reader.Application.Common.Exceptions;
 
-namespace Readerz.Infrastructure.Translator
+namespace Readerz.Web.Infrastructure.Translator
 {
     public class TranslationService : ITranslationService
     {

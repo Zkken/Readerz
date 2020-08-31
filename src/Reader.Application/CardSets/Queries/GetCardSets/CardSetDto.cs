@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Reader.Application.Common.Mappings;
-using Readerz.Domain.Entities;
+using Readerz.Web.Domain.Entities;
 
 namespace Reader.Application.CardSets.Queries.GetCardSets
 {

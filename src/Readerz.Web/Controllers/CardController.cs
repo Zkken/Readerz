@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Reader.Application.Cards.Commands.DeleteCard;
 using Reader.Application.Cards.Commands.UpdateCard;
 
-namespace Readerz.Controllers
+namespace Readerz.Web.Controllers
 {
     [Authorize]
     public class CardController : BaseController

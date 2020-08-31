@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Readerz.Infrastructure.Translator.Persistence.Migrations
+namespace Readerz.Web.Infrastructure.Translator.Persistence.Migrations
 {
     public partial class CardSetTimesPlayed : Migration
     {

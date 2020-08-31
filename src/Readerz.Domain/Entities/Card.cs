@@ -1,6 +1,6 @@
-﻿using Readerz.Domain.Common;
+﻿using Readerz.Web.Domain.Common;
 
-namespace Readerz.Domain.Entities
+namespace Readerz.Web.Domain.Entities
 {
     public class Card : AuditableEntity
     {

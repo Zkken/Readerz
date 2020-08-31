@@ -6,7 +6,7 @@ using Reader.Application.Text.Queries.GetProcessedText;
 using Reader.Application.Text.Queries.GetSupportedLanguages;
 using Reader.Application.Text.Queries.GetWordTranslation;
 
-namespace Readerz.Controllers
+namespace Readerz.Web.Controllers
 {
     [Authorize]
     public class TextController : BaseController

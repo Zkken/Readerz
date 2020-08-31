@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Reader.Application.Common.Interfaces;
 
-namespace Readerz.Services
+namespace Readerz.Web.Services
 {
     public class CurrentUserService : ICurrentUserService
     {

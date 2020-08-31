@@ -8,7 +8,7 @@ using Reader.Application.CardSets.Commands.UpdateCardSet;
 using Reader.Application.CardSets.Queries.GetCardSets;
 using Reader.Application.Common.Models;
 
-namespace Readerz.Controllers
+namespace Readerz.Web.Controllers
 {
     [Authorize]
     public class CardSetController : BaseController

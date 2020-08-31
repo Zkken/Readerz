@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using Reader.Application.Common.Models;
-using Readerz.Infrastructure.Translator.Services.TextProcessing;
+using Readerz.Web.Infrastructure.Translator.Services.TextProcessing;
 
 namespace Infrastructure.UnitTests.TextProcessing
 {

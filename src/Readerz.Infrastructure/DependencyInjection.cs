@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Reader.Application.Common.Interfaces;
-using Readerz.Infrastructure.Translator;
-using Readerz.Infrastructure.Translator.Identity;
-using Readerz.Infrastructure.Translator.Persistence;
-using Readerz.Infrastructure.Translator.Services.TextProcessing;
+using Readerz.Web.Infrastructure.Translator;
+using Readerz.Web.Infrastructure.Translator.Identity;
+using Readerz.Web.Infrastructure.Translator.Persistence;
+using Readerz.Web.Infrastructure.Translator.Services.TextProcessing;
 
-namespace Readerz.Infrastructure
+namespace Readerz.Web.Infrastructure
 {
     public static class DependencyInjection
     {

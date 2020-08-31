@@ -5,10 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Reader.Application;
 using Reader.Application.Common.Interfaces;
-using Readerz.Infrastructure;
-using Readerz.Services;
+using Readerz.Web.Infrastructure;
+using Readerz.Web.Services;
 
-namespace Readerz
+namespace Readerz.Web
 {
     public class Startup
     {

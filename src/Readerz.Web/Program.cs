@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Readerz
+namespace Readerz.Web
 {
     public static class Program
     {

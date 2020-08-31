@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Reader.Application.Common.Exceptions;
 using Reader.Application.Common.Interfaces;
-using Readerz.Domain.Entities;
+using Readerz.Web.Domain.Entities;
 using System.Threading;
 using System.Threading.Tasks;
 
