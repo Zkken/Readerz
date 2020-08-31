@@ -3,7 +3,7 @@ using System.Text;
 using Reader.Application.Common.Interfaces;
 using Reader.Application.Common.Models;
 
-namespace Readerz.Infrastructure.TextProcessing
+namespace Readerz.Infrastructure.Translator.Services.TextProcessing
 {
     public class TextProcessingService : ITextProcessingService
     {

@@ -12,7 +12,7 @@ using Reader.Application.Common.Exceptions;
 
 namespace Readerz.Infrastructure.Translator
 {
-    public class TranslationService : ITranslatiovService
+    public class TranslationService : ITranslationService
     {
         private readonly ITranslator _translator;
         private IEnumerable<Language> _supportedLanguages;
@@ -30,7 +30,7 @@ namespace Readerz.Infrastructure.Translator
                     .Select(language => new Language
                         {
                             Name = language.FullName,
-                            ISO = language.ISO639
+                            Iso = language.ISO639
                         }
                     );
             }
@@ -44,12 +44,12 @@ namespace Readerz.Infrastructure.Translator
                 throw new ArgumentNullException(nameof(text));
             }
 
-            if (SupportedLanguages.All(l => l.ISO != to))
+            if (SupportedLanguages.All(l => l.Iso != to))
             {
                 throw new NotSupportedLanguageException(to);
             }
 
-            if (from != "auto" && SupportedLanguages.All(l => l.ISO != from))
+            if (from != "auto" && SupportedLanguages.All(l => l.Iso != from))
             {
                 throw new NotSupportedLanguageException(to);
             }

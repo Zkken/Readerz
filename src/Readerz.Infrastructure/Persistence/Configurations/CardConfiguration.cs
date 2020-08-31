@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Readerz.Domain.Entities;
 
-namespace Readerz.Infrastructure.Persistence.Configurations
+namespace Readerz.Infrastructure.Translator.Persistence.Configurations
 {
     public class CardConfiguration : IEntityTypeConfiguration<Card>
     {

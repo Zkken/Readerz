@@ -3,13 +3,13 @@
     public class Language
     {
         /// <summary>
-        /// Full name of language
+        /// Full language name.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// ISO name of language
+        /// Language ISO.
         /// </summary>
-        public string ISO { get; set; }
+        public string Iso { get; set; }
     }
 }

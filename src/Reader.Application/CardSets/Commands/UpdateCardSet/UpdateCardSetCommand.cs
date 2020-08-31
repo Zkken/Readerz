@@ -4,9 +4,17 @@ using MediatR;
 using Reader.Application.Common.Exceptions;
 using Reader.Application.Common.Interfaces;
 using Readerz.Domain.Entities;
+using Readerz.Domain.Enums;
 
-namespace Reader.Application.CardSets.Commands.UpdateCommand
+namespace Reader.Application.CardSets.Commands.UpdateCardSet
 {
+    public class UpdateCardSetCommand : IRequest
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public CardSetStatus Status { get; set; }
+    }
+    
     public class UpdateCardSetCommandHandler : IRequestHandler<UpdateCardSetCommand>
     {
         private readonly IApplicationDbContext _context;
@@ -18,14 +26,13 @@ namespace Reader.Application.CardSets.Commands.UpdateCommand
 
         public async Task<Unit> Handle(UpdateCardSetCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.CardSets.FindAsync(request.CardSetId);
+            var entity = await _context.CardSets.FindAsync(request.Id);
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(CardSet), request.CardSetId);
+                throw new NotFoundException(nameof(CardSet), request.Id);
             }
-
-            entity.Id = request.CardSetId;
+            
             entity.Name = request.Name;
             entity.Status = request.Status;
 

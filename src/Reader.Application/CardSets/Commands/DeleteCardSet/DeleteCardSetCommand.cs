@@ -4,11 +4,15 @@ using MediatR;
 using Reader.Application.Common.Exceptions;
 using Reader.Application.Common.Interfaces;
 using Readerz.Domain.Entities;
-using Readerz.Domain.Enums;
 
-namespace Reader.Application.CardSets.Commands.DeleteCommand
+namespace Reader.Application.CardSets.Commands.DeleteCardSet
 {
-    public class DeleteCardSetCommandHandler : IRequestHandler<DeleteCardSetCommand, DeleteCardSetCommand>
+    public class DeleteCardSetCommand : IRequest
+    {
+        public int CardSetId { get; set; }
+    }
+    
+    public class DeleteCardSetCommandHandler : IRequestHandler<DeleteCardSetCommand>
     {
         private readonly IApplicationDbContext _context;
 
@@ -17,7 +21,7 @@ namespace Reader.Application.CardSets.Commands.DeleteCommand
             _context = context;
         }
 
-        public async Task<DeleteCardSetCommand> Handle(DeleteCardSetCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteCardSetCommand request, CancellationToken cancellationToken)
         {
             var cardSet = await _context.CardSets.FindAsync(request.CardSetId);
 
@@ -30,7 +34,7 @@ namespace Reader.Application.CardSets.Commands.DeleteCommand
 
             await _context.SaveChangesAsync(cancellationToken);
             
-            return request;
+            return Unit.Value;
         }
     }
 }

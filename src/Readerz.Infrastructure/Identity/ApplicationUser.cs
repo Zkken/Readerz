@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Readerz.Infrastructure.Identity
+namespace Readerz.Infrastructure.Translator.Identity
 {
     public class ApplicationUser : IdentityUser
     {

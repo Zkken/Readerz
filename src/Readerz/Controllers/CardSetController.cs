@@ -2,9 +2,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Reader.Application.Cards.Commands.DeleteCard;
-using Reader.Application.CardSets.Commands.CreateCommand;
-using Reader.Application.CardSets.Commands.DeleteCommand;
-using Reader.Application.CardSets.Commands.UpdateCommand;
+using Reader.Application.CardSets.Commands.CreateCardSet;
+using Reader.Application.CardSets.Commands.DeleteCardSet;
+using Reader.Application.CardSets.Commands.UpdateCardSet;
 using Reader.Application.CardSets.Queries.GetCardSets;
 using Reader.Application.Common.Models;
 

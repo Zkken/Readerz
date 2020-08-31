@@ -1,12 +1,19 @@
-﻿using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Reader.Application.Common.Interfaces;
 using Readerz.Domain.Entities;
+using Readerz.Domain.Enums;
 
-namespace Reader.Application.CardSets.Commands.CreateCommand
+namespace Reader.Application.CardSets.Commands.CreateCardSet
 {
+    public class CreateCardSetCommand : IRequest<int>
+    {
+        public string Name { get; set; }
+        public CardSetStatus Status { get; set; }
+        public int? TextId { get; set; }
+    }
+    
     public class CreateCardSetCommandHandler : IRequestHandler<CreateCardSetCommand, int>
     {
         private readonly IApplicationDbContext _context;
@@ -22,11 +29,6 @@ namespace Reader.Application.CardSets.Commands.CreateCommand
                 Name = request.Name,
                 Status = request.Status,
                 TextId = request.TextId,
-                Cards = request.Cards.Select(c => new Card
-                {
-                    Front = c.Front,
-                    Back = c.Back
-                }).ToList()
             };
             
             _context.CardSets.Add(cardSet);

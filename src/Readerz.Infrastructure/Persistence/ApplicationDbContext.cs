@@ -9,9 +9,9 @@ using Microsoft.Extensions.Options;
 using Reader.Application.Common.Interfaces;
 using Readerz.Domain.Common;
 using Readerz.Domain.Entities;
-using Readerz.Infrastructure.Identity;
+using Readerz.Infrastructure.Translator.Identity;
 
-namespace Readerz.Infrastructure.Persistence
+namespace Readerz.Infrastructure.Translator.Persistence
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, IApplicationDbContext
     {

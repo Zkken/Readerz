@@ -1,9 +1,7 @@
 ﻿using MediatR;
 using Reader.Application.Common.Interfaces;
 using Reader.Application.Common.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,22 +14,23 @@ namespace Reader.Application.Text.Queries.GetSupportedLanguages
 
     public class GetSupportedLanguagesQuery : IRequest<LanguageVm>
     {
-        public class GetSupportedLanguagesQueryHandler : IRequestHandler<GetSupportedLanguagesQuery, LanguageVm>
+    }
+    
+    public class GetSupportedLanguagesQueryHandler : IRequestHandler<GetSupportedLanguagesQuery, LanguageVm>
+    {
+        private readonly ITranslationService _translationService;
+
+        public GetSupportedLanguagesQueryHandler(ITranslationService translationService)
         {
-            private readonly ITranslatiovService _translatiovService;
+            _translationService = translationService;
+        }
 
-            public GetSupportedLanguagesQueryHandler(ITranslatiovService translatiovService)
+        public async Task<LanguageVm> Handle(GetSupportedLanguagesQuery request, CancellationToken cancellationToken)
+        {
+            return new LanguageVm
             {
-                _translatiovService = translatiovService;
-            }
-
-            public async Task<LanguageVm> Handle(GetSupportedLanguagesQuery request, CancellationToken cancellationToken)
-            {
-                return new LanguageVm
-                {
-                    Languages = await Task.Run(() => _translatiovService.SupportedLanguages, cancellationToken)
-                };
-            }
+                Languages = await Task.Run(() => _translationService.SupportedLanguages, cancellationToken)
+            };
         }
     }
 }

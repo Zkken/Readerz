@@ -5,7 +5,7 @@ namespace Reader.Application.Common.Models
     public class TranslationResult
     {
         /// <summary>
-        /// Possible translations
+        /// Possible translations.
         /// </summary>
         public IEnumerable<string> Translations { get; set; }
     }

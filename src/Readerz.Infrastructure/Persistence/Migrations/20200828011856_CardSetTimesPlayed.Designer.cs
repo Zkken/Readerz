@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Readerz.Infrastructure.Persistence;
+using Readerz.Infrastructure.Translator.Persistence;
 
-namespace Readerz.Infrastructure.Persistence.Migrations
+namespace Readerz.Infrastructure.Translator.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20200828011856_CardSetTimesPlayed")]

@@ -2,12 +2,17 @@
 
 namespace Reader.Application.Common.Exceptions
 {
+    /// <summary>
+    /// Represents an paginator exception type.
+    /// </summary>
     public class PaginatorException : Exception
     {
-        public PaginatorException(string message) 
-        : base(message)
+        /// <summary>
+        /// Instances a new paginator exception object.
+        /// </summary>
+        /// <param name="message">The actual message.</param>
+        public PaginatorException(string message) : base(message)
         {
-            
         }
     }
 }

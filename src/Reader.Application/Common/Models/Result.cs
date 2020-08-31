@@ -5,7 +5,7 @@ namespace Reader.Application.Common.Models
 {
     public class Result
     {
-        internal Result(bool succeeded, IEnumerable<string> errors)
+        private Result(bool succeeded, IEnumerable<string> errors)
         {
             Succeeded = succeeded;
             Errors = errors.ToArray();

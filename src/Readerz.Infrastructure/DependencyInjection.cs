@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Reader.Application.Common.Interfaces;
-using Readerz.Infrastructure.Identity;
-using Readerz.Infrastructure.Persistence;
-using Readerz.Infrastructure.TextProcessing;
 using Readerz.Infrastructure.Translator;
+using Readerz.Infrastructure.Translator.Identity;
+using Readerz.Infrastructure.Translator.Persistence;
+using Readerz.Infrastructure.Translator.Services.TextProcessing;
 
 namespace Readerz.Infrastructure
 {
@@ -33,7 +33,7 @@ namespace Readerz.Infrastructure
             
             services.AddTransient<IUserManager, UserManagerService>();
             services.AddTransient<ITextProcessingService, TextProcessingService>();
-            services.AddTransient<ITranslatiovService, TranslationService>();
+            services.AddTransient<ITranslationService, TranslationService>();
             
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
