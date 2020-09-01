@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 using Reader.Application.Common.Interfaces;
-using Readerz.Web.Domain.Entities;
+using Readerz.Domain.Entities;
 using Readerz.Web.Domain.Enums;
 
 namespace Reader.Application.CardSets.Commands.CreateCardSet

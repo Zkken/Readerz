@@ -9,7 +9,7 @@ export class CardSetService {
     }
 
     create(command: CreateCardSetCommand) {
-        return this.client.post(this.baseUrl + ApiUrl.CardSet.Create, command);
+        return this.client.post<number>(this.baseUrl + ApiUrl.CardSet.Create, command);
     }
 
     delete(id: number) {

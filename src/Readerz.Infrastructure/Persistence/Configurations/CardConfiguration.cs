@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Readerz.Web.Domain.Entities;
+using Readerz.Domain.Entities;
 
 namespace Readerz.Web.Infrastructure.Translator.Persistence.Configurations
 {

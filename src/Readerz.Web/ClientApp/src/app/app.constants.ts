@@ -7,7 +7,7 @@ export const ApiUrl = {
         GetDetail: "api/cardSet/getDetail"
     },
     Card: {
-        Create: "api/card/create",
+        CreateRange: "api/card/createRange",
         Update: "api/card/update",
         Delete: "api/card/delete"
     },

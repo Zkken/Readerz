@@ -47,10 +47,11 @@ namespace Readerz.Web.Controllers
             }));
         }
 
-        [HttpGet]
-        public async Task<ActionResult<CardSetDetailDto>> GetDetail(int cardSetId)
+        [HttpGet("{id}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<CardSetDetailDto>> GetDetail(int id)
         {
-            return await Mediator.Send(new GetCardSetDetailQuery {CardSetId = cardSetId});
+            return await Mediator.Send(new GetCardSetDetailQuery {CardSetId = id});
         }
     }
 }

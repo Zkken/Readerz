@@ -1,11 +1,13 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Reader.Application.Common.Exceptions;
 using Reader.Application.Common.Interfaces;
-using Readerz.Web.Domain.Entities;
+using Readerz.Domain.Entities;
 
 namespace Reader.Application.CardSets.Queries.GetCardSetDetail
 {
@@ -38,6 +40,7 @@ namespace Reader.Application.CardSets.Queries.GetCardSetDetail
             }
 
             var result = _mapper.Map<CardSet, CardSetDetailDto>(cardSet);
+            result.Cards = _mapper.Map<List<Card>, List<CardDto>>(cardSet.Cards.ToList());
 
             return result;
         }

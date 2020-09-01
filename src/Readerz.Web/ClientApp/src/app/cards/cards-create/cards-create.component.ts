@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CardSet } from 'src/app/models/card-set';
 import { CardSetService } from 'src/app/services/card-set.service';
 import { Card } from 'src/app/models/card';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cards-create',
@@ -17,7 +18,8 @@ export class CardsCreateComponent implements OnInit {
 
   constructor(
     private cardSetService: CardSetService,
-    private router: Router
+    private router: Router,
+    private cardService: CardService
   ) {
     this.cards = [];
     this.cardSet = new CardSet();
@@ -37,15 +39,17 @@ export class CardsCreateComponent implements OnInit {
   }
 
   save() {
-    const command = {
+    this.cardSetService.create({
       name: this.cardSet.name,
       status: this.cardSet.status,
-      cards: this.cards
-    }
-    this.cardSetService.create(command)
-      .subscribe(val => {
-        this.router.navigateByUrl("/cards/" + val)
-      });
+    })
+      .pipe(
+        switchMap(result => {
+          return this.cardService.createRange({
+            cards: this.cards,
+            cardSetId: result
+          })
+        })
+      ).subscribe(() => this.router.navigateByUrl("/cards"));
   }
-
 }

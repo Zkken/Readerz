@@ -2,7 +2,7 @@
 using Readerz.Web.Domain.Common;
 using Readerz.Web.Domain.Enums;
 
-namespace Readerz.Web.Domain.Entities
+namespace Readerz.Domain.Entities
 {
     public class CardSet : AuditableEntity
     {

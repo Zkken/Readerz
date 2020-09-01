@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Reader.Application.Common.Exceptions;
 using Reader.Application.Common.Interfaces;
-using Readerz.Web.Domain.Entities;
+using Readerz.Domain.Entities;
 
 namespace Reader.Application.CardSets.Commands.DeleteCardSet
 {

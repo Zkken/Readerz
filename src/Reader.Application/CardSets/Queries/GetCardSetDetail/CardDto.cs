@@ -1,5 +1,6 @@
-﻿using Reader.Application.Common.Mappings;
-using Readerz.Web.Domain.Entities;
+﻿using AutoMapper;
+using Reader.Application.Common.Mappings;
+using Readerz.Domain.Entities;
 
 namespace Reader.Application.CardSets.Queries.GetCardSetDetail
 {
@@ -8,5 +9,10 @@ namespace Reader.Application.CardSets.Queries.GetCardSetDetail
         public int Id { get; set; }
         public string Front { get; set; }
         public string Back { get; set; }
+
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<Card, CardDto>();
+        }
     }
 }

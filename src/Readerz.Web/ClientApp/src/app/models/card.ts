@@ -11,3 +11,8 @@ export class Card {
 export interface CardGetCommand {
     cards: Card[]
 }
+
+export interface CardCreateCommand {
+    cardSetId: number,
+    cards: Card[]
+}

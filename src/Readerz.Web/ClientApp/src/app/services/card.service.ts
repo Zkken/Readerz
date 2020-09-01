@@ -1,7 +1,7 @@
 import { Injectable, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { ApiUrl } from "../app.constants";
-import { CardGetCommand, Card } from "../models/card";
+import { Card, CardCreateCommand } from "../models/card";
 
 @Injectable()
 export class CardService {
@@ -18,6 +18,10 @@ export class CardService {
 
     updateCard(card: Card) {
         return this.http.put(this.baseUrl + ApiUrl.Card.Update, card);
+    }
+
+    createRange(command: CardCreateCommand) {
+        return this.http.post(this.baseUrl + ApiUrl.Card.CreateRange, command);
     }
 }
 

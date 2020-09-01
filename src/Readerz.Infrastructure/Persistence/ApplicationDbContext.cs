@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Reader.Application.Common.Interfaces;
 using Readerz.Web.Domain.Common;
-using Readerz.Web.Domain.Entities;
+using Readerz.Domain.Entities;
 using Readerz.Web.Infrastructure.Translator.Identity;
 
 namespace Readerz.Web.Infrastructure.Translator.Persistence

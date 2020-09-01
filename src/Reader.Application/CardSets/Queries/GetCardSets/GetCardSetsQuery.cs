@@ -7,7 +7,7 @@ using MediatR;
 using Reader.Application.Common.Exceptions;
 using Reader.Application.Common.Interfaces;
 using Reader.Application.Common.Models;
-using Readerz.Web.Domain.Entities;
+using Readerz.Domain.Entities;
 using Readerz.Web.Domain.Enums;
 
 namespace Reader.Application.CardSets.Queries.GetCardSets

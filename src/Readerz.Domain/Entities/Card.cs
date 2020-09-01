@@ -1,6 +1,6 @@
 ﻿using Readerz.Web.Domain.Common;
 
-namespace Readerz.Web.Domain.Entities
+namespace Readerz.Domain.Entities
 {
     public class Card : AuditableEntity
     {
