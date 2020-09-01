@@ -63,7 +63,7 @@ namespace Readerz.Web.Controllers
             return NoContent();
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<ActionResult> Like(int id)
         {
             await Mediator.Send(new IncrementLikeCardSetCommand {Id = id});

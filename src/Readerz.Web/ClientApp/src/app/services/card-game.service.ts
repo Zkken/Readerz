@@ -1,8 +1,6 @@
-import { Injectable } from "@angular/core";
 import { Card } from "../models/card";
 
-@Injectable()
-export class CardGameService {
+export class CardGame {
     private _cards: Card[];
     private _currentCard: Card;
     private _currentCardSide: CardSide;
@@ -10,7 +8,7 @@ export class CardGameService {
     currentLength: number;
     currentCardIndex: number;
 
-    set cards(value: Card[]) {
+    constructor(value: Card[]) {
         this._cards = value;
         this._currentCard = value[0];
         this._currentCardSide = CardSide.Front;

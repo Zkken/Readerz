@@ -45,7 +45,6 @@ export class CardSetDetail {
         public name?: string,
         public status?: CardSetStatus,
         public like?: number,
-        public dislike?: number,
         public timesPlayed?: number,
         public cards?: Card[] 
         ) {

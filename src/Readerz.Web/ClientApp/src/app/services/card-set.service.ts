@@ -37,6 +37,6 @@ export class CardSetService {
     }
 
     like(id: number) {
-        return this.client.put(this.baseUrl + ApiUrl.CardSet.Like, id);
+        return this.client.put(this.baseUrl + ApiUrl.CardSet.Like + "/" + id, id);
     }
 }

@@ -3,7 +3,7 @@ import { CardSetService } from 'src/app/services/card-set.service';
 import { ActivatedRoute } from '@angular/router';
 import { fromEvent, Subscription } from 'rxjs';
 import { map, filter} from 'rxjs/operators';
-import { CardGameService, GameKey } from 'src/app/services/card-game.service';
+import { CardGame, GameKey } from 'src/app/services/card-game.service';
 
 @Component({
   selector: 'app-cards-game',
@@ -13,10 +13,10 @@ import { CardGameService, GameKey } from 'src/app/services/card-game.service';
 export class CardsGameComponent implements OnInit {
   cardSetId: number
   private eventSubscription: Subscription
+  private game: CardGame
 
   constructor(
     activedRoute: ActivatedRoute,
-    private game: CardGameService,
     private cardSetService: CardSetService
   ) {
     this.cardSetId = Number.parseInt(activedRoute.snapshot.params["id"]);
@@ -25,7 +25,7 @@ export class CardsGameComponent implements OnInit {
   ngOnInit(): void {
     this.cardSetService.getDetail(this.cardSetId)
       .subscribe(result => { 
-          this.game.cards = result.cards;
+          this.game = new CardGame(result.cards);
           this.game.randomize();
           this.setHandler();
         }, err => console.log(err));

@@ -21,7 +21,7 @@ import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor
 import { CardSetService } from './services/card-set.service';
 import { CardService } from './services/card.service';
 import { CardsGameComponent } from './cards/cards-game/cards-game.component';
-import { CardGameService } from './services/card-game.service';
+import { CardGame } from './services/card-game.service';
 import { TextComponent } from './text/text.component';
 import { TextService } from './services/text.service';
 import { TextCreateComponent } from './text/text-create/text-create.component';
@@ -63,7 +63,6 @@ import { AngularMaterialModule } from '../angular-material-model/angular-materia
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
     CardSetService,
     CardService,
-    CardGameService,
     TextService
   ],
   bootstrap: [AppComponent]

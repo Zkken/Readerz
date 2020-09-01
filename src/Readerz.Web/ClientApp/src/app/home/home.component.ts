@@ -3,6 +3,7 @@ import { CardSetService } from '../services/card-set.service';
 import { CardSet } from '../models/card-set';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,11 +11,11 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 })
 export class HomeComponent implements OnInit {
   public cardSets: MatTableDataSource<CardSet>
-  public displayedColumns: string[] = ['name', 'like', 'dislike', 'timesPlayed']
+  public displayedColumns: string[] = ['name', 'like', 'timesPlayed', 'play']
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
-  constructor(private cardSetService: CardSetService) {
+  constructor(private cardSetService: CardSetService, public router: Router) {
   }
 
   ngOnInit(): void {
@@ -31,11 +32,5 @@ export class HomeComponent implements OnInit {
       this.paginator.pageSize = result.pageSize;
       this.cardSets = new MatTableDataSource<CardSet>(result.data);
     }, err => console.log(err));
-  }
-
-  like(id: number) {
-    this.cardSetService.like(id).subscribe(val => {
-      console.log("like has put");
-    });
   }
 }
