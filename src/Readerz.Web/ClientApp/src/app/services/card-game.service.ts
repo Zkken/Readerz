@@ -19,6 +19,9 @@ export class CardGameService {
     }
 
     get text() {
+        if(!this._currentCard) {
+            return "Loading";
+        }
         return this._currentCard[this._currentCardSide];
     }
 
@@ -60,6 +63,7 @@ export class CardGameService {
 export enum CardSide {
     Front = "front", Back = "back"
 }
+
 export enum GameKey {
     Enter = "Enter",
     Spacebar = " "

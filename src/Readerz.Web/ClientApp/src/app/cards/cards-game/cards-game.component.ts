@@ -12,12 +12,11 @@ import { CardGameService, GameKey } from 'src/app/services/card-game.service';
 })
 export class CardsGameComponent implements OnInit {
   cardSetId: number
-  text: string
   private eventSubscription: Subscription
 
   constructor(
     activedRoute: ActivatedRoute,
-    private cardGameService: CardGameService,
+    private game: CardGameService,
     private cardSetService: CardSetService
   ) {
     this.cardSetId = Number.parseInt(activedRoute.snapshot.params["id"]);
@@ -26,9 +25,10 @@ export class CardsGameComponent implements OnInit {
   ngOnInit(): void {
     this.cardSetService.getDetail(this.cardSetId)
       .subscribe(result => { 
-          this.cardGameService.cards = result.cards;
-          this.cardGameService.randomize()
-        }, err => console.log(err), () => this.setHandler());
+          this.game.cards = result.cards;
+          this.game.randomize();
+          this.setHandler();
+        }, err => console.log(err));
   }
 
   setHandler() {
@@ -39,18 +39,18 @@ export class CardsGameComponent implements OnInit {
       filter(keyEvent => keyEvent.key === GameKey.Enter || keyEvent.key === GameKey.Spacebar),
     ).subscribe(keyEvent => {
       if (keyEvent.key === GameKey.Spacebar) {
-        this.cardGameService.pushCurrentToEnd();
+        this.game.pushCurrentToEnd();
       }
-      this.cardGameService.nextCard();
-      if (this.cardGameService.end) {
+      this.game.nextCard();
+      if (this.game.end) {
         this.eventSubscription.unsubscribe();
       }
     })
   }
 
   myMouseClicked() {
-    if (!this.cardGameService.end) {
-      this.cardGameService.swapTextSides();
+    if (!this.game.end) {
+      this.game.swapTextSides();
     }
   }
 }
