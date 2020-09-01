@@ -1,6 +1,7 @@
 import { Injectable, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { ApiUrl } from "../app.constants";
+import { CardGetCommand, Card } from "../models/card";
 
 @Injectable()
 export class CardService {
@@ -9,10 +10,6 @@ export class CardService {
         @Inject('BASE_URL') private baseUrl: string
         ) {
 
-    }
-
-    getByCardSet(id: number) {
-        return this.http.get<CardGetCommand>(this.baseUrl + ApiUrl.Card.ByCardSetId + "/" + id);
     }
 
     deleteCard(id: number) {
@@ -24,16 +21,3 @@ export class CardService {
     }
 }
 
-interface CardGetCommand {
-    cards: Card[]
-}
-
-export class Card {
-    constructor (
-        public id?: number,
-        public front?: string,
-        public  back?: string
-        ) {
-
-    }
-}

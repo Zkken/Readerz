@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, AfterViewInit, ChangeDetectorRef, Input } from '@angular/core';
-import { UnknownText } from '../models/text';
-import { TextService, Language } from '../services/text.service';
-import { Card } from '../services/card.service';
+import { UnknownText, Language } from '../models/text';
+import { TextService } from '../services/text.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Card } from '../models/card';
 
 @Component({
   selector: 'app-text',

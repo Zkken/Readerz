@@ -19,7 +19,6 @@ import { AuthorizeGuard } from '../api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor';
 
 import { CardSetService } from './services/card-set.service';
-import { CurrentUserService } from './services/current-user.service';
 import { CardService } from './services/card.service';
 import { CardsGameComponent } from './cards/cards-game/cards-game.component';
 import { CardGameService } from './services/card-game.service';
@@ -63,7 +62,6 @@ import { AngularMaterialModule } from '../angular-material-model/angular-materia
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
     CardSetService,
-    CurrentUserService,
     CardService,
     CardGameService,
     TextService

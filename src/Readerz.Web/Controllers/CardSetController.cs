@@ -5,6 +5,7 @@ using Reader.Application.Cards.Commands.DeleteCard;
 using Reader.Application.CardSets.Commands.CreateCardSet;
 using Reader.Application.CardSets.Commands.DeleteCardSet;
 using Reader.Application.CardSets.Commands.UpdateCardSet;
+using Reader.Application.CardSets.Queries.GetCardSetDetail;
 using Reader.Application.CardSets.Queries.GetCardSets;
 using Reader.Application.Common.Models;
 
@@ -40,8 +41,16 @@ namespace Readerz.Web.Controllers
         {
             return Ok(await Mediator.Send(new GetCardSetsQuery
             {
-                PageIndex = pageIndex, PageSize = pageSize, ByCurrentUser = byCurrentUser
+                PageIndex = pageIndex, 
+                PageSize = pageSize, 
+                ByCurrentUser = byCurrentUser
             }));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<CardSetDetailDto>> GetDetail(int cardSetId)
+        {
+            return await Mediator.Send(new GetCardSetDetailQuery {CardSetId = cardSetId});
         }
     }
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CardService, Card } from 'src/app/services/card.service';
+import { CardService } from 'src/app/services/card.service';
 import { Router } from '@angular/router';
 import { CardSet } from 'src/app/models/card-set';
 import { CardSetService } from 'src/app/services/card-set.service';
-import { CurrentUserService } from 'src/app/services/current-user.service';
+import { Card } from 'src/app/models/card';
 
 @Component({
   selector: 'app-cards-create',

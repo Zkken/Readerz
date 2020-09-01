@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Card } from "./card.service";
+import { Card } from "../models/card";
 
 @Injectable()
 export class CardGameService {

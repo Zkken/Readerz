@@ -1,16 +1,11 @@
 import { Injectable, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { ApiUrl } from "../app.constants";
+import { Translable, TranslationResult, Languages, TextProcessingResult } from "../models/text";
 
 @Injectable()
 export class TextService {
-    constructor(@Inject('BASE_URL') private baseUrl: string,
-    private http: HttpClient) {
-
-    }
-
-    getText(id: number) {
-    
+    constructor(@Inject('BASE_URL') private baseUrl: string, private http: HttpClient) {
     }
 
     getTranslatedWord(translable: Translable) {
@@ -26,32 +21,4 @@ export class TextService {
         let params: string = `?text=${text}`;
         return this.http.get<TextProcessingResult>(this.baseUrl + ApiUrl.Text.Process + params);
     }
-}
-
-export interface Languages {
-    languages: Language[]
-}
-
-export interface Language {
-    iso: string,
-    name: string
-}
-
-export interface Translable {
-    text: string,
-    from?: string,
-    to: string
-}
-
-export interface TranslationResult {
-    translations: string[]
-}
-
-export interface TextProcessingResult {
-    text: TextItem[]
-}
-
-export interface TextItem {
-    isWord: boolean,
-    value: string
 }

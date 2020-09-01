@@ -1,8 +1,7 @@
 import { Injectable, Inject } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { ApiUrl } from "../app.constants";
-import { CardSet, CardSetStatus } from "../models/card-set";
-import { Card } from "./card.service";
+import { CardSets, CreateCardSetCommand, UpdateCardSetCommand, CardSetDetail } from "../models/card-set";
 
 @Injectable()
 export class CardSetService {
@@ -21,25 +20,19 @@ export class CardSetService {
         let params = new HttpParams()
         .set('pageIndex', pageIndex)
         .set('pageSize', pageSize);
+
         if(byUser) {
             params.set('byCurrentUser', 'true');
         }
+        
         return this.client.get<CardSets>(this.baseUrl + ApiUrl.CardSet.Get, { params });
     }
-}
 
-export interface CardSets {
-    data: CardSet[],
-    pageIndex: number,
-    pageSize: number,
-    totalPages: number,
-    hasPreviousPage: boolean,
-    hasNextPage: boolean
-}
+    getDetail(id: number) {
+        return this.client.get<CardSetDetail>(this.baseUrl + ApiUrl.CardSet.GetDetail + "/" + id);
+    }
 
-interface CreateCardSetCommand {
-    name: string,
-    status: CardSetStatus,
-    textId?: number,
-    cards: Card[]
+    update(command: UpdateCardSetCommand) {
+        return this.client.put(this.baseUrl + ApiUrl.CardSet.Update, command);
+    }
 }

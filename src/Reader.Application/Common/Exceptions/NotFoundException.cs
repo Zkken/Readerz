@@ -10,8 +10,8 @@ namespace Reader.Application.Common.Exceptions
         /// <summary>
         /// Instances a new not found exception object.
         /// </summary>
-        /// <param name="name">The name of a parameter.</param>
-        /// <param name="key">The requested property value that couldn't be found.</param>
+        /// <param name="name">The requested property name which value that couldn't be found.</param>
+        /// <param name="key">Type that couldn't be found.</param>
         public NotFoundException(string name, object key)
             : base($"Entity \"{name}\" ({key}) was not found.")
         {

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Card, CardService } from 'src/app/services/card.service';
 import { CardSetService } from 'src/app/services/card-set.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { fromEvent, from, of, Subscription } from 'rxjs';
-import { map, filter, delay, mergeMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { fromEvent, Subscription } from 'rxjs';
+import { map, filter} from 'rxjs/operators';
 import { CardGameService, GameKey } from 'src/app/services/card-game.service';
 
 @Component({
@@ -17,48 +16,42 @@ export class CardsGameComponent implements OnInit {
   private eventSubscription: Subscription
 
   constructor(
-    private cardService: CardService,
     activedRoute: ActivatedRoute,
-    private game: CardGameService
+    private cardGameService: CardGameService,
+    private cardSetService: CardSetService
   ) {
     this.cardSetId = Number.parseInt(activedRoute.snapshot.params["id"]);
   }
 
   ngOnInit(): void {
-    this.cardService.getByCardSet(this.cardSetId)
-      .subscribe(
-        val => { 
-          this.game.cards = val.cards;
-          this.game.randomize()
-        },
-        err => console.log(err),
-        () => this.setHandler()
-      );
+    this.cardSetService.getDetail(this.cardSetId)
+      .subscribe(result => { 
+          this.cardGameService.cards = result.cards;
+          this.cardGameService.randomize()
+        }, err => console.log(err), () => this.setHandler());
   }
 
   setHandler() {
     this.eventSubscription = fromEvent(document, 'keypress').pipe(
-      map((v: KeyboardEvent) => {
-        return { key: v.key }
+      map((keyEvent: KeyboardEvent) => {
+        return { key: keyEvent.key }
       }),
-      filter(v => v.key === GameKey.Enter || v.key === GameKey.Spacebar),
-    ).subscribe(v => {
-      if (v.key === GameKey.Spacebar) {
-        this.game.pushCurrentToEnd();
+      filter(keyEvent => keyEvent.key === GameKey.Enter || keyEvent.key === GameKey.Spacebar),
+    ).subscribe(keyEvent => {
+      if (keyEvent.key === GameKey.Spacebar) {
+        this.cardGameService.pushCurrentToEnd();
       }
-      this.game.nextCard();
-      if (this.game.end) {
+      this.cardGameService.nextCard();
+      if (this.cardGameService.end) {
         this.eventSubscription.unsubscribe();
       }
     })
   }
 
   myMouseClicked() {
-    if (!this.game.end) {
-      this.game.swapTextSides();
+    if (!this.cardGameService.end) {
+      this.cardGameService.swapTextSides();
     }
   }
-
-  //todo take and move a card to left or right
 }
 
