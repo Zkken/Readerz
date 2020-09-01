@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Reader.Application.Common.Interfaces;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces;
 using Readerz.Domain.Entities;
 using Readerz.Web.Domain.Enums;
 

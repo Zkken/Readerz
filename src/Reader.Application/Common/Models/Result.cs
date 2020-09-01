@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Reader.Application.Common.Models
+namespace Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models
 {
     public class Result
     {

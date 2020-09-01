@@ -1,4 +1,4 @@
-﻿namespace Reader.Application.Common.Models
+﻿namespace Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models
 {
     public class Language
     {

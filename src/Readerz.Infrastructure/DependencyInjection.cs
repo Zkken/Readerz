@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Reader.Application.Common.Interfaces;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces;
 using Readerz.Web.Infrastructure.Translator;
 using Readerz.Web.Infrastructure.Translator.Identity;
 using Readerz.Web.Infrastructure.Translator.Persistence;

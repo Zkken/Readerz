@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Reader.Application.Common.Models;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models;
 using Reader.Application.Text.Queries.GetProcessedText;
 using Reader.Application.Text.Queries.GetSupportedLanguages;
 using Reader.Application.Text.Queries.GetWordTranslation;

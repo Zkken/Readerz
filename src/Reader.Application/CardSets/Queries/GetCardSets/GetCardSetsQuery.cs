@@ -4,9 +4,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using Reader.Application.Common.Exceptions;
-using Reader.Application.Common.Interfaces;
-using Reader.Application.Common.Models;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Exceptions;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models;
 using Readerz.Domain.Entities;
 using Readerz.Web.Domain.Enums;
 

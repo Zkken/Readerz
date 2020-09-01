@@ -35,4 +35,8 @@ export class CardSetService {
     update(command: UpdateCardSetCommand) {
         return this.client.put(this.baseUrl + ApiUrl.CardSet.Update, command);
     }
+
+    like(id: number) {
+        return this.client.put(this.baseUrl + ApiUrl.CardSet.Like, id);
+    }
 }

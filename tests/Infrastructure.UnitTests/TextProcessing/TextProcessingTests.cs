@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Reader.Application.Common.Models;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models;
 using Readerz.Web.Infrastructure.Translator.Services.TextProcessing;
 
 namespace Infrastructure.UnitTests.TextProcessing

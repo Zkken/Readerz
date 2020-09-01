@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Reader.Application.Common.Models;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models;
 
-namespace Reader.Application.Common.Interfaces
+namespace Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces
 {
     public interface IUserManager
     {

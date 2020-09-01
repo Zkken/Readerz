@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using Reader.Application.Common.Interfaces;
-using Reader.Application.Common.Models;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

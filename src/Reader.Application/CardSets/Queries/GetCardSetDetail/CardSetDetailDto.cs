@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
 using Reader.Application.CardSets.Queries.GetCardSets;
-using Reader.Application.Common.Mappings;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Mappings;
 using Readerz.Domain.Entities;
 
 namespace Reader.Application.CardSets.Queries.GetCardSetDetail

@@ -1,7 +1,7 @@
 using System;
 using System.Text;
-using Reader.Application.Common.Interfaces;
-using Reader.Application.Common.Models;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models;
 
 namespace Readerz.Web.Infrastructure.Translator.Services.TextProcessing
 {

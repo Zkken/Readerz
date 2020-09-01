@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Reader.Application.Common.Exceptions;
-using Reader.Application.Common.Interfaces;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Exceptions;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces;
 using Readerz.Domain.Entities;
 
 namespace Reader.Application.CardSets.Commands.DeleteCardSet

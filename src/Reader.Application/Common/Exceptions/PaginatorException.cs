@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Reader.Application.Common.Exceptions
+namespace Reader.Application.CardSets.Commands.IncrementCardSetCommand.Exceptions
 {
     /// <summary>
     /// Represents an paginator exception type.

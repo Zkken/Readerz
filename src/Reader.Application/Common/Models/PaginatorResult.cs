@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace Reader.Application.Common.Models
+namespace Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models
 {
     public class PaginatorResult<TResult>
     {

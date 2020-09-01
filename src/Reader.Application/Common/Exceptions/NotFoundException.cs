@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Reader.Application.Common.Exceptions
+namespace Reader.Application.CardSets.Commands.IncrementCardSetCommand.Exceptions
 {
     /// <summary>
     /// Represents an exception type that the requested entity wasn't found. 

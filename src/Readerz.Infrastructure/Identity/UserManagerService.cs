@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Reader.Application.Common.Exceptions;
-using Reader.Application.Common.Interfaces;
-using Reader.Application.Common.Models;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Exceptions;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models;
 
 namespace Readerz.Web.Infrastructure.Translator.Identity
 {

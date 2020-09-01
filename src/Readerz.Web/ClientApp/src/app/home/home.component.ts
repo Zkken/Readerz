@@ -33,4 +33,9 @@ export class HomeComponent implements OnInit {
     }, err => console.log(err));
   }
 
+  like(id: number) {
+    this.cardSetService.like(id).subscribe(val => {
+      console.log("like has put");
+    });
+  }
 }

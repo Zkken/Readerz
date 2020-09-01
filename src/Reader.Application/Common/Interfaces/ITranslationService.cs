@@ -1,8 +1,8 @@
-﻿using Reader.Application.Common.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models;
 
-namespace Reader.Application.Common.Interfaces
+namespace Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces
 {
     /// <summary>
     /// Service defines text translations functionality.

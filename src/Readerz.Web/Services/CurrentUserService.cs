@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using Reader.Application.Common.Interfaces;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces;
 
 namespace Readerz.Web.Services
 {

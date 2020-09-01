@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Reader.Application.Common.Models
+namespace Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models
 {
     public class TranslationResult
     {

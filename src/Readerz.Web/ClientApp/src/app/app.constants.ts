@@ -4,7 +4,8 @@ export const ApiUrl = {
         Update: "api/cardSet/update",
         Delete: "api/cardSet/delete",
         Get: "api/cardSet/get",
-        GetDetail: "api/cardSet/getDetail"
+        GetDetail: "api/cardSet/getDetail",
+        Like: "api/cardSet/Like"
     },
     Card: {
         CreateRange: "api/card/createRange",

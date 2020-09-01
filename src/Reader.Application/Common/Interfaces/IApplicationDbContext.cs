@@ -3,7 +3,7 @@ using Readerz.Domain.Entities;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Reader.Application.Common.Interfaces
+namespace Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces
 {
     public interface IApplicationDbContext
     {

@@ -2,8 +2,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Reader.Application.Common.Interfaces;
-using Reader.Application.Common.Models;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces;
+using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models;
 
 namespace Reader.Application.Text.Queries.GetProcessedText
 {
