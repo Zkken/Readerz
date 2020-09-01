@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Readerz.Domain.Entities;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Readerz.Domain.Entities;
 
-namespace Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces
+namespace Reader.Application.Common.Interfaces
 {
     public interface IApplicationDbContext
     {

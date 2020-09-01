@@ -4,13 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Reader.Application.Cards.Commands.DeleteCard;
 using Reader.Application.CardSets.Commands.CreateCardSet;
 using Reader.Application.CardSets.Commands.DeleteCardSet;
-using Reader.Application.CardSets.Commands.IncrementCardSetCommand;
 using Reader.Application.CardSets.Commands.UpdateCardSet;
 using Reader.Application.CardSets.Queries.GetCardSetDetail;
 using Reader.Application.CardSets.Queries.GetCardSets;
-using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models;
 using Reader.Application.CardSets.Commands.IncrementLikeCardSet;
 using Reader.Application.CardSets.Commands.IncrementTimesPlayedCardSet;
+using Reader.Application.Common.Models;
 
 namespace Readerz.Web.Controllers
 {

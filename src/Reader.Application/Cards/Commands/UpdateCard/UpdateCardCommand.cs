@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Exceptions;
-using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces;
+using Reader.Application.Common.Exceptions;
+using Reader.Application.Common.Interfaces;
 using Readerz.Domain.Entities;
 
 namespace Reader.Application.Cards.Commands.UpdateCard

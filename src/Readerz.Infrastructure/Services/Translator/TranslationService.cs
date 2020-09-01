@@ -1,14 +1,14 @@
 using GoogleTranslateFreeApi;
-using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Language = Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models.Language;
+using Language = Reader.Application.Common.Models.Language;
 using Lang = GoogleTranslateFreeApi.Language;
-using TranslationResult = Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models.TranslationResult;
+using TranslationResult = Reader.Application.Common.Models.TranslationResult;
 using TranslationRes = GoogleTranslateFreeApi.TranslationResult;
 using System;
-using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Exceptions;
+using Reader.Application.Common.Exceptions;
+using Reader.Application.Common.Interfaces;
 
 namespace Readerz.Web.Infrastructure.Translator
 {

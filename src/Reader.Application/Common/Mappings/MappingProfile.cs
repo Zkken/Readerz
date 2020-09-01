@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using AutoMapper;
 
-namespace Reader.Application.CardSets.Commands.IncrementCardSetCommand.Mappings
+namespace Reader.Application.Common.Mappings
 {
     public class MappingProfile : Profile
     {

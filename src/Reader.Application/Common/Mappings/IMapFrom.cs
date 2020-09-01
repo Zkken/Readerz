@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Reader.Application.CardSets.Commands.IncrementCardSetCommand.Mappings
+namespace Reader.Application.Common.Mappings
 {
     public interface IMapFrom<T>
     {

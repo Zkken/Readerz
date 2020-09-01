@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Reader.Application.CardSets.Commands.IncrementCardSetCommand.Exceptions
+namespace Reader.Application.Common.Exceptions
 {
     /// <summary>
     /// Represents an exception type that the language ISO isn't supported. 

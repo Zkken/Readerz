@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces;
-using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Models;
 using System.Threading;
 using System.Threading.Tasks;
+using Reader.Application.Common.Interfaces;
+using Reader.Application.Common.Models;
 
 namespace Reader.Application.Text.Queries.GetWordTranslation
 {

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Reader.Application.CardSets.Commands.IncrementCardSetCommand.Mappings;
+using Reader.Application.Common.Mappings;
 using Readerz.Domain.Entities;
 
 namespace Reader.Application.CardSets.Queries.GetCardSetDetail

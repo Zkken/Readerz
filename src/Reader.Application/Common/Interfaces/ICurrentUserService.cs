@@ -1,4 +1,4 @@
-﻿namespace Reader.Application.CardSets.Commands.IncrementCardSetCommand.Interfaces
+﻿namespace Reader.Application.Common.Interfaces
 {
     /// <summary>
     /// Represents a service that handles information about a user who sends a request.
