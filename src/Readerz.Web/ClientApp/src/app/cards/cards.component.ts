@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CardSetService } from '../services/card-set.service';
 import { CardSet } from '../models/card-set';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-cards',
@@ -10,7 +11,9 @@ import { PageEvent, MatPaginator } from '@angular/material/paginator';
 })
 export class CardsComponent implements OnInit {
   cardSets: CardSet[];
-
+  pageEvent: PageEvent;
+  trashIcon = faTrash;
+  
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(

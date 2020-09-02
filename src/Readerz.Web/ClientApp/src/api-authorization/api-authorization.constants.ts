@@ -1,4 +1,4 @@
-export const ApplicationName = 'Readerz';
+export const ApplicationName = 'Readerz.Web';
 
 export const ReturnUrlType = 'returnUrl';
 

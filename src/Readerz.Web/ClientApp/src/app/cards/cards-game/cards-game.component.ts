@@ -13,7 +13,7 @@ import { CardGame, GameKey } from 'src/app/services/card-game.service';
 export class CardsGameComponent implements OnInit {
   cardSetId: number
   private eventSubscription: Subscription
-  private game: CardGame
+  public game: CardGame
 
   constructor(
     activedRoute: ActivatedRoute,

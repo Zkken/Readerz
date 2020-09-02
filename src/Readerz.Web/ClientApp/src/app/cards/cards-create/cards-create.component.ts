@@ -8,7 +8,7 @@ import { switchMap } from 'rxjs/operators';
 import { FormBuilder, Validators } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { Key } from 'protractor';
+import { GameKey } from 'src/app/services/card-game.service';
 
 @Component({
   selector: 'app-cards-create',
@@ -56,7 +56,7 @@ export class CardsCreateComponent implements OnInit {
 
   ngOnInit() {
     fromEvent(document, 'keypress').pipe(
-      filter((keyEvent: KeyboardEvent) => keyEvent.key === Key.ENTER)
+      filter((keyEvent: KeyboardEvent) => keyEvent.key === GameKey.Enter)
     )
     .subscribe(() => {
       this.add();

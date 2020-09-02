@@ -4,6 +4,7 @@ import { CardSet } from '../models/card-set';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,9 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   public cardSets: MatTableDataSource<CardSet>
   public displayedColumns: string[] = ['name', 'like', 'timesPlayed', 'play']
-
+  pageEvent: PageEvent;
+  playIcon = faPlay;
+  
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private cardSetService: CardSetService, public router: Router) {

@@ -12,8 +12,8 @@ import { Card } from '../models/card';
 export class TextComponent implements OnInit, AfterViewInit {
   @Input() text: UnknownText;
 
-  @ViewChild('paragraphTemplate', { static: false }) paragraphTemp: TemplateRef<any>;
-  @ViewChild('container', { static: false }) container: ViewContainerRef;
+  @ViewChild('paragraphTemplate') paragraphTemp: TemplateRef<any>;
+  @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
 
   languages: Language[];
   languageFrom: string;
@@ -29,8 +29,7 @@ export class TextComponent implements OnInit, AfterViewInit {
     langFromSelect: ['', [Validators.required]]
   });
 
-  constructor(private cdr: ChangeDetectorRef, private textService: TextService,
-    public fb: FormBuilder) {
+  constructor(private cdr: ChangeDetectorRef, private textService: TextService, public fb: FormBuilder) {
   }
 
   get langToSelect() {
@@ -50,21 +49,19 @@ export class TextComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.textService.getProcessed(this.text.innerText)
       .subscribe(val => {
-        console.log(val.text);
-        let paragraph = this.paragraphTemp.createEmbeddedView({ text: val.text });
+        let paragraph = this.paragraphTemp.createEmbeddedView({text: val.text});
         this.container.insert(paragraph);
         this.cdr.detectChanges();
       }, err => console.log(err));
   }
 
   selectWord(text: string) {
-    //check for validate errors
     if (this.langToSelect.errors || this.langFromSelect.errors) {
       return;
     }
+
     this.lastTranslation = text;
 
-    //traslate the span inner text
     if (this.wordCash.has(text)) {
       this.translation = this.wordCash.get(text).join(', ');
     } else {
@@ -80,15 +77,14 @@ export class TextComponent implements OnInit, AfterViewInit {
   }
 
   addWordToCards() {
-    //check for validate errors
     if (this.langToSelect.errors || this.langFromSelect.errors) {
       return;
     }
-    //check for existings last translation 
+
     if (!this.lastTranslation || !this.translation) {
       return;
     }
-    //push new card to card array
+
     this.cards.push(new Card(null, this.lastTranslation, this.translation));
   }
 }
