@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Reader.Application.Common.Interfaces;
-using Readerz.Web.Domain.Common;
 using Readerz.Domain.Entities;
-using Readerz.Web.Infrastructure.Translator.Identity;
+using Readerz.Infrastructure.Identity;
+using Readerz.Web.Domain.Common;
 
-namespace Readerz.Web.Infrastructure.Translator.Persistence
+namespace Readerz.Infrastructure.Persistence
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, IApplicationDbContext
     {

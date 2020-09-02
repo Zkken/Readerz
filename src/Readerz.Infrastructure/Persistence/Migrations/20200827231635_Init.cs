@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Readerz.Web.Infrastructure.Translator.Persistence.Migrations
+namespace Readerz.Infrastructure.Persistence.Migrations
 {
     public partial class Init : Migration
     {

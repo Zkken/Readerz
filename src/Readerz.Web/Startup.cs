@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Reader.Application;
 using Reader.Application.Common.Interfaces;
-using Readerz.Web.Infrastructure;
+using Readerz.Infrastructure;
 using Readerz.Web.Services;
 
 namespace Readerz.Web

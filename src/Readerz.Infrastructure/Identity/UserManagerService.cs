@@ -5,7 +5,7 @@ using Reader.Application.Common.Exceptions;
 using Reader.Application.Common.Interfaces;
 using Reader.Application.Common.Models;
 
-namespace Readerz.Web.Infrastructure.Translator.Identity
+namespace Readerz.Infrastructure.Identity
 {
     public class UserManagerService : IUserManager
     {

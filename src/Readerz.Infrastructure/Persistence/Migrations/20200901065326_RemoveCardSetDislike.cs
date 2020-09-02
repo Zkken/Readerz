@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Readerz.Web.Infrastructure.Translator.Persistence.Migrations
+namespace Readerz.Infrastructure.Persistence.Migrations
 {
     public partial class RemoveCardSetDislike : Migration
     {

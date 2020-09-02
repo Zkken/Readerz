@@ -12,6 +12,7 @@ namespace Readerz.Web.Controllers
     public class TextController : BaseController
     {
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<TranslationResult>> TranslateWord(
             [FromQuery] string text, 
             [FromQuery] string to, 

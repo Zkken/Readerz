@@ -1,16 +1,15 @@
-using GoogleTranslateFreeApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GoogleTranslateFreeApi;
+using Reader.Application.Common.Exceptions;
+using Reader.Application.Common.Interfaces;
 using Language = Reader.Application.Common.Models.Language;
 using Lang = GoogleTranslateFreeApi.Language;
 using TranslationResult = Reader.Application.Common.Models.TranslationResult;
-using TranslationRes = GoogleTranslateFreeApi.TranslationResult;
-using System;
-using Reader.Application.Common.Exceptions;
-using Reader.Application.Common.Interfaces;
 
-namespace Readerz.Web.Infrastructure.Translator
+namespace Readerz.Infrastructure.Services.Translator
 {
     public class TranslationService : ITranslationService
     {
@@ -44,6 +43,11 @@ namespace Readerz.Web.Infrastructure.Translator
                 throw new ArgumentNullException(nameof(text));
             }
 
+            if (to == null)
+            {
+                throw new ArgumentNullException(nameof(to));
+            }
+
             if (SupportedLanguages.All(l => l.Iso != to))
             {
                 throw new NotSupportedLanguageException(to);
@@ -60,7 +64,7 @@ namespace Readerz.Web.Infrastructure.Translator
 
             return new TranslationResult
             {
-                Translations = result.FragmentedTranslation.Concat(result.SeeAlso)
+                Translations = result.FragmentedTranslation
             };
         }
     }
