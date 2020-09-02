@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   public cardSets: MatTableDataSource<CardSet>
   public displayedColumns: string[] = ['name', 'like', 'timesPlayed', 'play']
 
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private cardSetService: CardSetService, public router: Router) {
   }

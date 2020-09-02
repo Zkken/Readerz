@@ -13,7 +13,7 @@ export class TextComponent implements OnInit, AfterViewInit {
   @Input() text: UnknownText;
 
   @ViewChild('paragraphTemplate', { static: false }) paragraphTemp: TemplateRef<any>;
-  @ViewChild('container', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+  @ViewChild('container', { static: false }) container: ViewContainerRef;
 
   languages: Language[];
   languageFrom: string;

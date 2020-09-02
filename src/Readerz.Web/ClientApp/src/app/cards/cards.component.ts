@@ -11,7 +11,7 @@ import { PageEvent, MatPaginator } from '@angular/material/paginator';
 export class CardsComponent implements OnInit {
   cardSets: CardSet[];
 
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private cardSetService: CardSetService
