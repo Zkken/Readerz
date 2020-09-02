@@ -1,55 +1,115 @@
 <div class="border p-2">
     <h4 class="text-center">Define card set's name: </h4>
 
+    <form [formGroup]="cardSetForm">
 
-    <div class="row">
-        <div class="col">
-            <input type="text" placeholder="Card set's name" class="form-control" [(ngModel)]="cardSet.name" />
-        </div>
-        <div class="col">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Accessibility</label>
+        <div class="row">
+            <div class="col">
+                <!-- Card set name validation -->
+                <div *ngIf="cardSetName.invalid && (cardSetName.dirty || cardSetName.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="cardSetName.errors.required">
+                        The card set name is required.
+                    </div>
+                    <div *ngIf="cardSetName.errors.minlength">
+                        The card set name must be at least 3 characters long.
+                    </div>
+                    <div *ngIf="cardSetName.errors.maxlength">
+                        The card set name must be less than 30 characters long.
+                    </div>
                 </div>
-                <select type="number" [(ngModel)]="cardSet.status" class="custom-select" id="inputGroupSelect01">
-                    <option selected value="0">Private</option>
-                    <option value="1">Public</option>
-                </select>
+
+                <!-- Card set name input -->
+                <input type="text" placeholder="Card set's name" class="form-control" [(ngModel)]="cardSet.name"
+                    formControlName="cardSetName" />
+
+            </div>
+            <div class="col">
+
+                <!-- Card set accessibility validation -->
+                <div *ngIf="select.invalid && (select.dirty || select.touched)" class="alert alert-danger">
+                    <div *ngIf="select.errors.required">
+                        Select the proper accessibility of the future card set.
+                    </div>
+                </div>
+
+                <!-- Dropdown list -->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="accessibilitySelect">Accessibility</label>
+                    </div>
+                    <select type="number" [(ngModel)]="cardSet.status" class="custom-select" id="accessibilitySelect"
+                        formControlName="select">
+                        <option selected value="0">Private</option>
+                        <option value="1">Public</option>
+                    </select>
+                </div>
+
             </div>
         </div>
-    </div>
 
 
 
-    <h3 class="text-center">({{cards.length}}) Cards: </h3>
-    <div *ngFor="let c of cards; let i = index">
-        <div class="row m-2">
-            <div class="offset-1 col-4 border rounded" style="height: 50px;">
-                {{c?.front}}
-            </div>
-            <div class="offset-2 col-4 border rounded" style="height: 50px;">
-                {{c?.back}}
-            </div>
-            <div class="col-1">
-                <button class="btn btn-danger" (click)=" delete(i)">
-                    <fa name="trash"></fa>
-                </button>
+        <h3 class="text-center">({{cards.length}}) Cards: </h3>
+        <div *ngFor="let c of cards; let i = index">
+            <div class="row m-2">
+                <div class="offset-1 col-4 border rounded" style="height: 50px;">
+                    {{c?.front}}
+                </div>
+                <div class="offset-2 col-4 border rounded" style="height: 50px;">
+                    {{c?.back}}
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-danger" (click)=" delete(i)">
+                        <fa name="trash"></fa>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="p-2 border rounded m-3">
-        <app-card-form [(card)]="card"></app-card-form>
-        <input type="button" value="Add" class="btn btn-primary btn-block mt-2" (click)="add()" />
-    </div>
+        <div class="p-2 border rounded m-3">
+            <div class="row">
 
+                <div class="col-6">
+                    <!-- Front card side validation -->
+                    <div *ngIf="front.invalid && (front.dirty || front.touched)" class="alert alert-danger">
+                        <div *ngIf="front.errors.required">
+                            The card's frontside is required.
+                        </div>
+                        <div *ngIf="front.errors.maxlength">
+                            The card's frontside must be less than 50 characters long.
+                        </div>
+                    </div>
+                    <input type="text" [(ngModel)]="card.front" class="form-control"
+                        placeholder="type some text here..." style="height: 50px;" formControlName="front" />
+                </div>
+
+                <div class="col-6">
+                    <!-- Back card side validation -->
+                    <div *ngIf="back.invalid && (back.dirty || back.touched)" class="alert alert-danger">
+                        <div *ngIf="back.errors.required">
+                            The card's backside is required.
+                        </div>
+                        <div *ngIf="back.errors.maxlength">
+                            The card's backside must be less than 50 characters long.
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" [(ngModel)]="card.back"
+                        placeholder="type translation here..." style="height: 50px;" formControlName="back" />
+                </div>
+            </div>
+            <input type="button" value="Add" class="btn btn-primary btn-block mt-2" (click)="add()"
+                [disabled]="front.errors || back.errors" />
+        </div>
+    </form>
 
     <div class="d-flex flex-row justify-content-between">
         <div class="p-2">
             <a routerLink="/cards" class="btn btn-danger btn-lg">Go back</a>
         </div>
         <div class="p-2">
-            <input type="button" value="Save set" class="btn btn-success btn-lg" (click)="save()" />
+            <input type="button" value="Save set" class="btn btn-success btn-lg" (click)="save()"
+                [disabled]="cardSetName.errors || select.errors || cards.length == 0" />
         </div>
     </div>
 </div>
