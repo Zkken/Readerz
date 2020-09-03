@@ -1,10 +1,74 @@
-<div class="row">
+<div class="row m-1">
     <div class="col-10">
-        <h3 class="text-center">{{text.name}}</h3>
-        <div class="border rounded mb-4">
-            <div class="p-container p-3">
-                <div *ngIf="!languages">Loading...</div>
-                <ng-container #container></ng-container>
+        <div *ngIf="!textCreated">
+            <form [formGroup]="textForm">
+                <div class="form-group">
+                    <h3 class="text-center">Text name: </h3>
+                    <!-- Text name validation -->
+                    <div class="alert alert-danger" *ngIf="textName.invalid && (textName.dirty || textName.touched)">
+                        <div *ngIf="textName.errors?.required">
+                            Text name is required.
+                        </div>
+                        <div *ngIf="textName.errors.minlength">
+                            Text name must be at least 3 characters long.
+                        </div>
+                        <div *ngIf="textName.errors.maxlength">
+                            Text name must be less than 30 characters long.
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <input class="form-control" placeholder="Type a text name here..." formControlName="textName">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <h3 class="text-muted">Text:</h3>
+                    <!-- Text validation -->
+                    <div class="alert alert-danger" *ngIf="textInner.invalid && (textInner.dirty || textInner.touched)">
+                        <div *ngIf="textInner.errors.required">
+                            Text is required.
+                        </div>
+                        <div *ngIf="textInner.errors.minlength">
+                            Text must be at least 10 characters long.
+                        </div>
+                        <div *ngIf="textInner.errors.maxlength">
+                            Text must be less than 5000 characters long.
+                        </div>
+                    </div>
+
+                    <textarea rows="10" class="form-control" placeholder="Insert your test here.."
+                        formControlname="textInner">
+            </textarea>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="d-flex justify-content-center offset-5 col-2">
+                            <input class="form-control btn btn-success" type="button" value="Save your text"
+                                (click)="setText()" [disabled]="textInner.invalid || text.invalid">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="textCreated">
+            <h3 class="text-center">{{text.name}}</h3>
+            <input type="button" value="Save card set" [disabled]="!cards || cards.length == 0" (click)="save()">
+            <div class="border rounded mb-4">
+                <div class="p-container p-3">
+                    <div *ngIf="!languages">Loading...</div>
+                    <div *ngIf="languages">
+                        <p class="p">
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <ng-template ngFor let-t [ngForOf]="textItems">
+                                <span (click)="selectWord(t.value)"
+                                    *ngIf="t.isWord;else emptyTemplate">{{t.value}}</span>
+                                <ng-template #emptyTemplate>{{t.value}}</ng-template>
+                            </ng-template>
+                            <br>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -19,38 +83,34 @@
             <div class="d-flex flex-column">
                 <div class="form-group">
                     <label for="langFromSelect">From:</label>
-                    <select [(ngModel)]="languageFrom" class="custom-select" id="langFromSelect"
-                        formControlName="langFromSelect">
+                    <select class="custom-select" id="langFromSelect" formControlName="langFromSelect"
+                        (change)="changeLangFrom($event)">
                         <option value="auto" selected>Auto</option>
                         <option *ngFor="let lang of languages" value="{{lang.iso}}">{{lang.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="langToSelect">To:</label>
-                    <select [(ngModel)]="languageTo" class="custom-select" id="langToSelect"
-                        formControlName="langToSelect">
+                    <select class="custom-select" id="langToSelect" formControlName="langToSelect"
+                        (change)="changeLangTo($event)">
                         <option *ngFor="let lang of languages" value="{{lang.iso}}">{{lang.name}}</option>
                     </select>
                 </div>
                 <div>
                     <h6 class="text-muted">Translation</h6>
                     <p>{{lastTranslation}} <b>-</b> {{translation}}</p>
-                    <div class="form-group">
-                        <input type="button" value="Add new card to list" class="btn btn-success">
+                    <div *ngIf="textCreated">
+                        Is this card in the card set?
+                        <span *ngIf="isLastCardUnique; else notUnique">✅</span>
+                        <ng-template #notUnique><span>❌</span></ng-template>
+
+                        <div class="form-group">
+                            <input type="button" value="Add new card to list" class="btn btn-success"
+                                [disabled]="isLastCardUnique" (click)="addCard()">
+                        </div>
                     </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
-
-<ng-template #paragraphTemplate let-text="text">
-    <p class="p">
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <ng-template ngFor let-t [ngForOf]="text">
-            <span (click)="selectWord(t.value)" *ngIf="t.isWord;else emptyTemplate">{{t.value}}</span>
-            <ng-template #emptyTemplate>{{t.value}}</ng-template>
-        </ng-template>
-        <br>
-    </p>
-</ng-template>

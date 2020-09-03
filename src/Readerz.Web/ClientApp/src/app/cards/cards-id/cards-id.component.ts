@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CardService } from 'src/app/services/card.service';
 import { Card } from 'src/app/models/card';
 import { CardSetService } from 'src/app/services/card-set.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-cards-id',
@@ -35,5 +36,8 @@ export class CardsIdComponent implements OnInit {
     this.cardService.deleteCard(id).subscribe(
       //Todo create alert for operation success
     );
+  }
+
+  private loadCards() {
   }
 }

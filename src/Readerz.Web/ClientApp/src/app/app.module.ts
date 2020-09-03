@@ -22,7 +22,7 @@ import { CardService } from './services/card.service';
 import { CardsGameComponent } from './cards/cards-game/cards-game.component';
 import { TextComponent } from './text/text.component';
 import { TextService } from './services/text.service';
-import { TextCreateComponent } from './text/text-create/text-create.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule, MatTable} from '@angular/material/table';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
@@ -39,7 +39,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     CardFormComponent,
     CardsGameComponent,
     TextComponent,
-    TextCreateComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -53,7 +52,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
       { path: 'cards/create', component: CardsCreateComponent, canActivate: [AuthorizeGuard] },
       { path: 'cards/:id', component: CardsIdComponent, canActivate: [AuthorizeGuard] },
       { path: 'cards/:id/game', component: CardsGameComponent, canActivate: [AuthorizeGuard]},
-      { path: 'text', component: TextCreateComponent, canActivate: [AuthorizeGuard] }
+      { path: 'text', component: TextComponent, canActivate: [AuthorizeGuard] }
     ]),
     BrowserAnimationsModule,
     MatPaginatorModule,

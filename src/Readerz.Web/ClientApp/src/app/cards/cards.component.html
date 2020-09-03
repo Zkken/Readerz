@@ -1,32 +1,38 @@
-<h2 class="text-center">Your card sets: </h2>
+<div class="row mr-2 ml-2">
+    <div class="col-lg-2 col-sm-0"></div>
+    <div class="col-lg-8 col-sm-12">
+        <h2 class="text-center">Your card sets: </h2>
 
-<p *ngIf="!cardSets"><em>Loading...</em></p>
+        <p *ngIf="!cardSets"><em>Loading...</em></p>
 
-<div *ngIf="cardSets">
-    <div *ngIf="cardSets.length !== 0;else e">
-        <a class="text-muted" routerLink="create">Create a new one</a>
-        <div *ngFor="let c of cardSets; let i = index">
-            <div class="card m-1">
-                <div class="card-body d-flex justify-content-around">
-                    <div></div>
-                    <a routerLink="{{c?.id}}" class="link">{{c?.name}}</a>
-                    <button class="btn btn-light" (click)="delete(c?.id)">
-                        <fa-icon [icon]="trashIcon"></fa-icon>
-                    </button>
+        <div *ngIf="cardSets">
+            <div *ngIf="cardSets.length !== 0;else e">
+                <a class="text-muted" routerLink="create">Create a new one</a>
+                <div *ngFor="let c of cardSets; let i = index">
+                    <div class="card m-1">
+                        <div class="card-body d-flex justify-content-around">
+                            <div></div>
+                            <a routerLink="{{c?.id}}" class="link">{{c?.name}}</a>
+                            <button class="btn btn-light" (click)="delete(c?.id)">
+                                <fa-icon [icon]="trashIcon"></fa-icon>
+                            </button>
+                        </div>
+                        <a class="btn btn-secondary" routerLink="{{c?.id}}/game">Click to play</a>
+                    </div>
                 </div>
-                <a class="btn btn-secondary" routerLink="{{c?.id}}/game">Click to play</a>
             </div>
+            <ng-template #e>
+                <div class="">
+                    <h6 class="text-muted">Card sets have not been found.</h6>
+                    <a routerLink="/cards/create">Go to create new collection.</a>
+                </div>
+            </ng-template>
         </div>
-    </div>
-    <ng-template #e>
-        <div class="">
-            <h6 class="text-muted">Card sets have not been found.</h6>
-            <a routerLink="/cards/create">Go to create new collection.</a>
-        </div>
-    </ng-template>
-</div>
 
-<!-- Pagination directive -->
-<mat-paginator [hidden]="!cardSets" (page)="getData($event)" [pageSize]="10"
-  [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons>
-</mat-paginator>
+        <!-- Pagination directive -->
+        <mat-paginator [hidden]="!cardSets" (page)="getData($event)" [pageSize]="10" [pageSizeOptions]="[10, 20, 50]"
+            showFirstLastButtons>
+        </mat-paginator>
+    </div>
+    <div class="col-lg-2 col-sm-0"></div>
+</div>
