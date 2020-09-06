@@ -8,13 +8,14 @@ import { CardSetStatus } from '../models/card-set';
 import { switchMap } from 'rxjs/operators';
 import { CardService } from '../services/card.service';
 import { Router } from '@angular/router';
+import { BaseFormComponent } from '../models/base.form.component';
 
 @Component({
   selector: 'app-text',
   templateUrl: './text.component.html',
   styleUrls: ['./text.component.css']
 })
-export class TextComponent implements OnInit {
+export class TextComponent extends BaseFormComponent implements OnInit {
   languages: Language[];
   lastTranslation: string = "Word that will be traslated will be here";
   translation: string = "Translation will be here";
@@ -24,12 +25,9 @@ export class TextComponent implements OnInit {
   cards: Card[] = [];
   wordCash: Map<string, string[]> = new Map<string, string[]>();
 
-  selectForm = this.fb.group({
+  form = this.fb.group({
     langToSelect: ['', [Validators.required]],
     langFromSelect: ['', [Validators.required]],
-  });
-
-  textForm = this.fb.group({
     textName: ['The text #1', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     textInner: [`Amy normally hated Monday mornings, but this year was different. Kamal was in her art class and she liked Kamal. She was waiting outside the classroom when her friend Tara arrived.
 
@@ -56,22 +54,7 @@ export class TextComponent implements OnInit {
     private cardSetService: CardSetService,
     private cardService: CardService,
     private router: Router) {
-  }
-
-  get langToSelect() {
-    return this.selectForm.get('langToSelect');
-  }
-
-  get langFromSelect() {
-    return this.selectForm.get('langFromSelect');
-  }
-
-  get textName() {
-    return this.textForm.get('textName');
-  }
-
-  get textInner() {
-    return this.textForm.get('textInner');
+    super();
   }
 
   get isLastCardUnique() {
@@ -85,7 +68,7 @@ export class TextComponent implements OnInit {
   }
 
   selectWord(text: string) {
-    if (this.langToSelect.errors || this.langFromSelect.errors) {
+    if (!this.isValid('langToSelect') || !this.isValid('langFromSelect')) {
       return;
     }
 
@@ -96,8 +79,8 @@ export class TextComponent implements OnInit {
     } else {
       this.textService.getTranslatedWord({
         text: text,
-        from: this.langFromSelect.value,
-        to: this.langToSelect.value
+        from: this.getControl('langFromSelect').value,
+        to: this.getControl('langToSelect').value
       }).subscribe(val => {
         this.translation = val.translations.join(', ');
         this.wordCash.set(text, val.translations);
@@ -106,10 +89,6 @@ export class TextComponent implements OnInit {
   }
 
   addCard() {
-    if (this.langToSelect.errors || this.langFromSelect.errors) {
-      return;
-    }
-
     if (!this.lastTranslation || !this.translation) {
       return;
     }
@@ -132,8 +111,8 @@ export class TextComponent implements OnInit {
   }
 
   setText() {
-    this.text.innerText = this.textInner.value;
-    this.text.name = this.textName.value;
+    this.text.innerText = this.getValue('textInner');
+    this.text.name = this.getValue('textName');
 
     this.textService.getProcessed(this.text.innerText)
     .subscribe(val => {
@@ -144,10 +123,10 @@ export class TextComponent implements OnInit {
   }
 
   changeLangTo(e) {
-    this.langToSelect.setValue(e.target.value);
+    this.setValue('langToSelect', e.target.value);
   }
 
   changeLangFrom(e) {
-    this.langFromSelect.setValue(e.target.value);
+    this.setValue('langFromSelect', e.target.value);
   }
 }

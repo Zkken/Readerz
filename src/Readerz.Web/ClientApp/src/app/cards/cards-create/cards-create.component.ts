@@ -9,18 +9,19 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { GameKey } from 'src/app/services/card-game.service';
+import { BaseFormComponent } from 'src/app/models/base.form.component';
 
 @Component({
   selector: 'app-cards-create',
   templateUrl: './cards-create.component.html',
   styleUrls: ['./cards-create.component.css']
 })
-export class CardsCreateComponent implements OnInit {
+export class CardsCreateComponent extends BaseFormComponent implements OnInit {
   cards: Card[];
   card: Card;
   cardSet: CardSet;
 
-  cardSetForm = this.formBuilder.group({
+  form = this.formBuilder.group({
     select: ['', [Validators.required]],
     cardSetName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     front: ['', [Validators.required, Validators.maxLength(50)]],
@@ -33,25 +34,10 @@ export class CardsCreateComponent implements OnInit {
     private cardService: CardService,
     public formBuilder: FormBuilder
   ) {
+    super();
     this.cards = [];
     this.cardSet = new CardSet();
     this.card = new Card();
-  }
-
-  get select() {
-    return this.cardSetForm.get('select');
-  }
-
-  get cardSetName() {
-    return this.cardSetForm.get('cardSetName');
-  }
-
-  get back() {
-    return this.cardSetForm.get('back');
-  }
-
-  get front() {
-    return this.cardSetForm.get('front');
   }
 
   ngOnInit() {
@@ -64,13 +50,13 @@ export class CardsCreateComponent implements OnInit {
   }
 
   add() {
-    if(this.front.invalid || this.back.invalid) {
+    if(this.isValid('front') || this.isValid('back')) {
       return;
     }
-    this.front.setValue('');
-    this.front.markAsUntouched();
-    this.back.setValue('');
-    this.back.markAsUntouched();
+    this.setValue('front', '');
+    this.getControl('front').markAsUntouched();
+    this.setValue('back', '');
+    this.getControl('back').markAsUntouched();
     this.cards.push(this.card);
     this.card = new Card();
   }

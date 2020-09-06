@@ -4,19 +4,19 @@
         <div class="border p-2">
             <h2 class="text-center">Define card set's name: </h2>
 
-            <form [formGroup]="cardSetForm">
+            <form [formGroup]="form">
                 <div class="row">
                     <div class="col">
                         <!-- Card set name validation -->
-                        <div *ngIf="cardSetName.invalid && (cardSetName.dirty || cardSetName.touched)"
+                        <div *ngIf="hasError('cardSetName')"
                             class="alert alert-danger">
-                            <div *ngIf="cardSetName.errors.required">
+                            <div *ngIf="getControl('cardSetName').errors?.required">
                                 The card set name is required.
                             </div>
-                            <div *ngIf="cardSetName.errors.minlength">
+                            <div *ngIf="getControl('cardSetName').errors?.minlength">
                                 The card set name must be at least 3 characters long.
                             </div>
-                            <div *ngIf="cardSetName.errors.maxlength">
+                            <div *ngIf="getControl('cardSetName').errors?.maxlength">
                                 The card set name must be less than 30 characters long.
                             </div>
                         </div>
@@ -29,8 +29,8 @@
                     <div class="col">
 
                         <!-- Card set accessibility validation -->
-                        <div *ngIf="select.invalid && (select.dirty || select.touched)" class="alert alert-danger">
-                            <div *ngIf="select.errors.required">
+                        <div *ngIf="hasError('select')" class="alert alert-danger">
+                            <div *ngIf="getControl('select').errors?.required">
                                 Select the proper accessibility of the future card set.
                             </div>
                         </div>
@@ -54,10 +54,10 @@
                 <div *ngFor="let c of cards; let i = index">
                     <div class="row m-2">
                         <div class="offset-1 col-4 border rounded" style="height: 50px;">
-                            {{c?.front}}
+                            {{c.front}}
                         </div>
                         <div class="offset-2 col-4 border rounded" style="height: 50px;">
-                            {{c?.back}}
+                            {{c.back}}
                         </div>
                         <div class="col-1">
                             <button class="btn btn-danger" (click)=" delete(i)">
@@ -72,11 +72,11 @@
 
                         <div class="col-6">
                             <!-- Front card side validation -->
-                            <div *ngIf="front.invalid && (front.dirty || front.touched)" class="alert alert-danger">
-                                <div *ngIf="front.errors.required">
+                            <div *ngIf="hasError('front')" class="alert alert-danger">
+                                <div *ngIf="getControl('front').errors?.required">
                                     The card's frontside is required.
                                 </div>
-                                <div *ngIf="front.errors.maxlength">
+                                <div *ngIf="getControl('front').errors?.maxlength">
                                     The card's frontside must be less than 50 characters long.
                                 </div>
                             </div>
@@ -86,11 +86,11 @@
 
                         <div class="col-6">
                             <!-- Back card side validation -->
-                            <div *ngIf="back.invalid && (back.dirty || back.touched)" class="alert alert-danger">
-                                <div *ngIf="back.errors.required">
+                            <div *ngIf="hasError('back')" class="alert alert-danger">
+                                <div *ngIf="getControl('back').errors?.required">
                                     The card's backside is required.
                                 </div>
-                                <div *ngIf="back.errors.maxlength">
+                                <div *ngIf="getControl('back').errors?.maxlength">
                                     The card's backside must be less than 50 characters long.
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                         </div>
                     </div>
                     <input type="button" value="Add" class="btn btn-primary btn-block mt-2" (click)="add()"
-                        [disabled]="front.errors || back.errors" />
+                        [disabled]="hasError('front') || hasError('back')" />
                 </div>
             </form>
 
@@ -109,7 +109,7 @@
                 </div>
                 <div class="p-2">
                     <input type="button" value="Save set" class="btn btn-success btn-lg" (click)="save()"
-                        [disabled]="cardSetName.errors || select.errors || cards.length == 0" />
+                        [disabled]="hasError('cardSetName') || hasError('select') || cards.length == 0" />
                 </div>
             </div>
         </div>

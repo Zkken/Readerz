@@ -1,18 +1,18 @@
-<div class="row m-1">
-    <div class="col-10">
-        <div *ngIf="!textCreated">
-            <form [formGroup]="textForm">
+<form [formGroup]="form">
+    <div class="row m-1">
+        <div class="col-10">
+            <div *ngIf="!textCreated">
                 <div class="form-group">
                     <h3 class="text-center">Text name: </h3>
                     <!-- Text name validation -->
-                    <div class="alert alert-danger" *ngIf="textName.invalid && (textName.dirty || textName.touched)">
-                        <div *ngIf="textName.errors?.required">
+                    <div class="alert alert-danger" *ngIf="hasError('textName')">
+                        <div *ngIf="getControl('textName').errors?.required">
                             Text name is required.
                         </div>
-                        <div *ngIf="textName.errors.minlength">
+                        <div *ngIf="getControl('textName').errors?.minlength">
                             Text name must be at least 3 characters long.
                         </div>
-                        <div *ngIf="textName.errors.maxlength">
+                        <div *ngIf="getControl('textName').errors?.maxlength">
                             Text name must be less than 30 characters long.
                         </div>
                     </div>
@@ -25,14 +25,14 @@
                 <div class="form-group">
                     <h3 class="text-muted">Text:</h3>
                     <!-- Text validation -->
-                    <div class="alert alert-danger" *ngIf="textInner.invalid && (textInner.dirty || textInner.touched)">
-                        <div *ngIf="textInner.errors.required">
+                    <div class="alert alert-danger" *ngIf="hasError('textInner')">
+                        <div *ngIf="getControl('textInner').errors?.required">
                             Text is required.
                         </div>
-                        <div *ngIf="textInner.errors.minlength">
+                        <div *ngIf="getControl('textInner').errors?.minlength">
                             Text must be at least 10 characters long.
                         </div>
-                        <div *ngIf="textInner.errors.maxlength">
+                        <div *ngIf="getControl('textInner').errors?.maxlength">
                             Text must be less than 5000 characters long.
                         </div>
                     </div>
@@ -45,37 +45,35 @@
                     <div class="row">
                         <div class="d-flex justify-content-center offset-5 col-2">
                             <input class="form-control btn btn-success" type="button" value="Save your text"
-                                (click)="setText()" [disabled]="textInner.invalid || text.invalid">
+                                (click)="setText()" [disabled]="hasError('textInner') || hasError('textName')">
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
-        <div *ngIf="textCreated">
-            <h3 class="text-center">{{text.name}}</h3>
-            <input type="button" value="Save card set" [disabled]="!cards || cards.length == 0" (click)="save()">
-            <div class="border rounded mb-4">
-                <div class="p-container p-3">
-                    <div *ngIf="!languages">Loading...</div>
-                    <div *ngIf="languages">
-                        <p class="p">
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <ng-template ngFor let-t [ngForOf]="textItems">
-                                <span (click)="selectWord(t.value)"
-                                    *ngIf="t.isWord;else emptyTemplate">{{t.value}}</span>
-                                <ng-template #emptyTemplate>{{t.value}}</ng-template>
-                            </ng-template>
-                            <br>
-                        </p>
+            </div>
+            <div *ngIf="textCreated">
+                <h3 class="text-center">{{text.name}}</h3>
+                <input type="button" value="Save card set" [disabled]="!cards || cards.length == 0" (click)="save()">
+                <div class="border rounded mb-4">
+                    <div class="p-container p-3">
+                        <div *ngIf="!languages">Loading...</div>
+                        <div *ngIf="languages">
+                            <p class="p">
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <ng-template ngFor let-t [ngForOf]="textItems">
+                                    <span (click)="selectWord(t.value)"
+                                        *ngIf="t.isWord;else emptyTemplate">{{t.value}}</span>
+                                    <ng-template #emptyTemplate>{{t.value}}</ng-template>
+                                </ng-template>
+                                <br>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-2">
-        <h5>Choose language and then click on the word you like</h5>
-        <form [formGroup]="selectForm">
-            <div *ngIf="langFromSelect.errors?.required || langToSelect.errors?.required">
+        <div class="col-2">
+            <h5>Choose language and then click on the word you like</h5>
+            <div *ngIf="hasError('langFromSelect') || hasError('langToSelect')">
                 <div class="alert alert-danger">
                     Choose source and destination languages
                 </div>
@@ -111,6 +109,6 @@
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+</form>
