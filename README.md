@@ -1,6 +1,6 @@
 # Readerz
 
-An angular 9   asp .net core 3.1 app with clean architecture that will be helpful in learning new languages. Built-in translator using external Api, card memorizing game.
+An angular 9   asp .net core 3.1 app with clean architecture that will be helpful in learning new languages. There are some main features as a built-in translator using external Api, card memorizing game, special input text processing for easy word translating by one click. Also, trivial services included such as authorization using Identity Server 4 and crud operations with database using Entity Framework Core. 
 
 ## Technologies
 
