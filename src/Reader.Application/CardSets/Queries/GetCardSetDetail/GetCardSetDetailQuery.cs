@@ -40,6 +40,7 @@ namespace Reader.Application.CardSets.Queries.GetCardSetDetail
             }
 
             var result = _mapper.Map<CardSet, CardSetDetailDto>(cardSet);
+            
             result.Cards = _mapper.Map<List<Card>, List<CardDto>>(cardSet.Cards.ToList());
 
             return result;

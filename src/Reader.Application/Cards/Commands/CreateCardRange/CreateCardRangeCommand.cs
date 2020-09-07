@@ -15,12 +15,13 @@ namespace Reader.Application.Cards.Commands.CreateCardRange
     {
         public int CardSetId { get; set; }
         public IEnumerable<CardDto> Cards { get; set; }
-        public class CardDto
-        {
-            public string Front { get; set; }
-            public string Back { get; set; }
-        }       
     }
+    
+    public class CardDto
+    {
+        public string Front { get; set; }
+        public string Back { get; set; }
+    }   
 
     public class CreateCardRangCommandHandler : IRequestHandler<CreateCardRangeCommand>
     {
