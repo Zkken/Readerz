@@ -7,11 +7,11 @@ using Reader.Application.Common.Models;
 
 namespace Readerz.Infrastructure.Identity
 {
-    public class UserManagerService : IUserManager
+    public class IdentityService : IIdentityService
     {
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserManagerService(UserManager<ApplicationUser> userManager)
+        public IdentityService(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }

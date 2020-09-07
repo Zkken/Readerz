@@ -3,7 +3,7 @@ using Reader.Application.Common.Models;
 
 namespace Reader.Application.Common.Interfaces
 {
-    public interface IUserManager
+    public interface IIdentityService
     {
         Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password);
 

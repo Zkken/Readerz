@@ -31,7 +31,7 @@ namespace Readerz.Infrastructure
             
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
             
-            services.AddTransient<IUserManager, UserManagerService>();
+            services.AddTransient<IIdentityService, IdentityService>();
             services.AddTransient<ITextProcessingService, TextProcessingService>();
             services.AddTransient<ITranslationService, TranslationService>();
             
