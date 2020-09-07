@@ -19,7 +19,6 @@ namespace Reader.Application.Common.Behaviours
             _identityService = identityService;
         }
         
-        
         public async Task Process(TRequest request, CancellationToken cancellationToken)
         {
             var requestName = typeof(TRequest).Name;
