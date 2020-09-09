@@ -36,29 +36,19 @@ namespace Readerz.Infrastructure.Services.Translator
         }
 
 
-        public async Task<TranslationResult> Translate(string text, string to, string from = "auto")
+        public async Task<TranslationResult> TranslateAsync(string text, string to, string from = "")
         {
             if (text == null)
             {
                 throw new ArgumentNullException(nameof(text));
             }
-
+            
             if (to == null)
             {
                 throw new ArgumentNullException(nameof(to));
             }
-
-            if (SupportedLanguages.All(l => l.Iso != to))
-            {
-                throw new NotSupportedLanguageException(to);
-            }
-
-            if (from != "auto" && SupportedLanguages.All(l => l.Iso != from))
-            {
-                throw new NotSupportedLanguageException(to);
-            }
-
-            var langFrom = from == "auto" ? Lang.Auto : GoogleTranslator.GetLanguageByISO(from);
+            
+            var langFrom = from == string.Empty ? Lang.Auto : GoogleTranslator.GetLanguageByISO(from);
             var langTo = GoogleTranslator.GetLanguageByISO(to);
             var result = await _translator.TranslateAsync(text, langFrom, langTo);
 

@@ -22,12 +22,9 @@ namespace Readerz.Application.Text.Queries.GetWordTranslation
         }
         public async Task<TranslationResult> Handle(GetWordTranslationQuery request, CancellationToken cancellationToken)
         {
-            if(string.IsNullOrEmpty(request.From))
-            {
-                request.From = "Auto";
-            }
+            request.From = request.From.ToLower() == "auto" ? string.Empty : request.From;
 
-            return await _translationService.Translate(request.Text, request.To, request.From);
+            return await _translationService.TranslateAsync(request.Text, request.To, request.From);
         }
     }
 }

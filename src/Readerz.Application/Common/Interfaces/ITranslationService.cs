@@ -18,7 +18,7 @@ namespace Readerz.Application.Common.Interfaces
         /// The "Auto" value means that the translator will automatically define the Language ISO.
         /// </param>
         /// <returns></returns>
-        Task<TranslationResult> Translate(string text, string to, string from = "Auto");
+        Task<TranslationResult> TranslateAsync(string text, string to, string from = "Auto");
         
         /// <summary>
         /// Languages supported by the Translator.
