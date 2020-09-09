@@ -4,15 +4,11 @@ using Readerz.Domain.Entities;
 
 namespace Readerz.Infrastructure.Persistence.Configurations
 {
-    public class CardConfiguration : IEntityTypeConfiguration<Card>
+    public class CardSetConfiguration : IEntityTypeConfiguration<CardSet>
     {
-        public void Configure(EntityTypeBuilder<Card> builder)
+        public void Configure(EntityTypeBuilder<CardSet> builder)
         {
-            builder.Property(e => e.Back)
-                .IsRequired()
-                .HasMaxLength(50);
-
-            builder.Property(e => e.Front)
+            builder.Property(prop => prop.Name)
                 .IsRequired()
                 .HasMaxLength(50);
         }
