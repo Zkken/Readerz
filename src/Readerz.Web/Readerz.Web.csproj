@@ -29,7 +29,7 @@
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\Reader.Application\Reader.Application.csproj" />
+        <ProjectReference Include="..\Readerz.Application\Readerz.Application.csproj" />
         <ProjectReference Include="..\Readerz.Infrastructure\Readerz.Infrastructure.csproj" />
     </ItemGroup>
 

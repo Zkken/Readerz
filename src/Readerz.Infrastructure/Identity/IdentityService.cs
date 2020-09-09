@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Reader.Application.Common.Exceptions;
-using Reader.Application.Common.Interfaces;
-using Reader.Application.Common.Models;
+using Readerz.Application.Common.Exceptions;
+using Readerz.Application.Common.Interfaces;
+using Readerz.Application.Common.Models;
 
 namespace Readerz.Infrastructure.Identity
 {

@@ -15,11 +15,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Reader.Application\Reader.Application.csproj" />
+      <Folder Include="Services" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Services" />
+      <ProjectReference Include="..\Readerz.Application\Readerz.Application.csproj" />
     </ItemGroup>
 
 </Project>

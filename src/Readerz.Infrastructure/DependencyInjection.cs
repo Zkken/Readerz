@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Reader.Application.Common.Interfaces;
+using Readerz.Application.Common.Interfaces;
 using Readerz.Infrastructure.Identity;
 using Readerz.Infrastructure.Persistence;
 using Readerz.Infrastructure.Services.TextProcessing;

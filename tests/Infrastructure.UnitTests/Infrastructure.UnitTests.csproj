@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Reader.Application\Reader.Application.csproj" />
+      <ProjectReference Include="..\..\src\Readerz.Application\Readerz.Application.csproj" />
       <ProjectReference Include="..\..\src\Readerz.Infrastructure\Readerz.Infrastructure.csproj" />
     </ItemGroup>
 

@@ -6,7 +6,7 @@ using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Reader.Application.Common.Interfaces;
+using Readerz.Application.Common.Interfaces;
 using Readerz.Domain.Entities;
 using Readerz.Infrastructure.Identity;
 using Readerz.Web.Domain.Common;

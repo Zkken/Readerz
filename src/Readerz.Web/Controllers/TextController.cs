@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Reader.Application.Common.Models;
-using Reader.Application.Text.Queries.GetProcessedText;
-using Reader.Application.Text.Queries.GetSupportedLanguages;
-using Reader.Application.Text.Queries.GetWordTranslation;
+using Readerz.Application.Common.Models;
+using Readerz.Application.Text.Queries.GetProcessedText;
+using Readerz.Application.Text.Queries.GetSupportedLanguages;
+using Readerz.Application.Text.Queries.GetWordTranslation;
 
 namespace Readerz.Web.Controllers
 {

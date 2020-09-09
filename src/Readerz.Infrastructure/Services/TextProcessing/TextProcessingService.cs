@@ -1,7 +1,7 @@
 using System;
 using System.Text;
-using Reader.Application.Common.Interfaces;
-using Reader.Application.Common.Models;
+using Readerz.Application.Common.Interfaces;
+using Readerz.Application.Common.Models;
 
 namespace Readerz.Infrastructure.Services.TextProcessing
 {

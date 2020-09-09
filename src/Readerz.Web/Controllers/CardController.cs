@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Reader.Application.Cards.Commands.CreateCardRange;
-using Reader.Application.Cards.Commands.DeleteCard;
-using Reader.Application.Cards.Commands.UpdateCard;
+using Readerz.Application.Cards.Commands.CreateCardRange;
+using Readerz.Application.Cards.Commands.DeleteCard;
+using Readerz.Application.Cards.Commands.UpdateCard;
 
 namespace Readerz.Web.Controllers
 {

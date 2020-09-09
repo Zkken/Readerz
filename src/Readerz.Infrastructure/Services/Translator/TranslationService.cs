@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GoogleTranslateFreeApi;
-using Reader.Application.Common.Exceptions;
-using Reader.Application.Common.Interfaces;
-using Language = Reader.Application.Common.Models.Language;
+using Readerz.Application.Common.Exceptions;
+using Readerz.Application.Common.Interfaces;
+using Language = Readerz.Application.Common.Models.Language;
 using Lang = GoogleTranslateFreeApi.Language;
-using TranslationResult = Reader.Application.Common.Models.TranslationResult;
+using TranslationResult = Readerz.Application.Common.Models.TranslationResult;
 
 namespace Readerz.Infrastructure.Services.Translator
 {

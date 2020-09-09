@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Reader.Application;
-using Reader.Application.Common.Interfaces;
+using Readerz.Application;
+using Readerz.Application.Common.Interfaces;
 using Readerz.Infrastructure;
 using Readerz.Web.Services;
 
