@@ -10,6 +10,7 @@ import { fromEvent } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { GameKey } from 'src/app/services/card-game.service';
 import { BaseFormComponent } from 'src/app/models/base.form.component';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-cards-create',
@@ -18,11 +19,11 @@ import { BaseFormComponent } from 'src/app/models/base.form.component';
 })
 export class CardsCreateComponent extends BaseFormComponent implements OnInit {
   cards: Card[];
-  card: Card;
-  cardSet: CardSet;
+
+  faTrash = faTrash;
 
   form = this.formBuilder.group({
-    select: ['', [Validators.required]],
+    cardSetStatus: ['', [Validators.required]],
     cardSetName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     front: ['', [Validators.required, Validators.maxLength(50)]],
     back: ['', [Validators.required, Validators.maxLength(50)]]
@@ -32,12 +33,10 @@ export class CardsCreateComponent extends BaseFormComponent implements OnInit {
     private cardSetService: CardSetService,
     private router: Router,
     private cardService: CardService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
   ) {
     super();
     this.cards = [];
-    this.cardSet = new CardSet();
-    this.card = new Card();
   }
 
   ngOnInit() {
@@ -47,18 +46,16 @@ export class CardsCreateComponent extends BaseFormComponent implements OnInit {
     .subscribe(() => {
       this.add();
     })
+
+    this.setValue('cardSetStatus', 0);
   }
 
   add() {
-    if(this.isValid('front') || this.isValid('back')) {
-      return;
-    }
+    this.cards.push(new Card(null, this.getValue('front'), this.getValue('back')));
     this.setValue('front', '');
-    this.getControl('front').markAsUntouched();
+    this.getControl('front').reset();
     this.setValue('back', '');
-    this.getControl('back').markAsUntouched();
-    this.cards.push(this.card);
-    this.card = new Card();
+    this.getControl('back').reset();
   }
 
   delete(index: number) {
@@ -67,8 +64,8 @@ export class CardsCreateComponent extends BaseFormComponent implements OnInit {
 
   save() {
     this.cardSetService.create({
-      name: this.cardSet.name,
-      status: this.cardSet.status,
+      name: this.getValue('cardSetName'),
+      status: this.getValue('cardSetStatus'),
     })
       .pipe(
         switchMap(result => {

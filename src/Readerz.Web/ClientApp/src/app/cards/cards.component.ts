@@ -3,6 +3,8 @@ import { CardSetService } from '../services/card-set.service';
 import { CardSet } from '../models/card-set';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { MatDialog } from '@angular/material/dialog';
+import { CardsDeleteDialogComponent } from './cards-delete-dialog/cards-delete-dialog.component';
 
 @Component({
   selector: 'app-cards',
@@ -13,11 +15,12 @@ export class CardsComponent implements OnInit {
   cardSets: CardSet[];
   pageEvent: PageEvent;
   trashIcon = faTrash;
-  
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
-    private cardSetService: CardSetService
+    private cardSetService: CardSetService,
+    public dialog: MatDialog
   ) {
   }
 
@@ -33,9 +36,16 @@ export class CardsComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.cardSetService.delete(id).subscribe(
-      () => this.loadCardSets(),
-      err => console.log(err));
+    const dialogRef = this.dialog.open(CardsDeleteDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.cardSetService.delete(id).subscribe(
+          () => this.loadCardSets(),
+          err => console.log(err)
+        );
+      }
+    });
   }
 
   getData(pageEvent: PageEvent) {
@@ -51,5 +61,3 @@ export class CardsComponent implements OnInit {
     }, err => console.log(err));
   }
 }
-
-//TODO add mat-table

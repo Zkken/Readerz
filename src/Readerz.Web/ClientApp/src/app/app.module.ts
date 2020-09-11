@@ -24,9 +24,13 @@ import { TextComponent } from './text/text.component';
 import { TextService } from './services/text.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatTableModule, MatTable} from '@angular/material/table';
+import {MatTableModule} from '@angular/material/table';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
+import { CardsDeleteDialogComponent } from './cards/cards-delete-dialog/cards-delete-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     CardFormComponent,
     CardsGameComponent,
     TextComponent,
+    CardsDeleteDialogComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -57,7 +62,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     BrowserAnimationsModule,
     MatPaginatorModule,
     MatTableModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatInputModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },

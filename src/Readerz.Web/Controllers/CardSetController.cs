@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Readerz.Application;
 using Readerz.Application.Cards.Commands.DeleteCard;
 using Readerz.Application.CardSets.Commands.CreateCardSet;
 using Readerz.Application.CardSets.Commands.DeleteCardSet;
@@ -41,6 +43,7 @@ namespace Readerz.Web.Controllers
         public async Task<ActionResult<PaginatorResult<CardSetDto>>> Get(int pageIndex = 0, int pageSize = 10,
             bool byCurrentUser = false)
         {
+            //todo: fix byCurrentUser parameter - unexpected behaviour.
             return Ok(await Mediator.Send(new GetCardSetsQuery
             {
                 PageIndex = pageIndex, 
@@ -69,6 +72,13 @@ namespace Readerz.Web.Controllers
             await Mediator.Send(new IncrementLikeCardSetCommand {Id = id});
             
             return NoContent();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<CardSetDto>>> Test()
+        {
+            return await Mediator.Send(new TestCommand());
         }
     }
 }

@@ -3,6 +3,7 @@ using Readerz.Domain.Entities;
 using System.Threading;
 using System.Threading.Tasks;
 using Readerz.Application.Common.Exceptions;
+using Readerz.Application.Common.Helpers;
 using Readerz.Application.Common.Interfaces;
 
 namespace Readerz.Application.Cards.Commands.DeleteCard
@@ -23,12 +24,7 @@ namespace Readerz.Application.Cards.Commands.DeleteCard
 
         public async Task<Unit> Handle(DeleteCardCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Cards.FindAsync(request.Id);
-
-            if (entity == null)
-            {
-                throw new NotFoundException(nameof(Card), request.Id);
-            }
+            var entity = await _context.Cards.TryFindAsync(p => p.Id, request.Id);
 
             _context.Cards.Remove(entity);
 

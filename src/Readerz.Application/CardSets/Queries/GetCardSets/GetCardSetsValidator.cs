@@ -10,7 +10,7 @@ namespace Readerz.Application.CardSets.Queries.GetCardSets
                 .GreaterThanOrEqualTo(0);
 
             RuleFor(prop => prop.PageSize)
-                .GreaterThanOrEqualTo(1)
+                .GreaterThanOrEqualTo(10)
                 .LessThanOrEqualTo(100);
 
         }

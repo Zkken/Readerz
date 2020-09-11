@@ -8,8 +8,7 @@
                 <div class="row">
                     <div class="col">
                         <!-- Card set name validation -->
-                        <div *ngIf="hasError('cardSetName')"
-                            class="alert alert-danger">
+                        <div *ngIf="hasError('cardSetName')" class="alert alert-danger">
                             <div *ngIf="getControl('cardSetName').errors?.required">
                                 The card set name is required.
                             </div>
@@ -22,15 +21,15 @@
                         </div>
 
                         <!-- Card set name input -->
-                        <input type="text" placeholder="Card set's name" class="form-control" [(ngModel)]="cardSet.name"
+                        <input type="text" placeholder="Card set's name" class="form-control"
                             formControlName="cardSetName" />
 
                     </div>
                     <div class="col">
 
                         <!-- Card set accessibility validation -->
-                        <div *ngIf="hasError('select')" class="alert alert-danger">
-                            <div *ngIf="getControl('select').errors?.required">
+                        <div *ngIf="hasError('cardSetStatus')" class="alert alert-danger">
+                            <div *ngIf="getControl('cardSetStatus').errors?.required">
                                 Select the proper accessibility of the future card set.
                             </div>
                         </div>
@@ -40,8 +39,8 @@
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="accessibilitySelect">Accessibility</label>
                             </div>
-                            <select type="number" [(ngModel)]="cardSet.status" class="custom-select"
-                                id="accessibilitySelect" formControlName="select">
+                            <select type="number" class="custom-select" id="accessibilitySelect"
+                                formControlName="cardSetStatus">
                                 <option selected value="0">Private</option>
                                 <option value="1">Public</option>
                             </select>
@@ -61,7 +60,7 @@
                         </div>
                         <div class="col-1">
                             <button class="btn btn-danger" (click)=" delete(i)">
-                                <fa name="trash"></fa>
+                                <fa-icon [icon]="faTrash"></fa-icon>
                             </button>
                         </div>
                     </div>
@@ -71,17 +70,14 @@
                     <div class="row">
 
                         <div class="col-6">
-                            <!-- Front card side validation -->
-                            <div *ngIf="hasError('front')" class="alert alert-danger">
-                                <div *ngIf="getControl('front').errors?.required">
-                                    The card's frontside is required.
-                                </div>
-                                <div *ngIf="getControl('front').errors?.maxlength">
-                                    The card's frontside must be less than 50 characters long.
-                                </div>
-                            </div>
-                            <input type="text" [(ngModel)]="card.front" class="form-control"
-                                placeholder="type some text here..." style="height: 50px;" formControlName="front" />
+                            <mat-form-field>
+                                <mat-label>Front</mat-label>
+                                <input matInput formControlName="front">
+                                <mat-hint>Max length is 50.</mat-hint>
+                                <mat-error *ngIf="getControl('front').errors?.required">
+                                    Front is <strong>required</strong>.
+                                </mat-error>
+                            </mat-form-field>
                         </div>
 
                         <div class="col-6">
@@ -94,8 +90,8 @@
                                     The card's backside must be less than 50 characters long.
                                 </div>
                             </div>
-                            <input type="text" class="form-control" [(ngModel)]="card.back"
-                                placeholder="type translation here..." style="height: 50px;" formControlName="back" />
+                            <input type="text" class="form-control" placeholder="type translation here..."
+                                style="height: 50px;" formControlName="back" />
                         </div>
                     </div>
                     <input type="button" value="Add" class="btn btn-primary btn-block mt-2" (click)="add()"
@@ -109,7 +105,7 @@
                 </div>
                 <div class="p-2">
                     <input type="button" value="Save set" class="btn btn-success btn-lg" (click)="save()"
-                        [disabled]="hasError('cardSetName') || hasError('select') || cards.length == 0" />
+                        [disabled]="hasError('cardSetName') || hasError('cardSetStatus') || cards.length == 0" />
                 </div>
             </div>
         </div>

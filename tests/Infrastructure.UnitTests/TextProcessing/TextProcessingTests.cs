@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Reader.Application.Common.Models;
+using Readerz.Application.Common.Models;
 using Readerz.Infrastructure.Services.TextProcessing;
 
 namespace Infrastructure.UnitTests.TextProcessing
