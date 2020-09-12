@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Readerz.Application.Common.Models;
-using Readerz.Application.Text.Queries.GetProcessedText;
 using Readerz.Application.Text.Queries.GetSupportedLanguages;
+using Readerz.Application.Text.Queries.GetWordItems;
 using Readerz.Application.Text.Queries.GetWordTranslation;
 
 namespace Readerz.Web.Controllers
@@ -34,9 +34,9 @@ namespace Readerz.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<TextProcessingResult>> Process([FromQuery] string text)
+        public async Task<ActionResult<WordsResult>> Process([FromQuery] string text)
         {
-            return Ok(await Mediator.Send(new GetProcessedTextQuery {Text = text}));
+            return Ok(await Mediator.Send(new GetWordItemsQuery {Text = text}));
         }
     }
 }

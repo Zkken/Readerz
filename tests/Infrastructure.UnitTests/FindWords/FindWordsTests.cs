@@ -2,38 +2,29 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using Readerz.Application.Common.Models;
-using Readerz.Infrastructure.Services.TextProcessing;
 
 namespace Infrastructure.UnitTests.TextProcessing
 {
-    public class TextProcessingTests
+    public class FindWordsTests
     {
         [Test]
         public void ShouldThrowsArgumentNullException()
         {
-            var service = new TextProcessingService();
+            var service = new FindWordsProcessor();
             Assert.Catch<ArgumentNullException>(() => service.Process(null));
         }
         
         [Test]
-        public void ShouldReturnEmptyResultText()
-        {
-            var service = new TextProcessingService();
-            var result = service.Process("");
-            Assert.AreEqual("", result.Text);
-        }
-
-        [Test]
         public void ShouldReturnCorrectResultText_WhenParametersIsCommonCase()
         {
-            var service = new TextProcessingService();
+            var service = new FindWordsProcessor();
             var result = service.Process("I love.");
-            var expected = new TextProcessingResult(new List<TextItem>
+            var expected = new WordsResult(new List<WordItem>
             {
-                new TextItem(true, "I"),
-                new TextItem(false, " "),
-                new TextItem(true, "love"),
-                new TextItem(false, ".")
+                new WordItem(true, "I"),
+                new WordItem(false, " "),
+                new WordItem(true, "love"),
+                new WordItem(false, ".")
             });
 
             Assert.AreEqual(expected, result);
@@ -42,11 +33,11 @@ namespace Infrastructure.UnitTests.TextProcessing
         [Test]
         public void ShouldReturnCorrectResultText_WhenParametersIsOnlyDelimiters()
         {
-            var service = new TextProcessingService();
+            var service = new FindWordsProcessor();
             var result = service.Process("./ ");
-            var expected = new TextProcessingResult(new List<TextItem>
+            var expected = new WordsResult(new List<WordItem>
             {
-                new TextItem(false, "./ ")
+                new WordItem(false, "./ ")
             });
             
             Assert.AreEqual(expected, result);
@@ -55,11 +46,11 @@ namespace Infrastructure.UnitTests.TextProcessing
         [Test]
         public void ShouldReturnCorrectResultText_WhenParametersIsOnlyLetters()
         {
-            var service = new TextProcessingService();
+            var service = new FindWordsProcessor();
             var result = service.Process("Lol");
-            var expected = new TextProcessingResult(new List<TextItem>
+            var expected = new WordsResult(new List<WordItem>
             {
-                new TextItem(true, "Lol")
+                new WordItem(true, "Lol")
             });
             
             Assert.AreEqual(expected, result);

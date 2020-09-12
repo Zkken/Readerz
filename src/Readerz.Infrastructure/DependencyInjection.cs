@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Readerz.Application.Common.Interfaces;
 using Readerz.Infrastructure.Identity;
 using Readerz.Infrastructure.Persistence;
-using Readerz.Infrastructure.Services.TextProcessing;
 using Readerz.Infrastructure.Services.Translator;
 
 namespace Readerz.Infrastructure
@@ -31,9 +30,8 @@ namespace Readerz.Infrastructure
             
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
             
-            services.AddTransient<IIdentityService, IdentityService>();
-            services.AddTransient<ITextProcessingService, TextProcessingService>();
-            services.AddTransient<ITranslationService, TranslationService>();
+            services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<ITranslationService, TranslationService>();
             
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();

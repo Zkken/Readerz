@@ -4,60 +4,60 @@ using System.Linq;
 
 namespace Readerz.Application.Common.Models
 {
-    public class TextProcessingResult
+    public class WordsResult
     {
-        public TextProcessingResult()
+        public WordsResult()
         {
-            Text = new List<TextItem>();
-        }
-
-        public TextProcessingResult(IList<TextItem> items)
-        {
-            Text = items;
+            Words = new List<WordItem>();
         }
         
-        public IList<TextItem> Text { get; }
+        public WordsResult(List<WordItem> items)
+        {
+            Words = items;
+        }
+
+        public List<WordItem> Words { get; }
 
         public override bool Equals(object obj)
         {
-            if (!(obj is TextProcessingResult result))
+            if (!(obj is WordsResult result))
             {
                 return false;
             }
 
-            if (Text.Count != result.Text.Count)
+            if (Words.Count != result.Words.Count)
             {
                 return false;
             }
 
-            return !Text.Where((t, i) => !t.Equals(result.Text[i])).Any();
+            return !Words.Where((t, i) => !t.Equals(result.Words[i])).Any();
         }
 
         public override int GetHashCode()
         {
-            return Text != null ? Text.GetHashCode() : 0;
+            return Words != null ? Words.GetHashCode() : 0;
         }
 
         public override string ToString()
         {
-            return string.Join(",", Text);
+            return string.Join(",", Words);
         }
     }
 
-    public readonly struct TextItem
+    public readonly struct WordItem
     {
-        public TextItem(bool isWord, string value)
+        public WordItem(bool isWord, string value)
         {
             IsWord = isWord;
             Value = value;
         }
 
-        public bool IsWord { get; }
-        public string Value { get; }
+        private bool IsWord { get; }
+        private string Value { get; }
 
         public override bool Equals(object obj)
         {
-            if (!(obj is TextItem item))
+            if (!(obj is WordItem item))
             {
                 return false;
             }

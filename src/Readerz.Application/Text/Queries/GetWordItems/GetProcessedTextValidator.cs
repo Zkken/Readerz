@@ -1,8 +1,9 @@
 ﻿using FluentValidation;
+using Readerz.Application.Text.Queries.GetWordItems;
 
 namespace Readerz.Application.Text.Queries.GetProcessedText
 {
-    public class GetProcessedTextValidator : AbstractValidator<GetProcessedTextQuery>
+    public class GetProcessedTextValidator : AbstractValidator<GetWordItemsQuery>
     {
         public GetProcessedTextValidator()
         {
